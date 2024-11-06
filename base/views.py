@@ -61,6 +61,7 @@ def logout(request):
 
 #dashboard
 def dashboard(request):
+    
     return render(request, 'dashboard.html')
 
 
@@ -79,7 +80,7 @@ def all_lead(request):
     else:
         lead = Lead.objects.all()
     context = {'lead': lead, 'search_query': search_query}
-    return render(request, 'lead_list.html', context)
+    return render(request, 'data.html', context)
 
 
 
@@ -136,7 +137,7 @@ def add_lead(request):
         )
 
         messages.success(request, 'New lead added successfully.')
-        return redirect('add-lead') 
+        return redirect('lead') 
     return render(request, 'lead.html')
 
 
@@ -151,26 +152,37 @@ def delete_lead(request,pk):
 
 #edit lead
 def edit_lead(request, pk):
+    # Retrieve the specific lead or return 404 if not found
     lead = get_object_or_404(Lead, id=pk)
 
     if request.method == 'POST':
+        # Update the lead data with the posted form values
         lead.name = request.POST.get('name')
         lead.email = request.POST.get('email')
         lead.phone = request.POST.get('phone')
-        
-        status_name = request.POST.get('status')
-        lead.status, created = Status.objects.get_or_create(identity=status_name)
-        
+        lead.address = request.POST.get('address')
+        lead.city = request.POST.get('city')
+        lead.gender = request.POST.get('gender')
+        lead.passout = request.POST.get('passout')
+        lead.college_name = request.POST.get('college_name')
+        lead.tech_field = request.POST.get('tech_field')
         lead.is_lead = request.POST.get('is_lead') == 'on'
         lead.created_at = request.POST.get('created_at')
         lead.follow_up = request.POST.get('follow_up')
-
+        
+        # Retrieve or create the status
+        status_name = request.POST.get('status')
+        status, created = Status.objects.get_or_create(identity=status_name)
+        lead.status = status
+        
+        # Save the updated lead information
         lead.save()
+
         messages.success(request, 'Lead updated successfully.')
-        return redirect('lead')  
+        return redirect(('lead'))  # Redirect to the lead list
 
     context = {'lead': lead}
-    return render(request, 'item.html', context)
+    return render(request, 'lead.html', context)
 
 
 #report
