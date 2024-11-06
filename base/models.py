@@ -19,7 +19,7 @@ class Lead(models.Model):
     passout = models.CharField(max_length=255)
     Department = models.CharField(max_length=255)
     college_name=models.CharField(max_length=255)
-    Technology = models.CharField(max_length=255)
+    tech_field = models.CharField(max_length=255)
     status = models.ForeignKey(Status, on_delete=models.SET_NULL, null=True)  
     is_lead = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True) 

@@ -107,6 +107,12 @@ def add_lead(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        gender=request.POST.get('gender')
+        passout=request.POST.get('passout')
+        college=request.POST.get('college_name')
+        tech =request.POST.get('tech_field')
         status_name = request.POST.get('status')
         is_lead = request.POST.get('is_lead') == 'on'
         created_at = request.POST.get('created_at')
@@ -117,7 +123,13 @@ def add_lead(request):
             name=name,
             email=email,
             phone=phone,
+            address=address,
+            city=city,
             status=status,
+            gender=gender,
+            passout=passout,
+            tech_field=tech,
+            college_name=college,
             is_lead=is_lead,
             created_at=created_at,
             follow_up=follow_up,
@@ -125,7 +137,7 @@ def add_lead(request):
 
         messages.success(request, 'New lead added successfully.')
         return redirect('add-lead') 
-    return render(request, 'item.html')
+    return render(request, 'lead.html')
 
 
 #delete lead
