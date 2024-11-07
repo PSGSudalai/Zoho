@@ -365,25 +365,29 @@
                                                     <input class="form-check-input" id="is_lead" name="is_lead" type="checkbox" style=" border-color: #000000;">
                                                     <div class="valid-feedback text-light">Looks good!</div>
                                                 </div> -->
-                                                <div class="col-lg-4">
-                                                    <label class="form-label" for="Status">Status</label>
-                                                    <select class="form-select" id="Status" name="status" required>
+                                                <div class="col-lg-4 col-md-8">
+                                                    <label class="form-label" for="status">Status</label>
+                                                    <select class="form-select" id="status" name="status" required>
                                                         <option selected disabled value="">Choose...</option>
                                                         {% for status in statuses %}
-                                                            <option value="{{ status.id }}" {% if lead and lead.status == status %}selected{% endif %}>
+                                                            <option value="{{ status.id }}" {% if lead.status and lead.status.id == status.id %}selected{% endif %}>
                                                                 {{ status.identity }}
                                                             </option>
                                                         {% endfor %}
                                                     </select>
-                                                    <div class="invalid-feedback">Please select a valid Status</div>
                                                 </div>
-                                                    <div class="col-lg-2">
-                                                        <label class="form-label" for="Status"></label>
-                                                        <!-- Button to trigger the Add Status modal -->
-                                                        <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
-                                                            Add Status
-                                                        </button>
-                                                    </div>
+                                                <div class="col-lg-2 col-md-4" style="
+                                                display: flex;
+                                                justify-content: center;
+                                                flex-direction: column;
+                                                align-items: center;
+                                            ">
+                                                    <label class="form-label" for="Status">Button</label>
+                                                    <!-- Button to trigger the Add Status modal -->
+                                                    <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
+                                                        Add Status
+                                                    </button>
+                                                </div>
                                                 
                                                 
                                                     
