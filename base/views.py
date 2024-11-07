@@ -47,7 +47,7 @@ def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)  # Ensure `username` is used if the default User model is used or modify if custom
+        user = authenticate(request, username=email, password=password)  # Ensure `username` is used if the default User model is used or modify if custom
         print(user)
         
         if user is not None:
