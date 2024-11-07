@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate,  logout ,login 
+from django.contrib.auth import authenticate,  logout ,login as auth_login
 from django.utils import timezone
 from base.models import Lead ,Status
 from django.utils.dateparse import parse_datetime
@@ -42,16 +42,18 @@ def register(request):
     return render(request, 'register.html')
 
 # Login
+
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, email=email, password=password)  # Ensure `username` is used if the default User model is used or modify if custom
+        print(user)
         
         if user is not None:
-            login(request, user)
+            auth_login(request, user)
             messages.success(request, 'Login Successful')
-            return redirect('lead')
+            return redirect('home')  
         else:
             messages.error(request, 'Invalid Email or Password')
             return redirect('login')
@@ -66,9 +68,8 @@ def logout(request):
 #dashboard
 def dashboard(request):
     total_lead = Lead.objects.all().count()  # Total number of leads
-    lead_status = Lead.objects.filter(is_lead=True).count()  # Number of leads with is_lead=True
-
-    # Count of leads where the status is "Success"
+    lead_status = Lead.objects.filter(is_lead=True).count() 
+    
     status_count = Lead.objects.filter(status__identity="Success").count()
 
     content = {
@@ -83,8 +84,7 @@ def dashboard(request):
 
 #lead Table
 def all_lead(request, lead_id=None):
-    leads = Lead.objects.all()
-    statuses = Status.objects.all()  # Get all status objects from the database
+    leads = Lead.objects.all()  # Get all status objects from the database
       # Get all lead objects
 
     # Check if you're editing an existing lead
@@ -94,25 +94,18 @@ def all_lead(request, lead_id=None):
     
     context = {
         'lead': lead,
-        'statuses': statuses,
         'leads': leads,  # Pass all leads to the template
     }
     
     return render(request, 'lead.html', context)
 
 
-# def status(request):
-#     statuses = Status.objects.all()  
-#     lead = None  # Replace with actual lead object if editing an existing lead
 
-#     # If you're editing an existing lead, fetch the lead and pass it in the context
-#     if 'lead_id' in request.GET:  # Example condition for fetching a lead
-#         lead = Lead.objects.get(id=request.GET['lead_id'])
-#     return render(request, 'add-lead.html', {'statuses': statuses})
 
 
 # #add Status
 def add_status(request):
+    statuses = Status.objects.all()  # Get the current list of statuses
     if request.method == 'POST':
         status_name = request.POST.get('identity', '').strip()
         
@@ -121,19 +114,18 @@ def add_status(request):
             if not Status.objects.filter(identity=status_name).exists():
                 new_status = Status(identity=status_name)
                 new_status.save()
-                messages.success(request, "Added successfully")
+                messages.success(request, "Status added successfully.")
             else:
-                messages.warning(request, "Status with this identity already exists")
+                messages.warning(request, "Status with this identity already exists.")
         else:
-            messages.error(request, "Status name cannot be empty")
-        
-        return redirect('add_status')
+            messages.error(request, "Status name cannot be empty.")
     
-    return render(request, 'add-lead.html')
+    return render(request, 'add-lead.html', {'statuses': statuses})
 
 
 #add Lead
 def add_lead(request):
+    statuses = Status.objects.all()
     if request.method == 'POST':
         # Collect data from the form
         name = request.POST.get('name')
@@ -164,15 +156,15 @@ def add_lead(request):
             passout=passout,
             tech_field=tech,
             college_name=college,
-            status=status,  # Ensure status is set
-            is_lead=is_lead,  # Set is_lead based on condition
-            follow_up=follow_up,  # Follow-up date (optional)
+            status=status,  
+            is_lead=is_lead,  
+            follow_up=follow_up, 
         )
 
         messages.success(request, 'New lead added successfully.')
-        return redirect('lead')  # Redirect to the list or another view
+        return redirect('lead')
     
-    return render(request, 'add-lead.html')
+    return render(request, 'add-lead.html', {'statuses': statuses})
 
 #delete lead
 def delete_lead(request,pk):
@@ -185,25 +177,37 @@ def delete_lead(request,pk):
 
 #edit lead
 def edit_lead(request, lead_id):
-    lead = get_object_or_404(Lead, pk=lead_id)
+    lead = get_object_or_404(Lead, id=lead_id)
+    statuses = Status.objects.all()
+
     if request.method == 'POST':
-        # Handle the POST request to update the lead
+        # Update the lead instance with form data
         lead.name = request.POST.get('name')
         lead.email = request.POST.get('email')
+        lead.phone = request.POST.get('phone')
         lead.address = request.POST.get('address')
         lead.city = request.POST.get('city')
-        lead.phone = request.POST.get('phone')
-        lead.passout = request.POST.get('passout')
         lead.gender = request.POST.get('gender')
+        lead.passout = request.POST.get('passout')
         lead.college_name = request.POST.get('college_name')
-        lead.status = request.POST.get('status')
-        lead.is_lead = request.POST.get('is_lead') == 'on'
         lead.tech_field = request.POST.get('tech_field')
-        lead.created_at = request.POST.get('created_at')
         lead.follow_up = request.POST.get('follow_up')
+
+        # Get the status as a ForeignKey object
+        status_id = request.POST.get('status')
+        if status_id:
+            lead.status = Status.objects.get(id=status_id)
+
+        lead.is_lead = 'is_lead' in request.POST
+
         lead.save()
-        return redirect('lead')  # Redirect to the lead list page or wherever you want after saving
+        messages.success(request, 'Lead updated successfully.')
+        return redirect('lead')  # Replace 'lead' with the appropriate name of your leads list page
 
-    return render(request, 'edit.html', {'lead': lead})
+    context = {
+        'lead': lead,
+        'statuses': statuses,
+    }
 
+    return render(request, 'edit.html', context)
 

@@ -117,9 +117,9 @@
 
                         <li class="profile-nav onhover-dropdown pe-0 py-0">
                             <div class="d-flex profile-media">
-                                <img class="b-r-10" src="../assets/images/dashboard/profile.png" alt />
+                                <img class="b-r-10" width="40px" src="{% static 'assets/images/nexgen.jpg' %}" alt />
                                 <div class="flex-grow-1">
-                                    <span>Emay Walter</span>
+                                    <span>{{ user.username }}</span>
                                     <p class="mb-0">
                                         Admin <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -134,7 +134,7 @@
                             <ul class="profile-dropdown onhover-show-div">
 
                                 <li>
-                                    <a href="login.html"><i data-feather="log-in"> </i><span>Log
+                                    <a href="{% url 'login' %}"><i data-feather="log-in"> </i><span>Log
                                             out</span></a>
                                 </li>
                             </ul>
@@ -333,12 +333,12 @@
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="phone">Phone Number:</label>
-                                                    <input class="form-control" id="phone" type="text" name="phone" placeholder="Phone number" required="">
+                                                    <input class="form-control" id="phone" type="text" name="phone" maxlength="10" placeholder="Phone number" required="">
                                                     <div class="invalid-feedback">Please enter a Phone Number</div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="passout">Passout:</label>
-                                                    <input class="form-control" id="passout" type="text" name="passout" placeholder="Passout" required="">
+                                                    <input class="form-control" id="passout" type="text" name="passout" maxlength="4" placeholder="Passout" required="">
                                                     <div class="invalid-feedback">Please enter a Phone Number</div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
@@ -370,16 +370,17 @@
                                                     <select class="form-select" id="Status" name="status" required>
                                                         <option selected disabled value="">Choose...</option>
                                                         {% for status in statuses %}
-                                                        <option value="{{ status.id }}" {% if lead and lead.status == status %}selected{% endif %}>
-                                                            {{ status.identity }}
-                                                        </option>
+                                                            <option value="{{ status.id }}" {% if lead and lead.status == status %}selected{% endif %}>
+                                                                {{ status.identity }}
+                                                            </option>
                                                         {% endfor %}
                                                     </select>
                                                     <div class="invalid-feedback">Please select a valid Status</div>
                                                 </div>
                                                     <div class="col-lg-2">
+                                                        <label class="form-label" for="Status"></label>
                                                         <!-- Button to trigger the Add Status modal -->
-                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
+                                                        <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
                                                             Add Status
                                                         </button>
                                                     </div>

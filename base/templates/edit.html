@@ -117,9 +117,9 @@
 
                         <li class="profile-nav onhover-dropdown pe-0 py-0">
                             <div class="d-flex profile-media">
-                                <img class="b-r-10" src="../assets/images/dashboard/profile.png" alt />
+                                <img class="b-r-10" width="40px" src="{% static 'assets/images/nexgen.jpg' %}" alt />
                                 <div class="flex-grow-1">
-                                    <span>Emay Walter</span>
+                                    <span>{{ user.username }}</span>
                                     <p class="mb-0">
                                         Admin <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -134,7 +134,7 @@
                             <ul class="profile-dropdown onhover-show-div">
 
                                 <li>
-                                    <a href="login.html"><i data-feather="log-in"> </i><span>Log
+                                    <a href="{% url 'login' %}"><i data-feather="log-in"> </i><span>Log
                                             out</span></a>
                                 </li>
                             </ul>
@@ -286,7 +286,38 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12">
+                                            <div class="col-12">
+                                                <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="statusModalLabel">Add New Status</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form action="{% url 'add_status' %}" method="POST">
+                                                                {% csrf_token %}
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="newStatus" class="form-label">Status</label>
+                                                                        <input type="text" class="form-control" id="newStatus" name="identity" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Save Status</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             <form class="row g-3 needs-validation" method="post" action="{% url 'edit-lead' lead.id %}">
+                                                {% if messages %}
+                                                <ul class="messages">
+                                                    {% for message in messages %}
+                                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                                {% endif %}
                                                 {% csrf_token %}
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="name">Name</label>
@@ -306,11 +337,11 @@
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="phone">Phone Number:</label>
-                                                    <input class="form-control" id="phone" name="phone" type="text" placeholder="Phone" value="{{ lead.phone }}" required>
+                                                    <input class="form-control" id="phone" name="phone" type="text" maxlength="10" placeholder="Phone" value="{{ lead.phone }}" required>
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="passout">Passout:</label>
-                                                    <input class="form-control" id="passout" name="passout" type="text" placeholder="Passout" value="{{ lead.passout }}" required>
+                                                    <input class="form-control" id="passout" name="passout" type="text" maxlength="4" placeholder="Passout" value="{{ lead.passout }}" required>
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="gender">Gender:</label>
@@ -329,19 +360,27 @@
                                                     <input class="form-control" id="status" name="status" type="text" placeholder="Status " required="">
                                                     <div class="valid-feedback">Looks good!</div>
                                                 </div> -->
-                                                <div class="col-md-2">
+                                                <!-- <div class="col-md-2">
                                                     <label class="form-label " for="is_lead">Lead:</label>
                                                     <input class="form-check-input" id="is_lead" name="is_lead" type="checkbox" {% if lead.is_lead %}checked{% endif %}>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-lg-4">
-                                                    <label class="form-label" for="Status">Status</label>
+                                                    <label class="form-label" for="status">Status</label>
                                                     <select class="form-select" id="status" name="status" required>
-                                                        <option value="Negotiation" {% if lead.status == 'Negotiation' %}selected{% endif %}>Negotiation</option>
-                                                        <option value="Proposal" {% if lead.status == 'Proposal' %}selected{% endif %}>Proposal</option>
-                                                        <option value="Interested" {% if lead.status == 'Interested' %}selected{% endif %}>Interested</option>
-                                                        <option value="Pending" {% if lead.status == 'Pending' %}selected{% endif %}>Pending</option>
-                                                        <option value="Success" {% if lead.status == 'Success' %}selected{% endif %}>Success</option>
+                                                        <option selected disabled value="">Choose...</option>
+                                                        {% for status in statuses %}
+                                                            <option value="{{ status.id }}" {% if lead.status and lead.status.id == status.id %}selected{% endif %}>
+                                                                {{ status.identity }}
+                                                            </option>
+                                                        {% endfor %}
                                                     </select>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="form-label" for="Status"></label>
+                                                    <!-- Button to trigger the Add Status modal -->
+                                                    <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
+                                                        Add Status
+                                                    </button>
                                                 </div>
                                                 <div class="col-xxl-4 col-md-6">
                                                     <label class="form-label" for="tech_field">Tech Field:</label>

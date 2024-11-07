@@ -49,29 +49,33 @@
                             </a>
                         </div>
                           <div class="login-main">
-                            <form class="theme-form">
+                            <form class="theme-form" method="post" action="{% url 'login' %}">
+                                {% csrf_token %}
                                 <h4>Sign in to account</h4>
                                 <p>Enter your email & password to login</p>
                                 <div class="form-group">
                                     <label class="col-form-label">Email Address</label>
-                                    <input class="form-control" type="email" required="" placeholder="test@gmail.com">
+                                    <input class="form-control" type="email" name="email" required placeholder="test@gmail.com">
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Password</label>
                                     <div class="form-input position-relative">
-                                        <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
-                                        <div class="show-hide"><span class="show">                         </span></div>
+                                        <input class="form-control" type="password" name="password" required placeholder="*********">
+                                        <div class="show-hide"><span class="show">Show</span></div>
                                     </div>
                                 </div>
-                                
-                                <h6 class="text-muted mt-4 or">Or Sign in with</h6>
-                                <div class="social mt-4">
-                                    <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a>
-                                        <a
-                                            class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a>
-                                    </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" type="submit">Login</button>
                                 </div>
+                                {% if messages %}
+                                <div class="messages">
+                                    {% for message in messages %}
+                                        <p class="{{ message.tags }}">{{ message }}</p>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
                             </form>
+                            
                         </div>
                     </div>
                 </div>
