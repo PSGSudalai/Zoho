@@ -1,57 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
-{% load static %}
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{% static 'assets/images/nexgen.jpg' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'assets/images/nexgen.jpg' %}" type="image/x-icon">
-    <title>Nexgen-Sales Management</title>
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
-    <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/icofont.css' %}">
-    <!-- Themify icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/themify.css' %}">
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/flag-icon.css' %}">
-    <!-- Feather icon-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/feather-icon.css' %}">
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/slick.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/slick-theme.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/scrollbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/jquery.dataTables.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/dataTables.bootstrap5.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/autoFill.bootstrap5.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/keyTable.bootstrap5.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/buttons.bootstrap5.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/fixedHeader.bootstrap5.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/responsive.bootstrap5.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/rowReorder.bootstrap5.css' %}">
-    <!-- Plugins css Ends-->
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/bootstrap.css' %}">
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
-    <link id="color" rel="stylesheet" href="{% static 'assets/css/color-1.css' %}" media="screen">
-    <!-- Responsive css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
-</head>
-
+    <head>
+        {% load static %}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+        <meta name="keywords"
+            content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+        <meta name="author" content="pixelstrap">
+        <link rel="icon" href="{% static 'assets/images/nexgen.jpg' %}" type="image/x-icon">
+        <link rel="shortcut icon" href="{% static 'assets/images/nexgen.jpg' %}" type="image/x-icon">
+        <title>Nexgen-Sales Management</title>
+        <!-- Google font-->
+        <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+            rel="stylesheet">
+        <!-- Font Awesome-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
+        <!-- ico-font-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/icofont.css' %}">
+        <!-- Themify icon-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/themify.css' %}">
+        <!-- Flag icon-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/flag-icon.css' %}">
+        <!-- Feather icon-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/feather-icon.css' %}">
+        <!-- Plugins css start-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/slick.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/slick-theme.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/scrollbar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/select/bootstrap-select.min.css' %}">
+        <!-- Plugins css Ends-->
+        <!-- Bootstrap css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/bootstrap.css' %}">
+        <!-- App css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+        <link id="color" rel="stylesheet" href="{% static 'assets/css/color-1.css' %}" media="screen">
+        <!-- Responsive css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
+    </head>
+    
 
 <body>
-    <!-- tap on top starts-->
-    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
-    <!-- tap on tap ends-->
     <!-- loader starts-->
     <div class="loader-wrapper">
         <div class="loader-index"> <span></span></div>
@@ -65,17 +58,20 @@
         </svg>
     </div>
     <!-- loader ends-->
+    <!-- tap on top starts-->
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+    <!-- tap on tap ends-->
     <!-- page-wrapper Start-->
-    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+    <div class="page-wrapper default-wrapper" id="pageWrapper">
         <!-- Page Header Start-->
         <div class="page-header">
             <div class="header-wrapper row m-0">
 
                 <div class="header-logo-wrapper col-auto p-0">
                     <div class="logo-wrapper">
-                        <a class="logo" href="{% url 'login' %}">
-                            <img class="img-fluid for-light" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt="loginpage">
-                            <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt="loginpage">
+                        <a href="{% url 'login' %}">
+                            <img class="img-fluid for-light" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
+                            <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
                         </a>
                     </div>
                     <div class="toggle-sidebar">
@@ -173,15 +169,14 @@
         </div>
         <!-- Page Header Ends                              -->
         <!-- Page Body Start-->
-        <div class="page-body-wrapper">
+        <div class="page-body-wrapper default-menu default-menu">
             <!-- Page Sidebar Start-->
             <div class="sidebar-wrapper" data-sidebar-layout="stroke-svg">
                 <div>
                     <div class="logo-wrapper">
-                        <a href="{% url 'login' %}">
-                            <img class="img-fluid for-light" width="150px" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
-                            <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
-                        </a>
+                        <a href="{% url 'login' %}"><img class="img-fluid for-light" width="150px" src="{% static 'assets/images/nexgen_logo.jpg' %}"
+                            alt /><img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}"
+                            alt /></a>
                         <div class="back-btn"><i class="fa-solid fa-angle-left"></i></div>
                         <div class="toggle-sidebar">
                             <i class="status_toggle middle sidebar-toggle" data-feather="grid">
@@ -189,9 +184,7 @@
                         </div>
                     </div>
                     <div class="logo-icon-wrapper">
-                        <a href="{% url 'login' %}">
-                            <img class="img-fluid" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
-                        </a>
+                        <a href="{% url 'login' %}"><img class="img-fluid" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt /></a>
                     </div>
                     <nav class="sidebar-main">
                         <div class="left-arrow" id="left-arrow">
@@ -263,7 +256,8 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h3>Lead Datatables</h3>
+                                <h3>
+                                    Update Lead</h3>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb">
@@ -277,72 +271,104 @@
                                                 <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
                                                 <path d="M10 12h4v4h-4z" />
                                             </svg></a></li>
-                                    <li class="breadcrumb-item">Lead List</li>
-                                    <li class="breadcrumb-item active">Lead Datatables</li>
+                                    <li class="breadcrumb-item">Lead</li>
+                                    <li class="breadcrumb-item active">Add Lead</li>
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Container-fluid starts-->
-                <div class="container-fluid autofill-data-tables">
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header pb-0 card-no-border">
-                                </div>
-                             
-                                    <div class="dt-ext table-responsive custom-scrollbar html-expert-table">
-                                        <table class="display table-striped" id="export-button">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Gender</th>
-                                                    <th>City</th>
-                                                    <th>College Name</th>
-                                                    <th>Passout</th>
-                                                    <th>Tech Fields</th>
-                                                    <th>Status</th>
-                                                    <th>Lead</th>
-                                                    <th>Date</th>
-                                                    <th>Follow Up</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for lead in leads %}
-                                                <tr>
-                                                    <td>{{ lead.name }}</td>
-                                                    <td>{{ lead.email }}</td>
-                                                    <td>{{ lead.phone }}</td>
-                                                    <td>{{ lead.gender }}</td>
-                                                    <td>{{ lead.city }}</td>
-                                                    <td>{{ lead.college_name }}</td>
-                                                    <td>{{ lead.passout }}</td>
-                                                    <td>{{ lead.tech_field }}</td>
-                                                    <td>{{ lead.status.identity }}</td>
-                                                    <td>{{ lead.is_lead|yesno:"Yes,No"}}</td>
-                                                    <td>{{ lead.created_at }}</td>
-                                                    <td>{{ lead.follow_up }}</td>
-                                                    <td>
-                                                        <a href="{% url 'edit-lead' lead.id %}" title="Edit Lead">
-                                                            <i class="fas fa-edit" style="color: #007bff; cursor: pointer;"></i>
-                                                        </a>
-                                                        &nbsp;
-                                                        <a href="{% url 'delete-lead' lead.id %}" title="Delete Lead" onclick="return confirm('Are you sure you want to delete this lead?');">
-                                                            <i class="fas fa-trash-alt" style="color: #dc3545; cursor: pointer;"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
-                                               
-                                            </tbody>
-                                        </table>
+                        <div class="col-12">
+                            <div class="card create-project-form custom-input">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <form class="row g-3 needs-validation" method="post" action="{% url 'edit-lead' lead.id %}">
+                                                {% csrf_token %}
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="name">Name</label>
+                                                    <input class="form-control" id="name" name="name" type="text" placeholder="Name" value="{{ lead.name }}" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="email">Email:</label>
+                                                    <input class="form-control" id="email" name="email" type="email" placeholder="Email" value="{{ lead.email }}" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="address">Address:</label>
+                                                    <input class="form-control" id="address" name="address" type="text" placeholder="Address" value="{{ lead.address }}" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="city">City:</label>
+                                                    <input class="form-control" id="city" name="city" type="text" placeholder="City" value="{{ lead.city }}" required>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label" for="phone">Phone Number:</label>
+                                                    <input class="form-control" id="phone" name="phone" type="text" placeholder="Phone" value="{{ lead.phone }}" required>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label" for="passout">Passout:</label>
+                                                    <input class="form-control" id="passout" name="passout" type="text" placeholder="Passout" value="{{ lead.passout }}" required>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label" for="gender">Gender:</label>
+                                                    <select class="form-select" id="gender" name="gender" required>
+                                                        <option value="" disabled {% if not lead.gender %}selected{% endif %}>Choose...</option>
+                                                        <option value="Male" {% if lead.gender == 'Male' %}selected{% endif %}>Male</option>
+                                                        <option value="Female" {% if lead.gender == 'Female' %}selected{% endif %}>Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="college_name">College Name:</label>
+                                                    <input class="form-control" id="college_name" name="college_name" type="text" placeholder="College Name" value="{{ lead.college_name }}" required>
+                                                </div>
+                                                <!-- <div class="col-md-4">
+                                                    <label class="form-label" for="status">Status:</label>
+                                                    <input class="form-control" id="status" name="status" type="text" placeholder="Status " required="">
+                                                    <div class="valid-feedback">Looks good!</div>
+                                                </div> -->
+                                                <div class="col-md-2">
+                                                    <label class="form-label " for="is_lead">Lead:</label>
+                                                    <input class="form-check-input" id="is_lead" name="is_lead" type="checkbox" {% if lead.is_lead %}checked{% endif %}>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="form-label" for="Status">Status</label>
+                                                    <select class="form-select" id="status" name="status" required>
+                                                        <option value="Negotiation" {% if lead.status == 'Negotiation' %}selected{% endif %}>Negotiation</option>
+                                                        <option value="Proposal" {% if lead.status == 'Proposal' %}selected{% endif %}>Proposal</option>
+                                                        <option value="Interested" {% if lead.status == 'Interested' %}selected{% endif %}>Interested</option>
+                                                        <option value="Pending" {% if lead.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                                        <option value="Success" {% if lead.status == 'Success' %}selected{% endif %}>Success</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xxl-4 col-md-6">
+                                                    <label class="form-label" for="tech_field">Tech Field:</label>
+                                                    <select class="form-select" id="tech_field" name="tech_field" required>
+                                                        <option value="IT" {% if lead.tech_field == 'IT' %}selected{% endif %}>IT</option>
+                                                        <option value="Non-IT" {% if lead.tech_field == 'Non-IT' %}selected{% endif %}>Non-IT</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xxl-4 col-md-6">
+                                                    <label class="form-label">Follow Up Date</label>
+                                                    <input class="form-control" id="follow_up" name="follow_up" type="date" value="{{ lead.follow_up|date:'Y-m-d' }}" required>
+                                                </div>
+                                                
+                                                <div class="col-12">
+                                                    <div class="common-flex justify-content-end">
+                                                        <button class="btn btn-primary" type="submit">Update </button>
+                                                        <a href="{% url 'lead' %}" class="btn btn-secondary">Cancel</a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </form>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Container-fluid Ends-->
@@ -352,14 +378,30 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 footer-copyright text-center">
-                            <p class="mb-0">Copyright <span class="year-update"> </span> ©  Sales Management </p>
+                            <p class="mb-0">Copyright <span class="year-update"> </span> © Sales Management </p>
                         </div>
                     </div>
                 </div>
             </footer>
         </div>
     </div>
- <!-- latest jquery-->
+    <script>
+        // Set the created_at date to the current date
+        const createdAtInput = document.getElementById('created_at');
+        const followUpInput = document.getElementById('follow_up');
+    
+        const today = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+        createdAtInput.value = today;  // Set created_at to today
+    
+        // Ensure follow_up date is set to a date after the created_at date
+        createdAtInput.addEventListener('change', function() {
+            followUpInput.min = createdAtInput.value;
+        });
+    
+        // Initialize follow_up minimum date to today
+        followUpInput.min = today;
+    </script>
+   <!-- latest jquery-->
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <!-- Bootstrap js-->
 <script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
@@ -377,27 +419,8 @@
 <script src="{% static 'assets/js/slick/slick.min.js' %}"></script>
 <script src="{% static 'assets/js/slick/slick.js' %}"></script>
 <script src="{% static 'assets/js/header-slick.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatables/jquery.dataTables.min.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatables/dataTables1.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatables/dataTables.bootstrap5.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/dataTables.autoFill.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/autoFill.bootstrap5.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/dataTables.keyTable.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/keyTable.bootstrap5.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/dataTables.buttons.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/buttons.bootstrap5.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/buttons.colVis.min.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/dataTables.fixedHeader.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/fixedHeader.bootstrap5.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/jszip.min.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/pdfmake.min.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/vfs_fonts.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/buttons.html5.min.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/dataTables.responsive.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/responsive.bootstrap5.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/dataTables.rowReorder.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/rowReorder.bootstrap5.js' %}"></script>
-<script src="{% static 'assets/js/datatable/datatable-extension/custom.js' %}"></script>
+<script src="{% static 'assets/js/form-validation-custom.js' %}"></script>
+<script src="{% static 'assets/js/select/bootstrap-select.min.js' %}"></script>
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{% static 'assets/js/script.js' %}"></script>

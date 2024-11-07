@@ -1,12 +1,14 @@
 
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate,  logout ,login as auth_login
+from django.contrib.auth import authenticate,  logout ,login 
 from django.utils import timezone
 from base.models import Lead ,Status
 from django.utils.dateparse import parse_datetime
 from django.db.models import Q
+from django.utils import timezone
 
 
 # Register
@@ -33,7 +35,7 @@ def register(request):
                 first_name=name  
             )
             user.save()
-            auth_login (request,user)
+            login (request,user)
             messages.success(request, 'Registration successfully')
             return redirect('home')
 
@@ -41,105 +43,136 @@ def register(request):
 
 # Login
 def login(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = authenticate(request,email=email,password=password)
+        user = authenticate(request, email=email, password=password)
+        
         if user is not None:
-            login(request,user)
-            messages.success(request,'Login Successfully')
-            return redirect("home")
+            login(request, user)
+            messages.success(request, 'Login Successful')
+            return redirect('lead')
         else:
-            messages.error(request,'Invalid Email and password')
+            messages.error(request, 'Invalid Email or Password')
             return redirect('login')
-    return render(request,'login.html')
+
+    return render(request, 'index.html')
 
 # logout
 def logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('index')
 
 #dashboard
 def dashboard(request):
+    total_lead = Lead.objects.all().count()  # Total number of leads
+    lead_status = Lead.objects.filter(is_lead=True).count()  # Number of leads with is_lead=True
+
+    # Count of leads where the status is "Success"
+    status_count = Lead.objects.filter(status__identity="Success").count()
+
+    content = {
+        'total_lead': total_lead,
+        'lead_status': lead_status,
+        'status_count': status_count
+    }
     
-    return render(request, 'dashboard.html')
+    return render(request, 'dashboard.html', content)
 
 
 
 #lead Table
-def all_lead(request):
-    search_query = request.GET.get("search", "")
-    if search_query:
-        lead = Lead.objects.filter(
-            Q(name__icontains=search_query) |
-            Q(email__icontains=search_query) |
-            Q(phone__icontains=search_query) |
-            Q(address__icontains=search_query) |
-            Q(status__identity__icontains=search_query)  
-        ).distinct()
-    else:
-        lead = Lead.objects.all()
-    context = {'lead': lead, 'search_query': search_query}
-    return render(request, 'data.html', context)
+def all_lead(request, lead_id=None):
+    leads = Lead.objects.all()
+    statuses = Status.objects.all()  # Get all status objects from the database
+      # Get all lead objects
+
+    # Check if you're editing an existing lead
+    lead = None
+    if lead_id:
+        lead = get_object_or_404(Lead, id=lead_id)  # Safely get the lead or return a 404 if not found
+    
+    context = {
+        'lead': lead,
+        'statuses': statuses,
+        'leads': leads,  # Pass all leads to the template
+    }
+    
+    return render(request, 'lead.html', context)
 
 
+# def status(request):
+#     statuses = Status.objects.all()  
+#     lead = None  # Replace with actual lead object if editing an existing lead
+
+#     # If you're editing an existing lead, fetch the lead and pass it in the context
+#     if 'lead_id' in request.GET:  # Example condition for fetching a lead
+#         lead = Lead.objects.get(id=request.GET['lead_id'])
+#     return render(request, 'add-lead.html', {'statuses': statuses})
 
 
-
-#add Status
+# #add Status
 def add_status(request):
     if request.method == 'POST':
-        status = request.POST.get('status')
+        status_name = request.POST.get('identity', '').strip()
         
-        # Check if status is provided
-        if status:
-            new_status = Status(identity=status)
-            new_status.save()
-            messages.success(request, 'Status added successfully.')
-            return redirect('add-status')
+        # Check if the input is valid and not empty
+        if status_name:
+            if not Status.objects.filter(identity=status_name).exists():
+                new_status = Status(identity=status_name)
+                new_status.save()
+                messages.success(request, "Added successfully")
+            else:
+                messages.warning(request, "Status with this identity already exists")
         else:
-            messages.error(request, 'Please enter a status.')
+            messages.error(request, "Status name cannot be empty")
+        
+        return redirect('add_status')
+    
+    return render(request, 'add-lead.html')
 
-    return render(request, 'status.html')
 
 #add Lead
 def add_lead(request):
     if request.method == 'POST':
+        # Collect data from the form
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         address = request.POST.get('address')
         city = request.POST.get('city')
-        gender=request.POST.get('gender')
-        passout=request.POST.get('passout')
-        college=request.POST.get('college_name')
-        tech =request.POST.get('tech_field')
-        status_name = request.POST.get('status')
-        is_lead = request.POST.get('is_lead') == 'on'
-        created_at = request.POST.get('created_at')
-        follow_up = request.POST.get('follow_up')
-
-        status, created = Status.objects.get_or_create(identity=status_name)
+        gender = request.POST.get('gender')
+        passout = request.POST.get('passout')
+        college = request.POST.get('college_name')
+        tech = request.POST.get('tech_field')
+        status_id = request.POST.get('status') 
+        is_lead = False 
+        status = Status.objects.get(id=status_id)  
+        if status.identity == 'Active': 
+            is_lead = True
+        
+        follow_up = request.POST.get('follow_up') or None
+        
+        # Create the new Lead object
         Lead.objects.create(
             name=name,
             email=email,
             phone=phone,
             address=address,
             city=city,
-            status=status,
             gender=gender,
             passout=passout,
             tech_field=tech,
             college_name=college,
-            is_lead=is_lead,
-            created_at=created_at,
-            follow_up=follow_up,
+            status=status,  # Ensure status is set
+            is_lead=is_lead,  # Set is_lead based on condition
+            follow_up=follow_up,  # Follow-up date (optional)
         )
 
         messages.success(request, 'New lead added successfully.')
-        return redirect('lead') 
-    return render(request, 'lead.html')
-
+        return redirect('lead')  # Redirect to the list or another view
+    
+    return render(request, 'add-lead.html')
 
 #delete lead
 def delete_lead(request,pk):
@@ -151,40 +184,26 @@ def delete_lead(request,pk):
 
 
 #edit lead
-def edit_lead(request, pk):
-    # Retrieve the specific lead or return 404 if not found
-    lead = get_object_or_404(Lead, id=pk)
-
+def edit_lead(request, lead_id):
+    lead = get_object_or_404(Lead, pk=lead_id)
     if request.method == 'POST':
-        # Update the lead data with the posted form values
+        # Handle the POST request to update the lead
         lead.name = request.POST.get('name')
         lead.email = request.POST.get('email')
-        lead.phone = request.POST.get('phone')
         lead.address = request.POST.get('address')
         lead.city = request.POST.get('city')
-        lead.gender = request.POST.get('gender')
+        lead.phone = request.POST.get('phone')
         lead.passout = request.POST.get('passout')
+        lead.gender = request.POST.get('gender')
         lead.college_name = request.POST.get('college_name')
-        lead.tech_field = request.POST.get('tech_field')
+        lead.status = request.POST.get('status')
         lead.is_lead = request.POST.get('is_lead') == 'on'
+        lead.tech_field = request.POST.get('tech_field')
         lead.created_at = request.POST.get('created_at')
         lead.follow_up = request.POST.get('follow_up')
-        
-        # Retrieve or create the status
-        status_name = request.POST.get('status')
-        status, created = Status.objects.get_or_create(identity=status_name)
-        lead.status = status
-        
-        # Save the updated lead information
         lead.save()
+        return redirect('lead')  # Redirect to the lead list page or wherever you want after saving
 
-        messages.success(request, 'Lead updated successfully.')
-        return redirect(('lead'))  # Redirect to the lead list
-
-    context = {'lead': lead}
-    return render(request, 'lead.html', context)
-
-
-#report
+    return render(request, 'edit.html', {'lead': lead})
 
 

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+        <meta name="keywords"
+            content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+        <meta name="author" content="pixelstrap">
+        <link rel="icon" href="{% static 'assets/images/nexgen.jpg' %}" type="image/x-icon">
+        <link rel="shortcut icon" href="{% static 'assets/images/nexgen.jpg' %}" type="image/x-icon">
+        <title>Nexgen-Sales Management</title>
+        <!-- Google font-->
+        <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
+            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap"
+            rel="stylesheet">
+        <!-- Font Awesome-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome.css' %}">
+        <!-- ico-font-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/icofont.css' %}">
+        <!-- Themify icon-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/themify.css' %}">
+        <!-- Flag icon-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/flag-icon.css' %}">
+        <!-- Feather icon-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/feather-icon.css' %}">
+        <!-- Plugins css start-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/slick.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/slick-theme.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/scrollbar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/select/bootstrap-select.min.css' %}">
+        <!-- Plugins css Ends-->
+        <!-- Bootstrap css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/bootstrap.css' %}">
+        <!-- App css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+        <link id="color" rel="stylesheet" href="{% static 'assets/css/color-1.css' %}" media="screen">
+        <!-- Responsive css-->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/responsive.css' %}">
+    </head>
+    
+
+<body>
+    <!-- loader starts-->
+    <div class="loader-wrapper">
+        <div class="loader-index"> <span></span></div>
+        <svg>
+            <defs></defs>
+            <filter id="goo">
+                <fegaussianblur in="SourceGraphic" stddeviation="11" result="blur"></fegaussianblur>
+                <fecolormatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo">
+                </fecolormatrix>
+            </filter>
+        </svg>
+    </div>
+    <!-- loader ends-->
+    <!-- tap on top starts-->
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper default-wrapper" id="pageWrapper">
+        <!-- Page Header Start-->
+        <div class="page-header">
+            <div class="header-wrapper row m-0">
+
+                <div class="header-logo-wrapper col-auto p-0">
+                    <div class="logo-wrapper">
+                        <a href="{% url 'login' %}">
+                            <img class="img-fluid for-light" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
+                            <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
+                        </a>
+                    </div>
+                    <div class="toggle-sidebar">
+                        <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
+                    </div>
+                </div>
+
+                <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
+                    <ul class="nav-menus">
+
+                        <li class="fullscreen-body">
+                            <span id="maximize-screen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-maximize">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 8v-2a2 2 0 0 1 2 -2h2" />
+                                    <path d="M4 16v2a2 2 0 0 0 2 2h2" />
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v2" />
+                                    <path d="M16 20h2a2 2 0 0 0 2 -2v-2" />
+                                </svg>
+
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <div class="mode">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-sun">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                    <path
+                                        d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+                                </svg>
+
+                            </div>
+                        </li>
+
+
+                        <li class="profile-nav onhover-dropdown pe-0 py-0">
+                            <div class="d-flex profile-media">
+                                <img class="b-r-10" src="../assets/images/dashboard/profile.png" alt />
+                                <div class="flex-grow-1">
+                                    <span>Emay Walter</span>
+                                    <p class="mb-0">
+                                        Admin <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M6 9l6 6l6 -6" />
+                                        </svg>
+                                    </p>
+                                </div>
+                            </div>
+                            <ul class="profile-dropdown onhover-show-div">
+
+                                <li>
+                                    <a href="login.html"><i data-feather="log-in"> </i><span>Log
+                                            out</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <script class="result-template" type="text/x-handlebars-template">
+                  <div class="ProfileCard u-cf">
+                    <div class="ProfileCard-avatar"><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-airplay m-0"
+                      ><path
+                          d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"
+                        ></path><polygon
+                          points="12 15 17 21 7 21 12 15"
+                        ></polygon></svg></div>
+                    <div class="ProfileCard-details">
+                      <div class="ProfileCard-realName">{{name}}</div>
+                    </div>
+                  </div>
+                </script>
+
+            </div>
+        </div>
+        <!-- Page Header Ends                              -->
+        <!-- Page Body Start-->
+        <div class="page-body-wrapper default-menu default-menu">
+            <!-- Page Sidebar Start-->
+            <div class="sidebar-wrapper" data-sidebar-layout="stroke-svg">
+                <div>
+                    <div class="logo-wrapper">
+                        <a href="{% url 'login' %}"><img class="img-fluid for-light" width="150px" src="{% static 'assets/images/nexgen_logo.jpg' %}"
+                            alt /><img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}"
+                            alt /></a>
+                        <div class="back-btn"><i class="fa-solid fa-angle-left"></i></div>
+                        <div class="toggle-sidebar">
+                            <i class="status_toggle middle sidebar-toggle" data-feather="grid">
+                            </i>
+                        </div>
+                    </div>
+                    <div class="logo-icon-wrapper">
+                        <a href="{% url 'login' %}"><img class="img-fluid" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt /></a>
+                    </div>
+                    <nav class="sidebar-main">
+                        <div class="left-arrow" id="left-arrow">
+                            <i data-feather="arrow-left"></i>
+                        </div>
+                        <div id="sidebar-menu">
+                            <ul class="sidebar-links" id="simple-bar">
+                                <li class="back-btn">
+                                    <div class="mobile-back text-end">
+                                        <span>Back</span><i class="fa-solid fa-angle-right ps-2" aria-hidden="true"></i>
+                                    </div>
+                                </li>
+                                <li class="pin-title sidebar-main-title">
+                                    <div>
+                                        <h6>Pinned</h6>
+                                    </div>
+                                </li>
+                                <li class="sidebar-list">
+                                    <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav"
+                                        href="{% url 'home' %}" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-home-2 stroke-icon">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                            <path d="M10 12h4v4h-4z" />
+                                        </svg><span>Dashboard</span></a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav"
+                                        href="{% url 'lead' %}" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user stroke-icon">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                        </svg><span>Lead List</span></a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav"
+                                        href="{% url 'add-lead' %}" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus stroke-icon">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                            <path d="M16 19h6" />
+                                            <path d="M19 16v6" />
+                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                                        </svg><span>Add new Lead</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="right-arrow" id="right-arrow">
+                            <i data-feather="arrow-right"></i>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Page Sidebar Ends-->
+            <div class="page-body">
+                <div class="container-fluid">
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3>
+                                    Add Lead</h3>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{% url 'login' %}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="icon icon-tabler icons-tabler-outline icon-tabler-home-2 stroke-icon">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                <path d="M10 12h4v4h-4z" />
+                                            </svg></a></li>
+                                    <li class="breadcrumb-item">Lead</li>
+                                    <li class="breadcrumb-item active">Add Lead </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card create-project-form custom-input">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="statusModalLabel">Add New Status</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="{% url 'add_status' %}" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label for="newStatus" class="form-label">Status</label>
+                                                                    <input type="text" class="form-control" id="newStatus" name="identity" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save Status</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form class="row g-3 needs-validation" method="post" action="{% url 'add-lead' %}" novalidate="">
+                                                {% csrf_token %}
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="name">Name</label>
+                                                    <input class="form-control" id="name" type="text" name="name" placeholder=" Name" required="">
+                                                    <div class="valid-feedback">Looks good!</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="email">Email:</label>
+                                                    <input class="form-control" id="email" name="email" type="text" placeholder="Email" required="">
+                                                    <div class="valid-feedback">Looks good!</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="address">Address:</label>
+                                                    <input class="form-control" id="address" name="address" type="text" placeholder="Address" required="">
+                                                    <div class="valid-feedback">Looks good!</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="city">City:</label>
+                                                    <input class="form-control" id="city" type="text" name="city" placeholder="City" required="">
+                                                    <div class="invalid-feedback">Please enter a City</div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label" for="phone">Phone Number:</label>
+                                                    <input class="form-control" id="phone" type="text" name="phone" placeholder="Phone number" required="">
+                                                    <div class="invalid-feedback">Please enter a Phone Number</div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label" for="passout">Passout:</label>
+                                                    <input class="form-control" id="passout" type="text" name="passout" placeholder="Passout" required="">
+                                                    <div class="invalid-feedback">Please enter a Phone Number</div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label" for="gender">Gender:</label>
+                                                    <select class="form-select" id="gender" name="gender" required="">
+                              <option selected="" disabled="" value="">Choose...</option>
+                              <option>Male </option>
+                              <option>Female</option>
+                            </select>
+                                                    <div class="invalid-feedback">Please select a valid gender</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="college_name">College Name:</label>
+                                                    <input class="form-control" id="college_name" name="college_name" type="text" placeholder="College Name" required="">
+                                                    <div class="valid-feedback">Looks good!</div>
+                                                </div>
+                                                <!-- <div class="col-md-4">
+                                                    <label class="form-label" for="status">Status:</label>
+                                                    <input class="form-control" id="status" name="status" type="text" placeholder="Status " required="">
+                                                    <div class="valid-feedback">Looks good!</div>
+                                                </div> -->
+                                                <!-- <div class="col-md-2">
+                                                    <label class="form-label " for="is_lead">Lead:</label>
+                                                    <input class="form-check-input" id="is_lead" name="is_lead" type="checkbox" style=" border-color: #000000;">
+                                                    <div class="valid-feedback text-light">Looks good!</div>
+                                                </div> -->
+                                                <div class="col-lg-4">
+                                                    <label class="form-label" for="Status">Status</label>
+                                                    <select class="form-select" id="Status" name="status" required>
+                                                        <option selected disabled value="">Choose...</option>
+                                                        {% for status in statuses %}
+                                                        <option value="{{ status.id }}" {% if lead and lead.status == status %}selected{% endif %}>
+                                                            {{ status.identity }}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <div class="invalid-feedback">Please select a valid Status</div>
+                                                </div>
+                                                    <div class="col-lg-2">
+                                                        <!-- Button to trigger the Add Status modal -->
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
+                                                            Add Status
+                                                        </button>
+                                                    </div>
+                                                
+                                                
+                                                    
+                                                
+                                                <!-- Modal for adding a new status -->
+                                                
+                                                
+                                                <div class="col-xxl-4 col-md-6">
+                                                    <label class="form-label" for="tech_field">Tech Field:</label>
+                                                    <select class="form-select" id="tech_field" name="tech_field" required="">
+                              <option selected="" disabled="" value="">Choose...</option>
+                              <option>IT</option>
+                              <option>Non-IT</option>
+                            </select>
+                                                    <div class="invalid-feedback">Please select a valid Tech Field</div>
+                                                </div>
+                                                <div class="col-xxl-4 col-md-6">
+                                                    <label class="form-label">Follow Up Date</label>
+                                                    <input class="form-control" type="date" id="follow_up" name="follow_up" required="">
+                                                    <div class="invalid-feedback">Please select your end date</div>
+                                                </div>
+                                                
+                                                <div class="col-12">
+                                                    <div class="common-flex justify-content-end">
+                                                        <button class="btn btn-primary" type="submit">Add </button>
+                                                        <a href="{% url 'add-lead' %}" class="btn btn-secondary">Cancel</a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+            </div>
+            <!-- footer start-->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 footer-copyright text-center">
+                            <p class="mb-0">Copyright <span class="year-update"> </span> © Sales Management </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        // Get today's date
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+        const day = String(today.getDate()).padStart(2, '0');
+    
+        // Set the value of the min attribute to today's date in YYYY-MM-DD format
+        const dateString = `${year}-${month}-${day}`;
+        document.getElementById('follow_up').setAttribute('min', dateString);
+    </script>
+    
+    
+   <!-- latest jquery-->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<!-- Bootstrap js-->
+<script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+<!-- feather icon js-->
+<script src="{% static 'assets/js/icons/feather-icon/feather.min.js' %}"></script>
+<script src="{% static 'assets/js/icons/feather-icon/feather-icon.js' %}"></script>
+<!-- scrollbar js-->
+<script src="{% static 'assets/js/scrollbar/simplebar.min.js' %}"></script>
+<script src="{% static 'assets/js/scrollbar/custom.js' %}"></script>
+<!-- Sidebar jquery-->
+<script src="{% static 'assets/js/config.js' %}"></script>
+<!-- Plugins JS start-->
+<script src="{% static 'assets/js/sidebar-menu.js' %}"></script>
+<script src="{% static 'assets/js/sidebar-pin.js' %}"></script>
+<script src="{% static 'assets/js/slick/slick.min.js' %}"></script>
+<script src="{% static 'assets/js/slick/slick.js' %}"></script>
+<script src="{% static 'assets/js/header-slick.js' %}"></script>
+<script src="{% static 'assets/js/form-validation-custom.js' %}"></script>
+<script src="{% static 'assets/js/select/bootstrap-select.min.js' %}"></script>
+<!-- Plugins JS Ends-->
+<!-- Theme js-->
+<script src="{% static 'assets/js/script.js' %}"></script>
+<script src="{% static 'assets/js/script1.js' %}"></script>
+</body>
+
+</html>
