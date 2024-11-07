@@ -364,7 +364,7 @@
                                                     <label class="form-label " for="is_lead">Lead:</label>
                                                     <input class="form-check-input" id="is_lead" name="is_lead" type="checkbox" {% if lead.is_lead %}checked{% endif %}>
                                                 </div> -->
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 col-md-8">
                                                     <label class="form-label" for="status">Status</label>
                                                     <select class="form-select" id="status" name="status" required>
                                                         <option selected disabled value="">Choose...</option>
@@ -375,8 +375,13 @@
                                                         {% endfor %}
                                                     </select>
                                                 </div>
-                                                <div class="col-lg-2">
-                                                    <label class="form-label" for="Status"></label>
+                                                <div class="col-lg-2 col-md-4" style="
+                                                display: flex;
+                                                justify-content: center;
+                                                flex-direction: column;
+                                                align-items: center;
+                                            ">
+                                                    <label class="form-label" for="Status">Button</label>
                                                     <!-- Button to trigger the Add Status modal -->
                                                     <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
                                                         Add Status

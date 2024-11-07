@@ -103,13 +103,13 @@ def all_lead(request, lead_id=None):
 
 
 
-# #add Status
+from django.shortcuts import redirect
+from django.contrib import messages
+
 def add_status(request):
-    statuses = Status.objects.all()  # Get the current list of statuses
+    statuses = Status.objects.all()
     if request.method == 'POST':
         status_name = request.POST.get('identity', '').strip()
-        
-        # Check if the input is valid and not empty
         if status_name:
             if not Status.objects.filter(identity=status_name).exists():
                 new_status = Status(identity=status_name)
@@ -119,8 +119,9 @@ def add_status(request):
                 messages.warning(request, "Status with this identity already exists.")
         else:
             messages.error(request, "Status name cannot be empty.")
-    
+        return redirect(request.META.get('HTTP_REFERER', 'default-page-url'))
     return render(request, 'add-lead.html', {'statuses': statuses})
+
 
 
 #add Lead
