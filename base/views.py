@@ -55,7 +55,7 @@ def login(request):
             messages.success(request, 'Login Successful')
             return redirect('home')  
         else:
-            messages.error(request, 'Invalid Email or Password')
+            messages.error(request, 'Invalid username or Password')
             return redirect('login')
 
     return render(request, 'index.html')
