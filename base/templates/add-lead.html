@@ -70,8 +70,8 @@
                 <div class="header-logo-wrapper col-auto p-0">
                     <div class="logo-wrapper">
                         <a href="{% url 'login' %}">
-                            <img class="img-fluid for-light" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
-                            <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt />
+                            <img class="img-fluid for-light" src="{% static 'assets/images/nexgen_logo.png' %}" alt />
+                            <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.png' %}" alt />
                         </a>
                     </div>
                     <div class="toggle-sidebar">
@@ -117,7 +117,7 @@
 
                         <li class="profile-nav onhover-dropdown pe-0 py-0">
                             <div class="d-flex profile-media">
-                                <img class="b-r-10" width="40px" src="{% static 'assets/images/nexgen.jpg' %}" alt />
+                                <img class="b-r-10" width="40px" src="{% static 'assets/images/nexgen.png' %}" alt />
                                 <div class="flex-grow-1">
                                     <span>{{ user.username }}</span>
                                     <p class="mb-0">
@@ -174,8 +174,8 @@
             <div class="sidebar-wrapper" data-sidebar-layout="stroke-svg">
                 <div>
                     <div class="logo-wrapper">
-                        <a href="{% url 'login' %}"><img class="img-fluid for-light" width="150px" src="{% static 'assets/images/nexgen_logo.jpg' %}"
-                            alt /><img class="img-fluid for-dark" src="{% static 'assets/images/nexgen.jpg' %}"
+                        <a href="{% url 'login' %}"><img class="img-fluid for-light" width="150px" src="{% static 'assets/images/nexgen_logo.png' %}"
+                            alt /><img class="img-fluid for-dark" src="{% static 'assets/images/nexgen.png' %}"
                             alt /></a>
                         <div class="back-btn"><i class="fa-solid fa-angle-left"></i></div>
                         <div class="toggle-sidebar">
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                     <div class="logo-icon-wrapper">
-                        <a href="{% url 'login' %}"><img class="img-fluid" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt /></a>
+                        <a href="{% url 'login' %}"><img class="img-fluid" width="40px" src="{% static 'assets/images/nexgen.png' %}" alt /></a>
                     </div>
                     <nav class="sidebar-main">
                         <div class="left-arrow" id="left-arrow">
@@ -204,7 +204,7 @@
                                 </li>
                                 <li class="sidebar-list">
                                     <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav"
-                                        href="{% url 'home' %}" target="_blank">
+                                        href="{% url 'home' %}" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -217,7 +217,7 @@
                                 </li>
                                 <li class="sidebar-list">
                                     <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav"
-                                        href="{% url 'lead' %}" target="_blank">
+                                        href="{% url 'lead' %}" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -229,7 +229,7 @@
                                 </li>
                                 <li class="sidebar-list">
                                     <i class="fa-solid fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav"
-                                        href="{% url 'add-lead' %}" target="_blank">
+                                        href="{% url 'add-lead' %}" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                             stroke-linecap="round" stroke-linejoin="round"
