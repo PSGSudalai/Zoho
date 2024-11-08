@@ -171,7 +171,7 @@
                         <a href="{% url 'login' %}">
                             <img class="img-fluid for-light" width="150px"
                                 src="{% static 'assets/images/nexgen_logo.png' %}" alt />
-                            <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.png' %}" alt />
+                            <img class="img-fluid for-dark" width="150px" src="{% static 'assets/images/nexgen_logo.png' %}" alt />
                         </a>
                         <div class="back-btn"><i class="fa-solid fa-angle-left"></i></div>
                         <div class="toggle-sidebar">
@@ -451,11 +451,13 @@
                             </div>
                             <div class="col-xxl-8 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
                                 <div class="card">
-                                    <div class="card-header card-no-border">
+                                    <div class="card-header card-no-border" style="height: 100px;
+                                    display: flex;
+                                    justify-content: center;">
                                         <div class="header-top">
-                                            <h5>Weekly Follow_up</h5>
+                                            <h5>Weekly Follow up</h5>
                                             <div class="card-header-right-icon">
-                                                <a class="btn btn-light f-w-500 c-o-light" href="#"> </a>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -525,43 +527,32 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 order-xxl-0 order-sm-1 box-ord-1">
-                                <div class="card">
+                            
+                            <div class="col-sm-4">
+                                <div class="card widget-hover" style="    height: 340px;
+                                display: flex;
+                                justify-content: center;">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
-                                            <h5>Leads</h5>
-                                            <div class="card-header-right-icon">
-                                                <a class="btn btn-light f-w-500 c-o-light" href="{% url 'lead' %}">View All</a>
+                                            <div class="sales-header">
+                                                <h5 class="m-0">Yearly Lead</h5><span class="c-o-light f-w-500">Nov
+                                                    1, 2024 </span>
                                             </div>
+                                            <div class="card-header-right-icon"></div>
                                         </div>
                                     </div>
-                                    <div class="card-body px-0 pt-0">
-                                        <div class="recent-table table-responsive custom-scrollbar deal-table">
-                                            <table class="table" id="finance-deal-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Email</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>City</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for lead in leading %}
-                                                    <tr>
-                                                        <td>{{ lead.email }}</td>
-                                                        <td>{{ lead.name }}</td>
-                                                        <td>{{ lead.phone }}</td>
-                                                        <td>{{ lead.city }}</td>
-                                                    </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
+                                    <div class="card-body pt-0 main-sale">
+                                        <div class="sales-chart-wrap">
+                                            <div id="sales-chart1"></div>
+                                        </div>
+                                        <div class="sale-details">
+                                            <h4 class="mb-0"></h4><span class="f-12 f-w-500 txt-success"><i
+                                                    class="icon-arrow-up me-1"></i>+8.3%</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-6 col-md-6 box-col-6">
+                            <div class="col-xxl-8 col-md-6 box-col-6">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
@@ -590,7 +581,46 @@
                                     </div>
                                 </div>
                             </div>
-                           
+                            <div class="col-md-12 order-xxl-0 order-sm-1 box-ord-1">
+                                <div class="card">
+                                    <div class="card-header card-no-border">
+                                        <div class="header-top">
+                                            <h5>Leads</h5>
+                                            <div class="card-header-right-icon">
+                                                <a class="btn btn-light f-w-500 c-o-light" href="{% url 'lead' %}">View All</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body px-0 pt-0">
+                                        <div class="recent-table table-responsive custom-scrollbar deal-table">
+                                            <table class="table" id="finance-deal-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>City</th>
+                                                        <th>Source</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for lead in leading %}
+                                                    <tr>
+                                                        <td>{{ lead.email }}</td>
+                                                        <td>{{ lead.name }}</td>
+                                                        <td>{{ lead.email }}</td>
+                                                        <td>{{ lead.phone }}</td>
+                                                        <td>{{ lead.city }}</td>
+                                                        <td>{{ lead.source }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                            
                         </div>
                     </div>
@@ -838,7 +868,7 @@ financeChart1.render();
     colors: [CubaAdminConfig.primary, "#65c15c"],
     yaxis: {
         min: 1,
-        max: 10,
+        max: 50,
         tickAmount: 4,
         tickPlacement: "on",
 
@@ -917,119 +947,299 @@ var financeChart1 = new ApexCharts(document.querySelector("#gender"), financeCha
 financeChart1.render();
     </script>
 <script>
-    const pipeline = JSON.parse('{{ leadcount|safe|escapejs }}');
-    console.log(pipeline)
-var options_pipeline = {
-    series: [pipeline],
-    labels: ["Lead", "Success", "Follow_Up"],
-    chart: {
-        width: 140,
-        height: 158,
-        type: "donut",
-    },
-    plotOptions: {
-        pie: {
-            expandOnClick: false,
-            donut: {
-                labels: {
-                    show: true,
-                    name: {
-                        show: false,
-                    },
-                    total: {
-                        show: true,
-                        fontSize: "14px",
-                        fontWeight: 500,
-                        fontFamily: "Rubik, sans-serif",
-                        formatter: () => "",
-                    },
-                },
-            },
-        },
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    colors: ["#7366FF", "#ffb829", "#65c15c"],
-    fill: {
-        type: "solid",
-    },
-    legend: {
-        show: false,
-    },
-    stroke: {
-        width: 0,
-    },
-    responsive: [{
-            breakpoint: 1700,
-            options: {
-                chart: {
-                    height: 155,
-                    offsetX: 10,
-                },
-            },
-        },
-        {
-            breakpoint: 1618,
-            options: {
-                chart: {
-                    height: 150,
-                    offsetX: 10,
-                },
-            },
-        },
-        {
-            breakpoint: 1537,
-            options: {
-                chart: {
-                    height: 170,
-                    offsetX: 0,
-                },
-            },
-        },
-        {
-            breakpoint: 992,
-            options: {
-                chart: {
-                    height: 158,
-                    offsetX: 0,
-                },
-            },
-        },
-        {
-            breakpoint: 768,
-            options: {
-                chart: {
-                    height: 140,
-                    offsetX: 0,
-                },
-            },
-        },
-        {
-            breakpoint: 591,
-            options: {
-                chart: {
-                    height: 130,
-                    offsetX: -10,
-                },
-            },
-        },
-        {
-            breakpoint: 480,
-            options: {
-                chart: {
-                    width: 200,
-                },
-                legend: {
-                    position: "bottom",
-                },
-            },
-        },
+        var salesChart1 = {
+        series: [
+            {
+            name: "Lead",
+            data: [5, 8, 12, 18, 10, 2, 5, 18, 20, 16, 22, 5],
+        }, 
+            {
+            name: "Male",
+            data: [35, 28, 12, 18, 30, 2, 15, 18, 20, 16, 2, 15],
+        }, 
+            {
+            name: "Female",
+            data: [15, 18, 12, 18, 10, 12, 5, 18, 20, 16, 12, 50],
+        }, 
     ],
-};
+        chart: {
+            height: 150,
+            type: "line",
+            zoom: {
+                enabled: false,
+            },
+            offsetY: -20,
+            offsetX: -20,
+            toolbar: {
+                show: false,
+            },
+            dropShadow: {
+                enabled: true,
+                top: 8,
+                left: 0,
+                blur: 3,
+                color: "#54BA4A",
+                opacity: 0.2,
+            },
+        },
+        chart1: {
+            height: 150,
+            type: "line",
+            zoom: {
+                enabled: false,
+            },
+            offsetY: -20,
+            offsetX: -20,
+            toolbar: {
+                show: false,
+            },
+            dropShadow: {
+                enabled: true,
+                top: 8,
+                left: 0,
+                blur: 3,
+                color: "#0000ff",
+                opacity: 0.2,
+            },
+        },
+        chart2: {
+            height: 150,
+            type: "line",
+            zoom: {
+                enabled: false,
+            },
+            offsetY: -20,
+            offsetX: -20,
+            toolbar: {
+                show: false,
+            },
+            dropShadow: {
+                enabled: true,
+                top: 8,
+                left: 0,
+                blur: 3,
+                color: "#e52b50",
+                opacity: 0.2,
+            },
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        stroke: {
+            curve: "smooth",
+            width: 2,
+        },
+        grid: {
+            show: false,
+        },
+        tooltip: {
+            x: {
+                show: false,
+            },
+            z: {
+                show: false,
+            },
+        },
+        colors: ["#0000ff","#e52b50","#228b22"],
+        fill: {
+            opacity: 1,
+            type: "solid",
+            gradient: {
+                shade: "light",
+                type: "vertical",
+                shadeIntensity: 1,
+                opacityFrom: 0.95,
+                opacityTo: 1,
+                colorStops: [{
+                        offset: 0,
+                        color: "#0000ff",
+                        opacity: 0.1,
+                    },
+                    {
+                        offset: 30,
+                        color: "#7366FF",
+                        opacity: 0.8,
+                    },
+                    {
+                        offset: 80,
+                        color: "#54BA4A",
+                        opacity: 1,
+                    },
+                    {
+                        offset: 100,
+                        color: "#54BA4A",
+                        opacity: 0.1,
+                    },
+                ],
+            },
+        },
+        markers: {
+            discrete: [{
+                seriesIndex: 0,
+                dataPointIndex: 11,
+                fillColor: "#65c15c",
+                strokeColor: "var(--white)",
+                size: 5,
+                sizeOffset: 3,
+            }, ],
+            hover: {
+                size: 5,
+                sizeOffset: 0,
+            },
+        },
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            labels: {
+                show: false,
+            },
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
+            tooltip: {
+                enabled: false,
+            },
+        },
+        yaxis: {
+            labels: {
+                show: false,
+            },
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
+        },
+        responsive: [{
+                breakpoint: 1684,
+                options: {
+                    chart: {
+                        width: 280,
+                    },
+                },
+            },
+            {
+                breakpoint: 1582,
+                options: {
+                    chart: {
+                        width: 240,
+                    },
+                },
+            },
+            {
+                breakpoint: 1421,
+                options: {
+                    chart: {
+                        width: 225,
+                    },
+                },
+            },
+            {
+                breakpoint: 1400,
+                options: {
+                    chart: {
+                        width: "100%",
+                    },
+                },
+            },
+            {
+                breakpoint: 716,
+                options: {
+                    chart: {
+                        height: 75,
+                    },
+                },
+            },
+        ],
+        responsive: [{
+                breakpoint: 1684,
+                options: {
+                    chart2: {
+                        width: 280,
+                    },
+                },
+            },
+            {
+                breakpoint: 1582,
+                options: {
+                    chart2: {
+                        width: 240,
+                    },
+                },
+            },
+            {
+                breakpoint: 1421,
+                options: {
+                    chart2: {
+                        width: 225,
+                    },
+                },
+            },
+            {
+                breakpoint: 1400,
+                options: {
+                    chart2: {
+                        width: "100%",
+                    },
+                },
+            },
+            {
+                breakpoint: 716,
+                options: {
+                    chart2: {
+                        height: 75,
+                    },
+                },
+            },
+        ],
+        responsive: [{
+                breakpoint: 1684,
+                options: {
+                    chart1: {
+                        width: 280,
+                    },
+                },
+            },
+            {
+                breakpoint: 1582,
+                options: {
+                    chart1: {
+                        width: 240,
+                    },
+                },
+            },
+            {
+                breakpoint: 1421,
+                options: {
+                    chart1: {
+                        width: 225,
+                    },
+                },
+            },
+            {
+                breakpoint: 1400,
+                options: {
+                    chart1: {
+                        width: "100%",
+                    },
+                },
+            },
+            {
+                breakpoint: 716,
+                options: {
+                    chart1: {
+                        height: 75,
+                    },
+                },
+            },
+        ],
+    };
 
-var chart_pipeline = new ApexCharts(document.querySelector("#pipeline-chart"), options_pipeline);
-chart_pipeline.render();
+    var salesChart1 = new ApexCharts(document.querySelector("#sales-chart1"), salesChart1);
+    salesChart1.render();
 </script>
 </body>
 
