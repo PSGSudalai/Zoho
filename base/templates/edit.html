@@ -333,7 +333,45 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="city">City:</label>
-                                                    <input class="form-control" id="city" name="city" type="text" placeholder="City" value="{{ lead.city }}" required>
+                                                    <select class="form-select" id="city" name="city" required>
+                                                        <option value="" disabled {% if not lead.city %}selected{% endif %}>Select a District</option>
+                                                        <option value="Ariyalur" {% if lead.city == 'Ariyalur' %}selected{% endif %}>Ariyalur</option>
+                                                        <option value="Chengalpattu" {% if lead.city == 'Chengalpattu' %}selected{% endif %}>Chengalpattu</option>
+                                                        <option value="Chennai" {% if lead.city == 'Chennai' %}selected{% endif %}>Chennai</option>
+                                                        <option value="Coimbatore" {% if lead.city == 'Coimbatore' %}selected{% endif %}>Coimbatore</option>
+                                                        <option value="Cuddalore" {% if lead.city == 'Cuddalore' %}selected{% endif %}>Cuddalore</option>
+                                                        <option value="Dharmapuri" {% if lead.city == 'Dharmapuri' %}selected{% endif %}>Dharmapuri</option>
+                                                        <option value="Dindigul" {% if lead.city == 'Dindigul' %}selected{% endif %}>Dindigul</option>
+                                                        <option value="Erode" {% if lead.city == 'Erode' %}selected{% endif %}>Erode</option>
+                                                        <option value="Kallakurichi" {% if lead.city == 'Kallakurichi' %}selected{% endif %}>Kallakurichi</option>
+                                                        <option value="Kancheepuram" {% if lead.city == 'Kancheepuram' %}selected{% endif %}>Kancheepuram</option>
+                                                        <option value="Karur" {% if lead.city == 'Karur' %}selected{% endif %}>Karur</option>
+                                                        <option value="Krishnagiri" {% if lead.city == 'Krishnagiri' %}selected{% endif %}>Krishnagiri</option>
+                                                        <option value="Madurai" {% if lead.city == 'Madurai' %}selected{% endif %}>Madurai</option>
+                                                        <option value="Nagapattinam" {% if lead.city == 'Nagapattinam' %}selected{% endif %}>Nagapattinam</option>
+                                                        <option value="Namakkal" {% if lead.city == 'Namakkal' %}selected{% endif %}>Namakkal</option>
+                                                        <option value="Nilgiris" {% if lead.city == 'Nilgiris' %}selected{% endif %}>Nilgiris</option>
+                                                        <option value="Perambalur" {% if lead.city == 'Perambalur' %}selected{% endif %}>Perambalur</option>
+                                                        <option value="Pudukkottai" {% if lead.city == 'Pudukkottai' %}selected{% endif %}>Pudukkottai</option>
+                                                        <option value="Ramanathapuram" {% if lead.city == 'Ramanathapuram' %}selected{% endif %}>Ramanathapuram</option>
+                                                        <option value="Ranipet" {% if lead.city == 'Ranipet' %}selected{% endif %}>Ranipet</option>
+                                                        <option value="Salem" {% if lead.city == 'Salem' %}selected{% endif %}>Salem</option>
+                                                        <option value="Sivaganga" {% if lead.city == 'Sivaganga' %}selected{% endif %}>Sivaganga</option>
+                                                        <option value="Tenkasi" {% if lead.city == 'Tenkasi' %}selected{% endif %}>Tenkasi</option>
+                                                        <option value="Thanjavur" {% if lead.city == 'Thanjavur' %}selected{% endif %}>Thanjavur</option>
+                                                        <option value="Theni" {% if lead.city == 'Theni' %}selected{% endif %}>Theni</option>
+                                                        <option value="Thoothukudi" {% if lead.city == 'Thoothukudi' %}selected{% endif %}>Thoothukudi</option>
+                                                        <option value="Tiruchirappalli" {% if lead.city == 'Tiruchirappalli' %}selected{% endif %}>Tiruchirappalli</option>
+                                                        <option value="Tirunelveli" {% if lead.city == 'Tirunelveli' %}selected{% endif %}>Tirunelveli</option>
+                                                        <option value="Tirupathur" {% if lead.city == 'Tirupathur' %}selected{% endif %}>Tirupathur</option>
+                                                        <option value="Tiruppur" {% if lead.city == 'Tiruppur' %}selected{% endif %}>Tiruppur</option>
+                                                        <option value="Tiruvallur" {% if lead.city == 'Tiruvallur' %}selected{% endif %}>Tiruvallur</option>
+                                                        <option value="Tiruvannamalai" {% if lead.city == 'Tiruvannamalai' %}selected{% endif %}>Tiruvannamalai</option>
+                                                        <option value="Tiruvarur" {% if lead.city == 'Tiruvarur' %}selected{% endif %}>Tiruvarur</option>
+                                                        <option value="Vellore" {% if lead.city == 'Vellore' %}selected{% endif %}>Vellore</option>
+                                                        <option value="Viluppuram" {% if lead.city == 'Viluppuram' %}selected{% endif %}>Viluppuram</option>
+                                                        <option value="Virudhunagar" {% if lead.city == 'Virudhunagar' %}selected{% endif %}>Virudhunagar</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="phone">Phone Number:</label>
@@ -381,12 +419,23 @@
                                                 flex-direction: column;
                                                 align-items: center;
                                             ">
-                                                    <label class="form-label" for="Status">Button</label>
+                                                    <label class="form-label" for="Status"></label>
                                                     <!-- Button to trigger the Add Status modal -->
                                                     <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal">
                                                         Add Status
                                                     </button>
                                                 </div>
+                                                <div class="col-lg-4 col-md-6">
+                                                    <label class="form-label" for="source">Source:</label>
+                                                    <select class="form-select" id="source" name="source" required>
+                                                        <option selected disabled value="">Choose...</option>
+                                                        <option value="Social media" {% if lead.source == 'Social media' %}selected{% endif %}>Social media</option>
+                                                        <option value="Referral" {% if lead.source == 'Referral' %}selected{% endif %}>Referral</option>
+                                                        <option value="Job portal" {% if lead.source == 'Job portal' %}selected{% endif %}>Job portal</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Please select a valid source</div>
+                                                </div>
+                                                
                                                 <div class="col-xxl-4 col-md-6">
                                                     <label class="form-label" for="tech_field">Tech Field:</label>
                                                     <select class="form-select" id="tech_field" name="tech_field" required>
@@ -430,21 +479,17 @@
         </div>
     </div>
     <script>
-        // Set the created_at date to the current date
-        const createdAtInput = document.getElementById('created_at');
-        const followUpInput = document.getElementById('follow_up');
+        // Get today's date
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+        const day = String(today.getDate()).padStart(2, '0');
     
-        const today = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-        createdAtInput.value = today;  // Set created_at to today
-    
-        // Ensure follow_up date is set to a date after the created_at date
-        createdAtInput.addEventListener('change', function() {
-            followUpInput.min = createdAtInput.value;
-        });
-    
-        // Initialize follow_up minimum date to today
-        followUpInput.min = today;
+        // Set the value of the min attribute to today's date in YYYY-MM-DD format
+        const dateString = `${year}-${month}-${day}`;
+        document.getElementById('follow_up').setAttribute('min', dateString);
     </script>
+  
    <!-- latest jquery-->
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <!-- Bootstrap js-->

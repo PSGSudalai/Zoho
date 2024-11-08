@@ -352,8 +352,8 @@
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
-                                                <span class="f-w-500 c-o-light"> Leads Status</span>
-                                                <h4 class="mb-2">{{ lead_status}}</h4>
+                                                <span class="f-w-500 c-o-light"> Monthly lead</span>
+                                                <h4 class="mb-2">{{ monthly_lead }}</h4>
                                                 <!-- <div class="progress" role="progressbar" aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
                                                     <div class="progress-bar bg-success" style="width: 58%"></div>
@@ -420,12 +420,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-5 col-md-6 box-col-6">
+                            <div class="col-xxl-6 col-md-6 box-col-6">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
-                                            <h5>Yearly Leads</h5>
-                                            <div class="dropdown icon-dropdown">
+                                            <h5>Weekly Leads</h5>
+                                            <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
@@ -436,7 +436,7 @@
                                                         href="#">Yesterday</a><a class="dropdown-item" href="#">This
                                                         week</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="card-body finance-wrapper pt-0">
@@ -449,20 +449,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-4 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
+                            <div class="col-xxl-8 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
-                                            <h7>Weekly Follows UP</h7>
-                                            <!-- <div class="dropdown icon-dropdown">
-                                                <button class="btn dropdown-toggle" id="dealsDropdown" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                        class="icon-more-alt"></i></button>
-                                                <div class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dealsDropdown"><a class="dropdown-item"
-                                                        href="#">Today</a><a class="dropdown-item" href="#">Yesterday</a><a
-                                                        class="dropdown-item" href="#">This week</a></div>
-                                            </div> -->
+                                            <h5>Weekly Follow_up</h5>
+                                            <div class="card-header-right-icon">
+                                                <a class="btn btn-light f-w-500 c-o-light" href="#"> </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body px-0 pt-0">
@@ -470,18 +464,19 @@
                                             <table class="table" id="finance-deal-table">
                                                 <thead>
                                                     <tr>
+                                                        <th>S.No</th>
                                                         <th>Name</th>
                                                         <th>Phone</th>
                                                         <th>Follow Up Date</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {% for lead in leads %}
+                                                    {% for lead in weekly_follow_up %}
                                                     <tr>
-                                                        <td>{}</td>
-                                                        <td>Project</td>
-                                                        <td>$30,000</td>
-                                                        <td>13 Jan 2024</td>
+                                                        <td>{{ lead.name }}</td>
+                                                        <td>{{ lead.name }}</td>
+                                                        <td>{{ lead.phone }}</td>
+                                                        <td>{{ lead.follow_up }}</td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>
@@ -490,53 +485,39 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-3 col-sm-6 order-xxl-0 order-sm-2 box-col-6 box-ord-2">
+                            <div class="col-xxl-4 col-sm-6 order-xxl-0 order-sm-2 box-col-6 box-ord-2">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
                                             <div class="total-source">
                                                 <h5 class="pb-1">Lead Source</h5>
-                                                <h6>
-                                                    92%<span class="c-o-light f-14 ms-1">( Total lead source )</span>
-                                                </h6>
+                                                
                                             </div>
-                                            <div class="dropdown icon-dropdown">
-                                                <button class="btn dropdown-toggle" id="leadSourceDropdown"
-                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="icon-more-alt"></i>
-                                                </button>
+                                            <!-- <div class="dropdown icon-dropdown">
+                                                <button class="btn dropdown-toggle" id="leadSourceDropdown" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                        class="icon-more-alt"></i></button>
                                                 <div class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="leadSourceDropdown">
-                                                    <a class="dropdown-item" href="#">Today</a><a class="dropdown-item"
-                                                        href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                        week</a>
-                                                </div>
-                                            </div>
+                                                    aria-labelledby="leadSourceDropdown"><a class="dropdown-item"
+                                                        href="#">Today</a><a class="dropdown-item" href="#">Yesterday</a><a
+                                                        class="dropdown-item" href="#">This week</a></div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="main-lead-source">
                                             <div class="lead-source-1">
-                                                <div class="source-txt">
-                                                    <span class="mb-1">Campaign</span>
-                                                    <h5>
-                                                        <span class="counter" data-target="95">0</span>%
-                                                    </h5>
+                                                <div class="source-txt"><span class="mb-1">Social media</span>
+                                                    <h5> {{source_social}}</h5>
                                                 </div>
                                                 <div class="lead-source-2">
-                                                    <div class="source-txt">
-                                                        <span>Email</span>
-                                                        <h5>
-                                                            <span class="counter" data-target="84">0</span>%
-                                                        </h5>
+                                                    <div class="source-txt"> <span>Job Portal</span>
+                                                        <h5>{{ source_job }}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="lead-source-3">
-                                                    <div class="source-txt">
-                                                        <span>Referral</span>
-                                                        <h5>
-                                                            <span class="counter" data-target="70">0</span>%
-                                                        </h5>
+                                                    <div class="source-txt"> <span>Referral</span>
+                                                        <h5>{{source_referral}}</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -550,28 +531,28 @@
                                         <div class="header-top">
                                             <h5>Leads</h5>
                                             <div class="card-header-right-icon">
-                                                <a class="btn btn-light f-w-500 c-o-light" href="#!">View All</a>
+                                                <a class="btn btn-light f-w-500 c-o-light" href="{% url 'lead' %}">View All</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body px-0 pt-0">
-                                        <div class="dt-ext table-responsive custom-scrollbar html-expert-table">
-                                            <table class="display table-striped" id="export-button">
+                                        <div class="recent-table table-responsive custom-scrollbar deal-table">
+                                            <table class="table" id="finance-deal-table">
                                                 <thead>
                                                     <tr>
+                                                        <th>Email</th>
                                                         <th>Name</th>
-                                                        <th>Status</th>
-                                                        <th>Lead</th>
-                                                        <th>Date</th>
+                                                        <th>Phone</th>
+                                                        <th>City</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {% for lead in leads %}
+                                                    {% for lead in leading %}
                                                     <tr>
+                                                        <td>{{ lead.email }}</td>
                                                         <td>{{ lead.name }}</td>
-                                                        <td>{{ lead.status.identity }}</td>
-                                                        <td>{{ lead.is_lead|yesno:"Yes,No"}}</td>
-                                                        <td>{{ lead.created_at }}</td>
+                                                        <td>{{ lead.phone }}</td>
+                                                        <td>{{ lead.city }}</td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>
@@ -580,6 +561,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xxl-6 col-md-6 box-col-6">
+                                <div class="card">
+                                    <div class="card-header card-no-border">
+                                        <div class="header-top">
+                                            <h5>Weekly Gender Leads</h5>
+                                            <!-- <div class="dropdown icon-dropdown">
+                                                <button class="btn dropdown-toggle" id="financeDropdown" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="icon-more-alt"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end"
+                                                    aria-labelledby="financeDropdown">
+                                                    <a class="dropdown-item" href="#">Today</a><a class="dropdown-item"
+                                                        href="#">Yesterday</a><a class="dropdown-item" href="#">This
+                                                        week</a>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="card-body finance-wrapper pt-0">
+                                        <div class="common-flex">
+                                            <h6>Overall gender Leads : {{total_lead }}</h6>
+                                        </div>
+                                        <div class="finance-chart-wrapper">
+                                            <div id="gender"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
                            
                         </div>
                     </div>
@@ -600,7 +611,7 @@
                 </div>
             </footer>
         </div>
-    </div>
+    </div>    
     <!-- latest jquery-->
     <script src="{% static 'assets/js/jquery.min.js' %}"></script>
     <!-- Bootstrap js-->
@@ -628,12 +639,398 @@
     <script src="{% static 'assets/js/datatable/datatables/dataTables.select.js' %}"></script>
     <script src="{% static 'assets/js/datatable/datatables/select.bootstrap5.js' %}"></script>
     <script src="{% static 'assets/js/datatable/datatables/datatable.custom.js' %}"></script>
-    <script src="{% static 'assets/js/dashboard/dashboard_9.js' %}"></script>
+    <!-- <script src="{% static 'assets/js/dashboard/dashboard_9.js' %}"></script> -->
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{% static 'assets/js/script.js' %}"></script>
     <script src="{% static 'assets/js/script1.js' %}"></script>
     <!-- <script src="../assets/js/theme-customizer/customizer.js"></script> -->
+
+    <script>
+    const salesData1 = JSON.parse('{{ leadStatus|safe|escapejs }}');
+    const salesData2 = JSON.parse('{{ leadchart|safe|escapejs }}');
+
+    var financeChart1 = {
+        series: [
+            {
+                name: "Success",
+                data: salesData1,
+            },
+            {
+                name: "Lead",
+                data: salesData2,
+            },
+        ],
+    chart: {
+        type: "bar",
+        height: 230,
+        stacked: true,
+        toolbar: {
+            show: false,
+        },
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: "50%",
+            borderRadius: 0,
+        },
+    },
+    grid: {
+        show: false,
+        yaxis: {
+            lines: {
+                show: true,
+            },
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    stroke: {
+        width: 2,
+        dashArray: 0,
+        lineCap: "butt",
+        colors: "#fff",
+    },
+    fill: {
+        opacity: 1,
+    },
+    legend: {
+        show: false,
+    },
+
+    colors: [CubaAdminConfig.primary, "#AAAFCB"],
+    yaxis: {
+        min: 1,
+        max: 10,
+        tickAmount: 4,
+        tickPlacement: "on",
+
+        axisBorder: {
+            show: false,
+        },
+        axisTicks: {
+            show: false,
+        },
+    },
+    xaxis: {
+        categories: ["Week1", "Week2", "Week3", " Week4"],
+        labels: {
+            style: {
+                fontFamily: "Rubik, sans-serif",
+            },
+        },
+        axisBorder: {
+            show: false,
+        },
+        axisTicks: {
+            show: false,
+        },
+    },
+    responsive: [{
+            breakpoint: 1200,
+            options: {
+                chart: {
+                    height: 235,
+                },
+            },
+        },
+        {
+            breakpoint: 875,
+            options: {
+                xaxis: {
+                    tickAmount: 6,
+                    tickPlacement: "between",
+                },
+            },
+        },
+        {
+            breakpoint: 767,
+            options: {
+                plotOptions: {
+                    bar: {
+                        columnWidth: "15px",
+                    },
+                },
+            },
+        },
+        {
+            breakpoint: 576,
+            options: {
+                plotOptions: {
+                    bar: {
+                        columnWidth: "8px",
+                    },
+                },
+            },
+        },
+        {
+            breakpoint: 400,
+            options: {
+                plotOptions: {
+                    bar: {
+                        columnWidth: "6px",
+                    },
+                },
+            },
+        },
+    ],
+};
+
+var financeChart1 = new ApexCharts(document.querySelector("#finance-chart"), financeChart1);
+financeChart1.render();
+    </script>
+    <script>
+    const salesData11 = JSON.parse('{{ lead_gender_male|safe|escapejs }}');
+    const salesData12 = JSON.parse('{{ lead_gender_female|safe|escapejs }}');
+
+    var financeChart1 = {
+        series: [
+            {
+                name: "Male",
+                data: salesData11,
+            },
+            {
+                name: "Female",
+                data: salesData12,
+            },
+        ],
+    chart: {
+        type: "bar",
+        height: 230,
+        stacked: true,
+        toolbar: {
+            show: false,
+        },
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: "50%",
+            borderRadius: 0,
+        },
+    },
+    grid: {
+        show: false,
+        yaxis: {
+            lines: {
+                show: true,
+            },
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    stroke: {
+        width: 2,
+        dashArray: 0,
+        lineCap: "butt",
+        colors: "#7366FF",
+    },
+    fill: {
+        opacity: 1,
+    },
+    legend: {
+        show: false,
+    },
+
+    colors: [CubaAdminConfig.primary, "#65c15c"],
+    yaxis: {
+        min: 1,
+        max: 10,
+        tickAmount: 4,
+        tickPlacement: "on",
+
+        axisBorder: {
+            show: false,
+        },
+        axisTicks: {
+            show: false,
+        },
+    },
+    xaxis: {
+        categories: ["Week1", "Week2", "Week3", " Week4"],
+        labels: {
+            style: {
+                fontFamily: "Rubik, sans-serif",
+            },
+        },
+        axisBorder: {
+            show: false,
+        },
+        axisTicks: {
+            show: false,
+        },
+    },
+    responsive: [{
+            breakpoint: 1200,
+            options: {
+                chart: {
+                    height: 235,
+                },
+            },
+        },
+        {
+            breakpoint: 875,
+            options: {
+                xaxis: {
+                    tickAmount: 6,
+                    tickPlacement: "between",
+                },
+            },
+        },
+        {
+            breakpoint: 767,
+            options: {
+                plotOptions: {
+                    bar: {
+                        columnWidth: "15px",
+                    },
+                },
+            },
+        },
+        {
+            breakpoint: 576,
+            options: {
+                plotOptions: {
+                    bar: {
+                        columnWidth: "8px",
+                    },
+                },
+            },
+        },
+        {
+            breakpoint: 400,
+            options: {
+                plotOptions: {
+                    bar: {
+                        columnWidth: "6px",
+                    },
+                },
+            },
+        },
+    ],
+};
+
+var financeChart1 = new ApexCharts(document.querySelector("#gender"), financeChart1);
+financeChart1.render();
+    </script>
+<script>
+    const pipeline = JSON.parse('{{ leadcount|safe|escapejs }}');
+    console.log(pipeline)
+var options_pipeline = {
+    series: [pipeline],
+    labels: ["Lead", "Success", "Follow_Up"],
+    chart: {
+        width: 140,
+        height: 158,
+        type: "donut",
+    },
+    plotOptions: {
+        pie: {
+            expandOnClick: false,
+            donut: {
+                labels: {
+                    show: true,
+                    name: {
+                        show: false,
+                    },
+                    total: {
+                        show: true,
+                        fontSize: "14px",
+                        fontWeight: 500,
+                        fontFamily: "Rubik, sans-serif",
+                        formatter: () => "",
+                    },
+                },
+            },
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    colors: ["#7366FF", "#ffb829", "#65c15c"],
+    fill: {
+        type: "solid",
+    },
+    legend: {
+        show: false,
+    },
+    stroke: {
+        width: 0,
+    },
+    responsive: [{
+            breakpoint: 1700,
+            options: {
+                chart: {
+                    height: 155,
+                    offsetX: 10,
+                },
+            },
+        },
+        {
+            breakpoint: 1618,
+            options: {
+                chart: {
+                    height: 150,
+                    offsetX: 10,
+                },
+            },
+        },
+        {
+            breakpoint: 1537,
+            options: {
+                chart: {
+                    height: 170,
+                    offsetX: 0,
+                },
+            },
+        },
+        {
+            breakpoint: 992,
+            options: {
+                chart: {
+                    height: 158,
+                    offsetX: 0,
+                },
+            },
+        },
+        {
+            breakpoint: 768,
+            options: {
+                chart: {
+                    height: 140,
+                    offsetX: 0,
+                },
+            },
+        },
+        {
+            breakpoint: 591,
+            options: {
+                chart: {
+                    height: 130,
+                    offsetX: -10,
+                },
+            },
+        },
+        {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200,
+                },
+                legend: {
+                    position: "bottom",
+                },
+            },
+        },
+    ],
+};
+
+var chart_pipeline = new ApexCharts(document.querySelector("#pipeline-chart"), options_pipeline);
+chart_pipeline.render();
+</script>
 </body>
 
 </html>

@@ -667,133 +667,139 @@ var saleWeek = {
 var saleWeek = new ApexCharts(document.querySelector("#sale-week"), saleWeek);
 saleWeek.render();
 
+const series = [{
+    name: "Sales",
+    data: salesData,  // salesData is available from the template
+}];
+
+console.log(series);
 //  Finance Chart
-var financeChart1 = {
-    series: [{
-            name: "Expenses",
-            data: [20, 45, 40, 50, 65, 18, 25, 60, 35, 25, 60, 30],
-        },
-        {
-            name: "Revenue",
-            data: [40, 82, 90, 40, 99, 55, 15, 35, 95, 20, 20, 30],
-        },
-    ],
-    chart: {
-        type: "bar",
-        height: 230,
-        stacked: true,
-        toolbar: {
-            show: false,
-        },
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: "50%",
-            borderRadius: 0,
-        },
-    },
-    grid: {
-        show: false,
-        yaxis: {
-            lines: {
-                show: true,
-            },
-        },
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    stroke: {
-        width: 2,
-        dashArray: 0,
-        lineCap: "butt",
-        colors: "#fff",
-    },
-    fill: {
-        opacity: 1,
-    },
-    legend: {
-        show: false,
-    },
+// var financeChart1 = {
+//     series: [{
+//             name: "Expenses",
+//             data: [20, 45, 40, 50, 65, 18, 25, 60, 35, 25, 60, 30],
+//         },
+//         {
+//             name: "Revenue",
+//             data: [40, 82, 90, 40, 99, 55, 15, 35, 95, 20, 20, 30],
+//         },
+//     ],
+//     chart: {
+//         type: "bar",
+//         height: 230,
+//         stacked: true,
+//         toolbar: {
+//             show: false,
+//         },
+//     },
+//     plotOptions: {
+//         bar: {
+//             horizontal: false,
+//             columnWidth: "50%",
+//             borderRadius: 0,
+//         },
+//     },
+//     grid: {
+//         show: false,
+//         yaxis: {
+//             lines: {
+//                 show: true,
+//             },
+//         },
+//     },
+//     dataLabels: {
+//         enabled: false,
+//     },
+//     stroke: {
+//         width: 2,
+//         dashArray: 0,
+//         lineCap: "butt",
+//         colors: "#fff",
+//     },
+//     fill: {
+//         opacity: 1,
+//     },
+//     legend: {
+//         show: false,
+//     },
 
-    colors: [CubaAdminConfig.primary, "#AAAFCB"],
-    yaxis: {
-        min: 20,
-        max: 100,
-        tickAmount: 4,
-        tickPlacement: "on",
+//     colors: [CubaAdminConfig.primary, "#AAAFCB"],
+//     yaxis: {
+//         min: 20,
+//         max: 100,
+//         tickAmount: 4,
+//         tickPlacement: "on",
 
-        axisBorder: {
-            show: false,
-        },
-        axisTicks: {
-            show: false,
-        },
-    },
-    xaxis: {
-        categories: ["Jan", "Feb", "Mar", " Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        labels: {
-            style: {
-                fontFamily: "Rubik, sans-serif",
-            },
-        },
-        axisBorder: {
-            show: false,
-        },
-        axisTicks: {
-            show: false,
-        },
-    },
-    responsive: [{
-            breakpoint: 1200,
-            options: {
-                chart: {
-                    height: 235,
-                },
-            },
-        },
-        {
-            breakpoint: 875,
-            options: {
-                xaxis: {
-                    tickAmount: 6,
-                    tickPlacement: "between",
-                },
-            },
-        },
-        {
-            breakpoint: 767,
-            options: {
-                plotOptions: {
-                    bar: {
-                        columnWidth: "15px",
-                    },
-                },
-            },
-        },
-        {
-            breakpoint: 576,
-            options: {
-                plotOptions: {
-                    bar: {
-                        columnWidth: "8px",
-                    },
-                },
-            },
-        },
-        {
-            breakpoint: 400,
-            options: {
-                plotOptions: {
-                    bar: {
-                        columnWidth: "6px",
-                    },
-                },
-            },
-        },
-    ],
-};
+//         axisBorder: {
+//             show: false,
+//         },
+//         axisTicks: {
+//             show: false,
+//         },
+//     },
+//     xaxis: {
+//         categories: ["Jan", "Feb", "Mar", " Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//         labels: {
+//             style: {
+//                 fontFamily: "Rubik, sans-serif",
+//             },
+//         },
+//         axisBorder: {
+//             show: false,
+//         },
+//         axisTicks: {
+//             show: false,
+//         },
+//     },
+//     responsive: [{
+//             breakpoint: 1200,
+//             options: {
+//                 chart: {
+//                     height: 235,
+//                 },
+//             },
+//         },
+//         {
+//             breakpoint: 875,
+//             options: {
+//                 xaxis: {
+//                     tickAmount: 6,
+//                     tickPlacement: "between",
+//                 },
+//             },
+//         },
+//         {
+//             breakpoint: 767,
+//             options: {
+//                 plotOptions: {
+//                     bar: {
+//                         columnWidth: "15px",
+//                     },
+//                 },
+//             },
+//         },
+//         {
+//             breakpoint: 576,
+//             options: {
+//                 plotOptions: {
+//                     bar: {
+//                         columnWidth: "8px",
+//                     },
+//                 },
+//             },
+//         },
+//         {
+//             breakpoint: 400,
+//             options: {
+//                 plotOptions: {
+//                     bar: {
+//                         columnWidth: "6px",
+//                     },
+//                 },
+//             },
+//         },
+//     ],
+// };
 
-var financeChart1 = new ApexCharts(document.querySelector("#finance-chart"), financeChart1);
-financeChart1.render();
+// var financeChart1 = new ApexCharts(document.querySelector("#finance-chart"), financeChart1);
+// financeChart1.render();

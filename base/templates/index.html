@@ -44,15 +44,15 @@
                     <div>
                         <div>
                             <a class="logo" href="{% url 'login' %}">
-                                <img class="img-fluid for-light" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt="loginpage">
-                                <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.jpg' %}" alt="loginpage">
+                                <img class="img-fluid for-light" src="{% static 'assets/images/nexgen_logo.png' %}" alt="loginpage">
+                                <img class="img-fluid for-dark" src="{% static 'assets/images/nexgen_logo.png' %}" alt="loginpage">
                             </a>
                         </div>
                           <div class="login-main">
                             <form class="theme-form" method="post" action="{% url 'login' %}">
                                 {% csrf_token %}
                                 <h4>Sign in to account</h4>
-                                <p>Enter your email & password to login</p>
+                                <p>Enter your username & password to login</p>
                                 <div class="form-group">
                                     <label class="col-form-label">Username</label>
                                     <input class="form-control" type="text" name="email" required placeholder="username">
