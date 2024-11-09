@@ -248,7 +248,7 @@ def all_lead(request, lead_id=None):
     
     # Apply tech field filter if provided
     elif tech:
-        leads = Lead.objects.filter(tech=tech)
+        leads = Lead.objects.filter(tech_field=tech)
 
     # Get a specific lead if an ID is provided
     lead = None

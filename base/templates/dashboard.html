@@ -603,7 +603,7 @@
                                     </div>
                                     <div class="card-body pt-0 main-sale">
                                         <div class="sales-chart-wrap">
-                                            <div id="funnelchart"></div>
+                                            <div id="funnelchart"style="max-width: 480px;height: 360px;margin: 0px auto;"></div>
                                         </div>
                                         <div class="sale-details">
                                             <h4 class="mb-0"></h4>
@@ -648,7 +648,7 @@
                                             <h6></h6>
                                         </div>
                                         <div class="finance-chart-wrapper">
-                                            <div id="piechart" style="max-width: 480px; height: 360px; margin: 0px auto"></div>
+                                            <div id="chartDiv2" style="max-width: 560px;height: 400px;margin: 0px auto;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -747,6 +747,7 @@
     <!-- Theme js-->
     <script src="{% static 'assets/js/script.js' %}"></script>
     <script src="{% static 'assets/js/script1.js' %}"></script>
+    <script src="https://code.jscharting.com/latest/jscharting.js"></script>
     <!-- <script src="../assets/js/theme-customizer/customizer.js"></script> -->
 
     <script>
@@ -884,79 +885,71 @@
 var financeChart1 = new ApexCharts(document.querySelector("#finance-chart"), financeChart1);
 financeChart1.render();
     </script>
-
-    <script>
-        var chart = JSC.chart('funnelchart', { 
-  debug: true, 
-  type: 'funnel square', 
-  legend_visible: false, 
-  annotations: [ 
-    { 
-      position: 'inside top', 
-      margin_top: 15, 
-      label: { 
-        text: '', 
-        style_fontSize: 15 
-      } 
-    } 
-  ], 
-  defaultSeries: { 
-    shape_innerPadding: 6, 
-    defaultPoint: { 
-      tooltip: 
-        '<b>%name</b><br><b>Applicants:</b> %yValue', 
-      label: { 
-        text: 
-          '%name %yValue (%percentOfSeriesMax%)', 
-        placement: 'outside'
-      } 
-    } 
-  }, 
-  series: [ 
-    { 
-      name: 'All Applicants', 
-      palette: 'fiveColor11', 
-      points: [ 
-        { name: 'Candidates Applied', y: 183 }, 
-        { name: 'Aptitude Test', y: 140 }, 
-        { name: 'Technical Interview', y: 136 }, 
-        { name: 'HR Interview', y: 80 }, 
-        { name: 'Candidates Recruited', y: 51 } 
-      ] 
-    } 
-  ] 
-}); 
+    <script type="text/javascript">
+        var chart2 = JSC.chart('chartDiv2', {
+            debug: true,
+            type: 'pie',
+            title: {
+                label_text: 'Source Lead',
+                position: 'center'
+            },
+            legend_visible: false,
+            defaultSeries: { angle: 45, pointSelection: true },
+            defaultPoint_label_text: '%name <b>%percentOfTotal%</b>',
+            series: [
+                {
+                    name: 'Top 5 Countries',
+                    points: [
+                        { name: 'Social media', y: 1349585838 },
+                        { name: 'Referral', y: 1220800359 },
+                        { name: 'Whatsapp', y: 509365627 },
+                        { name: 'Job portal', y: 316438601 }
+                    ]
+                }
+            ]
+        });
     </script>
 
-    <script>
-        var chart = JSC.chart('piechart', { 
-  debug: true, 
-  type: 'pie', 
-  title: { 
-    label_text: 'Top World Populations', 
-    position: 'center'
-  }, 
-  legend_visible: false, 
-  defaultSeries: { 
-    angle: 45, 
-    pointSelection: true
-  }, 
-  defaultPoint_label_text: 
-    '%name <b>%percentOfTotal%</b>', 
-  series: [ 
-    { 
-      name: 'Top 5 Countries', 
-      points: [ 
-        { name: 'China', y: 1349585838 }, 
-        { name: 'India', y: 1220800359 }, 
-        { name: 'Europe', y: 509365627 }, 
-        { name: 'U.S.', y: 316438601 }, 
-        { name: 'Indonesia', y: 251160124 } 
-      ] 
-    } 
-  ] 
-}); 
-    </script>
+<script type="text/javascript">
+    var chart = JSC.chart('funnelchart', {
+        debug: true,
+        type: 'funnel square',
+        legend_visible: false,
+        annotations: [
+            {
+                position: 'inside top',
+                margin_top: 20,
+                label: { text: 'Status Lead', style_fontSize: 15 }
+            }
+        ],
+        defaultSeries: {
+            shape_innerPadding: 6,
+            defaultPoint: {
+                tooltip: '<b>%name</b><br><b>Applicants:</b> %yValue',
+                label: {
+                    text: '%name %yValue (%percentOfSeriesMax%)',
+                    placement: 'outside'
+                }
+            }
+        },
+        series: [
+            {
+                name: 'All Applicants',
+                palette: 'fiveColor11',
+                points: [
+                    { name: 'Lead', y: 183 },
+                    { name: 'Success', y: 140 },
+                    { name: 'Negotiation', y: 136 },
+                    { name: 'Follow up', y: 136 },
+                    { name: 'Pending', y: 80 },
+                    { name: 'Closed', y: 51 }
+                ]
+            }
+        ]
+    });
+</script>
+
+    
   
 </body>
 
