@@ -900,10 +900,10 @@ financeChart1.render();
                 {
                     name: 'Top 5 Countries',
                     points: [
-                        { name: 'Social media', y: 1349585838 },
-                        { name: 'Referral', y: 1220800359 },
-                        { name: 'Whatsapp', y: 509365627 },
-                        { name: 'Job portal', y: 316438601 }
+                        { name: 'Social media', y: {{source_social}} },
+                        { name: 'Referral', y: {{source_referral}} },
+                        { name: 'Whatsapp', y: {{source_whatsapp}} },
+                        { name: 'Job portal', y: {{source_job}} }
                     ]
                 }
             ]
@@ -937,12 +937,12 @@ financeChart1.render();
                 name: 'All Applicants',
                 palette: 'fiveColor11',
                 points: [
-                    { name: 'Lead', y: 183 },
-                    { name: 'Success', y: 140 },
-                    { name: 'Negotiation', y: 136 },
-                    { name: 'Follow up', y: 136 },
-                    { name: 'Pending', y: 80 },
-                    { name: 'Closed', y: 51 }
+                    { name: 'Lead', y: {{total_lead}} },
+                    { name: 'Success', y: {{status_count}} },
+                    { name: 'Negotiation', y: {{negotiation_lead}} },
+                    { name: 'Follow up', y: {{follow_up_lead}} },
+                    { name: 'Pending', y: {{pending_lead}} },
+                    { name: 'Closed', y: {{closed_lead}} }
                 ]
             }
         ]

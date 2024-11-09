@@ -86,7 +86,7 @@ def dashboard(request,lead_id=None):
     #Overall Count
     status_count = Lead.objects.filter(status__identity="Success").count()  #Status count
     closed_lead =Lead.objects.filter(status__identity="Closed").count()
-    negotiation_lead =Lead.objects.filter(status__identity="Negotation").count()
+    negotiation_lead =Lead.objects.filter(status__identity="Negotiation").count()
     follow_up_lead =Lead.objects.filter(status__identity="Follow Up").count()
     pending_lead =Lead.objects.filter(status__identity="Pending").count()
 
