@@ -310,9 +310,98 @@
                             <div class="card">
                                 <div class="card-header pb-0 card-no-border">
                                 </div>
+                               
                              
                                     <div class="dt-ext table-responsive custom-scrollbar html-expert-table">
+                                        
                                         <table class="display table-striped" id="export-button">
+                                            <div class="row">
+                                                <form method="GET" action="{% url 'lead' %}">
+                                                <div class="col-sm-2">
+                                                    <label class="form-label" for="status" style="font-weight: bold; font-weight:100px ;">Filter</label>
+                                                    <input type="date" id="startDate" name="start_date" class="form-control" >
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="form-label" for="status"></label>
+                                                    <input type="date" id="endDate" name="end_date" class="form-control" >
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label" for="status"></label>
+                                                    <select class="form-select" id="city" name="city" >
+                                                        <option value="" disabled {% if not lead.city %}selected{% endif %}>Select a District</option>
+                                                        <option value="Ariyalur" {% if lead.city == 'Ariyalur' %}selected{% endif %}>Ariyalur</option>
+                                                        <option value="Chengalpattu" {% if lead.city == 'Chengalpattu' %}selected{% endif %}>Chengalpattu</option>
+                                                        <option value="Chennai" {% if lead.city == 'Chennai' %}selected{% endif %}>Chennai</option>
+                                                        <option value="Coimbatore" {% if lead.city == 'Coimbatore' %}selected{% endif %}>Coimbatore</option>
+                                                        <option value="Cuddalore" {% if lead.city == 'Cuddalore' %}selected{% endif %}>Cuddalore</option>
+                                                        <option value="Dharmapuri" {% if lead.city == 'Dharmapuri' %}selected{% endif %}>Dharmapuri</option>
+                                                        <option value="Dindigul" {% if lead.city == 'Dindigul' %}selected{% endif %}>Dindigul</option>
+                                                        <option value="Erode" {% if lead.city == 'Erode' %}selected{% endif %}>Erode</option>
+                                                        <option value="Kallakurichi" {% if lead.city == 'Kallakurichi' %}selected{% endif %}>Kallakurichi</option>
+                                                        <option value="Kancheepuram" {% if lead.city == 'Kancheepuram' %}selected{% endif %}>Kancheepuram</option>
+                                                        <option value="Karur" {% if lead.city == 'Karur' %}selected{% endif %}>Karur</option>
+                                                        <option value="Krishnagiri" {% if lead.city == 'Krishnagiri' %}selected{% endif %}>Krishnagiri</option>
+                                                        <option value="Madurai" {% if lead.city == 'Madurai' %}selected{% endif %}>Madurai</option>
+                                                        <option value="Nagapattinam" {% if lead.city == 'Nagapattinam' %}selected{% endif %}>Nagapattinam</option>
+                                                        <option value="Namakkal" {% if lead.city == 'Namakkal' %}selected{% endif %}>Namakkal</option>
+                                                        <option value="Nilgiris" {% if lead.city == 'Nilgiris' %}selected{% endif %}>Nilgiris</option>
+                                                        <option value="Perambalur" {% if lead.city == 'Perambalur' %}selected{% endif %}>Perambalur</option>
+                                                        <option value="Pudukkottai" {% if lead.city == 'Pudukkottai' %}selected{% endif %}>Pudukkottai</option>
+                                                        <option value="Ramanathapuram" {% if lead.city == 'Ramanathapuram' %}selected{% endif %}>Ramanathapuram</option>
+                                                        <option value="Ranipet" {% if lead.city == 'Ranipet' %}selected{% endif %}>Ranipet</option>
+                                                        <option value="Salem" {% if lead.city == 'Salem' %}selected{% endif %}>Salem</option>
+                                                        <option value="Sivaganga" {% if lead.city == 'Sivaganga' %}selected{% endif %}>Sivaganga</option>
+                                                        <option value="Tenkasi" {% if lead.city == 'Tenkasi' %}selected{% endif %}>Tenkasi</option>
+                                                        <option value="Thanjavur" {% if lead.city == 'Thanjavur' %}selected{% endif %}>Thanjavur</option>
+                                                        <option value="Theni" {% if lead.city == 'Theni' %}selected{% endif %}>Theni</option>
+                                                        <option value="Thoothukudi" {% if lead.city == 'Thoothukudi' %}selected{% endif %}>Thoothukudi</option>
+                                                        <option value="Tiruchirappalli" {% if lead.city == 'Tiruchirappalli' %}selected{% endif %}>Tiruchirappalli</option>
+                                                        <option value="Tirunelveli" {% if lead.city == 'Tirunelveli' %}selected{% endif %}>Tirunelveli</option>
+                                                        <option value="Tirupathur" {% if lead.city == 'Tirupathur' %}selected{% endif %}>Tirupathur</option>
+                                                        <option value="Tiruppur" {% if lead.city == 'Tiruppur' %}selected{% endif %}>Tiruppur</option>
+                                                        <option value="Tiruvallur" {% if lead.city == 'Tiruvallur' %}selected{% endif %}>Tiruvallur</option>
+                                                        <option value="Tiruvannamalai" {% if lead.city == 'Tiruvannamalai' %}selected{% endif %}>Tiruvannamalai</option>
+                                                        <option value="Tiruvarur" {% if lead.city == 'Tiruvarur' %}selected{% endif %}>Tiruvarur</option>
+                                                        <option value="Vellore" {% if lead.city == 'Vellore' %}selected{% endif %}>Vellore</option>
+                                                        <option value="Viluppuram" {% if lead.city == 'Viluppuram' %}selected{% endif %}>Viluppuram</option>
+                                                        <option value="Virudhunagar" {% if lead.city == 'Virudhunagar' %}selected{% endif %}>Virudhunagar</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xxl-2 col-md-6">
+                                                    <label class="form-label" for="status"></label>
+                                                    <select class="form-select" id="tech_field" name="tech_field" >
+                                                        <option selected disabled value="">Choose...</option>
+                                                        <option value="IT" {% if lead.tech_field == 'IT' %}selected{% endif %}>IT</option>
+                                                        <option value="Non-IT" {% if lead.tech_field == 'Non-IT' %}selected{% endif %}>Non-IT</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6">
+                                                    <label class="form-label" for="status"></label>
+                                                    <select class="form-select" id="source" name="source" >
+                                                        <option selected disabled value="">Choose...</option>
+                                                        <option value="Social media" {% if lead.source == 'Social media' %}selected{% endif %}>Social media</option>
+                                                        <option value="Referral" {% if lead.source == 'Referral' %}selected{% endif %}>Referral</option>
+                                                        <option value="Job portal" {% if lead.source == 'Job portal' %}selected{% endif %}>Job portal</option>
+                                                        <option value="Whatsapp" {% if lead.source == 'Whatsapp' %}selected{% endif %}>Whatsapp</option>
+                                                    </select>
+                                                </div>
+                                                <!-- <div class="col-lg-2 col-md-8">
+                                                    <label class="form-label" for="status"></label>
+                                                    <select class="form-select" id="status" name="status" required>
+                                                        <option selected disabled value="">Choose...</option>
+                                                        {% for status in statuses %}
+                                                            <option value="{{ status.id }}" {% if lead.status and lead.status.id == status.id %}selected{% endif %}>
+                                                                {{ status.identity }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    </div> -->
+                                                    <div class="col-md-2 mt-3">
+                                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                                    </div>
+                                                </form>
+                                                </div>
+                                            
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -363,6 +452,7 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                     </div>
                 </div>

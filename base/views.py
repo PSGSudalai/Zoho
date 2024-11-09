@@ -6,11 +6,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,  logout ,login as auth_login
 from django.utils import timezone
 from base.models import Lead ,Status
-from django.utils.dateparse import parse_datetime
 from django.db.models import Q
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.db.models import Count
+from django.utils.dateparse import parse_date
 
 # Register
 def register(request):
@@ -79,10 +79,16 @@ def dashboard(request,lead_id=None):
     ).count()
     weekly_follow_up = Lead.objects.filter(follow_up__week=current_week)   # weekly follow up list
     total_lead = Lead.objects.all().count()   # Total lead count
-    status_count = Lead.objects.filter(status__identity="Success").count()  #Status count
     leading = Lead.objects.all()[:5]   #Lead Data List
     lead_count = Lead.objects.all().count()   #Lead Data count
     leadweek = Lead.objects.filter(follow_up__week=current_week)
+
+    #Overall Count
+    status_count = Lead.objects.filter(status__identity="Success").count()  #Status count
+    closed_lead =Lead.objects.filter(status__identity="Closed").count()
+    negotiation_lead =Lead.objects.filter(status__identity="Negotation").count()
+    follow_up_lead =Lead.objects.filter(status__identity="Follow Up").count()
+    pending_lead =Lead.objects.filter(status__identity="Pending").count()
 
     follow_up = Lead.objects.filter(follow_up__year=current_year).count()
     lead = None
@@ -120,10 +126,44 @@ def dashboard(request,lead_id=None):
     lead_gender_female = [0,0,lead_female,0]
 
 
-#lead source
+    #year source count
     source_social = Lead.objects.filter(source='Social media',created_at__year=current_year).count()
     source_job = Lead.objects.filter(source='Job portal',created_at__year=current_year).count()
     source_referral = Lead.objects.filter(source='Referral',created_at__year=current_year).count()
+    source_whatsapp = Lead.objects.filter(source='Whatsapp',created_at__year=current_year).count()
+
+
+    #week source count
+    week_social = Lead.objects.filter(source='Social media',created_at__week=current_week).count()
+    week_job = Lead.objects.filter(source='Job portal',created_at__week=current_week).count()
+    week_referral = Lead.objects.filter(source='Referral',created_at__week=current_week).count()
+    week_whatsapp = Lead.objects.filter(source='Whatsapp',created_at__week=current_week).count()
+
+
+    #Weekly Status Count
+    week_success = Lead.objects.filter(status__identity="Success",created_at__week=current_week).count()  #Status count
+    week_closed =Lead.objects.filter(status__identity="Closed",created_at__week=current_week).count()
+    week_negotiation =Lead.objects.filter(status__identity="Negotation",created_at__week=current_week).count()
+    week_follow_up =Lead.objects.filter(status__identity="Follow Up",created_at__week=current_week).count()
+    week_pending =Lead.objects.filter(status__identity="Pending",created_at__week=current_week).count()
+
+    #Yearly Status count
+    year_success = Lead.objects.filter(status__identity="Success",created_at__year=current_year).count()  #Status count
+    year_closed =Lead.objects.filter(status__identity="Closed",created_at__year=current_year).count()
+    year_negotiation =Lead.objects.filter(status__identity="Negotation",created_at__year=current_year).count()
+    year_follow_up =Lead.objects.filter(status__identity="Follow Up",created_at__year=current_year).count()
+    year_pending =Lead.objects.filter(status__identity="Pending",created_at__year=current_year).count()
+
+
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
+    if start_date and end_date:
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
+        lead_date = Lead.objects.filter(created_at__range=(start_date, end_date))
+    else:
+        lead_date = Lead.objects.all()
 
 
 
@@ -145,6 +185,28 @@ def dashboard(request,lead_id=None):
         'source_referral':source_referral,
         'source_job':source_job,
         'source_social':source_social,
+        'closed_lead':closed_lead,
+        'pending_lead':pending_lead,
+        'follow_up_lead':follow_up_lead,
+        'negotiation_lead':negotiation_lead,
+        'source_whatsapp':source_whatsapp,
+        'week_success':week_success,
+        'week_closed':week_closed,
+        'week_negotiation':week_negotiation,
+        'week_follow_up':week_follow_up,
+        'week_pending':week_pending,
+        'year_success':year_success,
+        'year_closed':year_closed,
+        'year_negotiation':year_negotiation,
+        'year_follow_up':year_follow_up,
+        'year_pending':year_pending,
+        'week_whatsapp':week_whatsapp,
+        'week_referral':week_referral,
+        'week_job':week_job,
+        'week_social':week_social,
+        'lead_date':lead_date,
+
+
     }
     
     return render(request, 'dashboard.html', content)
@@ -153,17 +215,53 @@ def dashboard(request,lead_id=None):
 
 #lead Table
 def all_lead(request, lead_id=None):
-    leads = Lead.objects.all().order_by("-created_at") 
+    # Get all leads and order them by creation date
+    leads = Lead.objects.all().order_by("-created_at")
+    
+    
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    city = request.GET.get('city')
+    source = request.GET.get('source')
+    tech = request.GET.get('tech_field')
+
+
+    if start_date:
+        start_date = parse_date(start_date)
+    if end_date:
+        end_date = parse_date(end_date)
+
+    if start_date and end_date:
+        leads = Lead.objects.filter(created_at__range=[start_date, end_date])
+    elif start_date:
+        leads = Lead.objects.filter(created_at__gte=start_date)
+    elif end_date:
+        leads = Lead.objects.filter(created_at__lte=end_date)
+    
+    # Apply city filter if provided
+    elif city:
+        leads = Lead.objects.filter(city=city)
+    
+    # Apply source filter if provided
+    elif source:
+        leads = Lead.objects.filter(source=source)
+    
+    # Apply tech field filter if provided
+    elif tech:
+        leads = Lead.objects.filter(tech=tech)
+
+    # Get a specific lead if an ID is provided
     lead = None
     if lead_id:
-        lead = get_object_or_404(Lead, id=lead_id)  # Safely get the lead or return a 404 if not found
-    
+        lead = get_object_or_404(Lead, id=lead_id)
+
     context = {
         'lead': lead,
-        'leads': leads,  # Pass all leads to the template
+        'leads': leads,  # Pass filtered or all leads to the template
     }
     
     return render(request, 'lead.html', context)
+
 
 
 
@@ -193,54 +291,8 @@ def add_status(request):
 
 
 #add Lead
-# def add_lead(request):
-#     statuses = Status.objects.all()
-#     if request.method == 'POST':
-#         # Collect data from the form
-#         name = request.POST.get('name')
-#         email = request.POST.get('email')
-#         phone = request.POST.get('phone')
-#         address = request.POST.get('address')
-#         city = request.POST.get('city')
-#         gender = request.POST.get('gender')
-#         passout = request.POST.get('passout')
-#         college = request.POST.get('college_name')
-#         tech = request.POST.get('tech_field')
-#         source = request.POST.get('source')
-#         status_id = request.POST.get('status') 
-#         is_lead = False 
-#         status = Status.objects.get(id=status_id)  
-#         if status.identity == 'Active': 
-#             is_lead = True
-        
-#         follow_up = request.POST.get('follow_up') or None
-        
-#         # Create the new Lead object
-#         Lead.objects.create(
-#             name=name,
-#             email=email,
-#             phone=phone,
-#             address=address,
-#             city=city,
-#             gender=gender,
-#             passout=passout,
-#             tech_field=tech,
-#             source=source,
-#             college_name=college,
-#             status=status,  
-#             is_lead=is_lead,  
-#             follow_up=follow_up, 
-#         )
-
-#         messages.success(request, 'New lead added successfully.')
-#         return redirect('lead')
-    
-#     return render(request, 'add-lead.html', {'statuses': statuses})
-
-
 def add_lead(request):
     statuses = Status.objects.all()
-
     if request.method == 'POST':
         # Collect data from the form
         name = request.POST.get('name')
@@ -254,50 +306,43 @@ def add_lead(request):
         tech = request.POST.get('tech_field')
         source = request.POST.get('source')  # Get the selected source
         status_id = request.POST.get('status')
-        follow_up = request.POST.get('follow_up') or None
-
-        # Ensure all required fields are provided
-        if not name or not email or not phone or not city or not gender or not source or not status_id:
-            messages.error(request, 'Please fill in all required fields.')
-            
         is_lead = False
 
-        # Fetch the status based on the provided status_id
         try:
             status = Status.objects.get(id=status_id)
-        except Status.DoesNotExist:
+        except (Status.DoesNotExist, ValueError):
             status = None
-            messages.error(request, 'Invalid status selected.')
-            return redirect('add_status')
-
+        
         # If the status is 'Active', mark as lead
-        if status and status.identity == 'Active':
+        if status and status.identity == 'Active': 
             is_lead = True
 
-        # Create the new Lead object
-        try:
-            Lead.objects.create(
-                name=name,
-                email=email,
-                phone=phone,
-                address=address,
-                city=city,
-                gender=gender,
-                passout=passout,
-                tech_field=tech,
-                source=source,
-                college_name=college,
-                status=status,
-                is_lead=is_lead,
-                follow_up=follow_up,
-            )
-            messages.success(request, 'New lead added successfully.')
-        except Exception as e:
-            messages.error(request, f'Error adding lead: {str(e)}')
+        # Check if the follow-up date is provided; if not, set it to None
+        follow_up = request.POST.get('follow_up') or None
 
+        # Create the new Lead object
+        Lead.objects.create(
+            name=name,
+            email=email,
+            phone=phone,
+            address=address,
+            city=city,
+            gender=gender,
+            passout=passout,
+            tech_field=tech,
+            source=source,
+            college_name=college,
+            status=status,  
+            is_lead=is_lead,  
+            follow_up=follow_up,  # This will be None if not provided
+        )
+
+        messages.success(request, 'New lead added successfully.')
         return redirect('lead')  # Replace with your appropriate redirect URL or view name
 
     return render(request, 'add-lead.html', {'statuses': statuses})
+
+
 
 #delete lead
 def delete_lead(request,pk):
@@ -314,7 +359,7 @@ def edit_lead(request, lead_id):
     statuses = Status.objects.all()
 
     if request.method == 'POST':
-        # Update the lead instance with form data
+        # Update lead instance with form data
         lead.name = request.POST.get('name')
         lead.email = request.POST.get('email')
         lead.phone = request.POST.get('phone')
@@ -325,7 +370,9 @@ def edit_lead(request, lead_id):
         lead.college_name = request.POST.get('college_name')
         lead.source = request.POST.get('source')
         lead.tech_field = request.POST.get('tech_field')
-        lead.follow_up = request.POST.get('follow_up')
+
+        # Allow empty follow-up date
+        lead.follow_up = request.POST.get('follow_up') or None
 
         # Get the status as a ForeignKey object
         status_id = request.POST.get('status')
@@ -336,7 +383,7 @@ def edit_lead(request, lead_id):
 
         lead.save()
         messages.success(request, 'Lead updated successfully.')
-        return redirect('lead')  # Replace 'lead' with the appropriate name of your leads list page
+        return redirect('lead')  # Redirect to the appropriate leads list page
 
     context = {
         'lead': lead,

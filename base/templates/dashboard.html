@@ -310,7 +310,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
-                                                <span class="f-w-500 c-o-light">No of Users</span>
+                                                <span class="f-w-500 c-o-light">Total Lead</span>
                                                 <h4 class="mb-2">{{ total_lead }}</h4>
                                                 <!-- <div class="progress" role="progressbar" aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
@@ -392,6 +392,44 @@
                                             <div class="card-body pt-0">
                                                 <span class="f-w-500 c-o-light">Won Status</span>
                                                 <h4 class="mb-2">{{ status_count }}</h4>
+                                                <!-- <div class="progress" role="progressbar" aria-label="Basic example"
+                                                    aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar bg-warning" style="width: 58%"></div>
+                                                </div><span class="user-growth f-12 f-w-500"><i
+                                                        class="icon-arrow-up txt-success"></i><span
+                                                        class="txt-success">+6.7%</span></span><span class="user-text">last
+                                                    month</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="card compare-order">
+                                            <div class="card-header card-no-border">
+                                                <div class="header-top">
+                                                    <div class="compare-icon shadow-warning">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="currentColor"
+                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-coin-rupee fill-warning">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path
+                                                                d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 3.66h-6c-1.287 0 -1.332 1.864 -.133 1.993l.133 .007h1a2 2 0 0 1 1.732 1h-2.732a1 1 0 0 0 0 2l2.732 .001a2 2 0 0 1 -1.732 .999h-1c-.89 0 -1.337 1.077 -.707 1.707l3 3a1 1 0 0 0 1.414 0l.083 -.094a1 1 0 0 0 -.083 -1.32l-1.484 -1.485l.113 -.037a4.009 4.009 0 0 0 2.538 -2.77l1.126 -.001a1 1 0 0 0 0 -2h-1.126a3.973 3.973 0 0 0 -.33 -.855l-.079 -.145h1.535a1 1 0 0 0 1 -1l-.007 -.117a1 1 0 0 0 -.993 -.883z" />
+                                                        </svg>
+                                                    </div>
+                                                    <!-- <div class="dropdown icon-dropdown">
+                                                        <button class="btn dropdown-toggle" id="compareDropdown1"
+                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                class="icon-more-alt"></i></button>
+                                                        <div class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="compareDropdown1"><a class="dropdown-item"
+                                                                href="#">Today</a><a class="dropdown-item"
+                                                                href="#">Yesterday</a><a class="dropdown-item" href="#">This
+                                                                week</a></div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <span class="f-w-500 c-o-light">Closed Lead</span>
+                                                <h4 class="mb-2">{{ closed_lead }}</h4>
                                                 <!-- <div class="progress" role="progressbar" aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
                                                     <div class="progress-bar bg-warning" style="width: 58%"></div>
@@ -528,59 +566,94 @@
                                 </div>
                             </div>
                             
-                            <div class="col-sm-4">
-                                <div class="card widget-hover" style="    height: 340px;
+                            <div class="col-sm-6 ">
+                                <div class="card widget-hover" style=" height: 501px;
                                 display: flex;
                                 justify-content: center;">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
                                             <div class="sales-header">
-                                                <h5 class="m-0">Yearly Lead</h5><span class="c-o-light f-w-500">Nov
-                                                    1, 2024 </span>
+                                                <h5 class="m-0">Filter Lead</h5>
+                                            </div>
+                                            <div class="filter">
+                                                <!-- Date filter form -->
+                                                <form method="get" action="">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="date" id="startDate" name="start_date" class="form-control" required>
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="date" id="endDate" name="end_date" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="dropdown icon-dropdown">
+                                                <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="icon-more-alt"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="financeDropdown">
+                                                    <a class="dropdown-item" href="#">Week</a>
+                                                    <a class="dropdown-item" href="#">Month</a>
+                                                    <a class="dropdown-item" href="#">Year</a>
+                                                </div>
                                             </div>
                                             <div class="card-header-right-icon"></div>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0 main-sale">
                                         <div class="sales-chart-wrap">
-                                            <div id="sales-chart1"></div>
+                                            <div id="funnelchart"></div>
                                         </div>
                                         <div class="sale-details">
-                                            <h4 class="mb-0"></h4><span class="f-12 f-w-500 txt-success"><i
-                                                    class="icon-arrow-up me-1"></i>+8.3%</span>
+                                            <h4 class="mb-0"></h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-8 col-md-6 box-col-6">
+                            <div class="col-xxl-6 col-md-6 box-col-6" style=" height: 501px;
+                            display: flex;
+                            justify-content: center;">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
-                                            <h5>Weekly Gender Leads</h5>
-                                            <!-- <div class="dropdown icon-dropdown">
-                                                <button class="btn dropdown-toggle" id="financeDropdown" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                            <h5>Pie-Chart Leads</h5>
+                                            <div class="filter">
+                                                <!-- Date filter form -->
+                                                <form method="get" action="">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="date" id="startDate" name="start_date" class="form-control" required>
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="date" id="endDate" name="end_date" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="dropdown icon-dropdown">
+                                                <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
                                                 </button>
-                                                <div class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="financeDropdown">
-                                                    <a class="dropdown-item" href="#">Today</a><a class="dropdown-item"
-                                                        href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                        week</a>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="financeDropdown">
+                                                    <a class="dropdown-item" href="#">Week</a>
+                                                    <a class="dropdown-item" href="#">Month</a>
+                                                    <a class="dropdown-item" href="#">Year</a>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body finance-wrapper pt-0">
                                         <div class="common-flex">
-                                            <h6>Overall gender Leads : {{total_lead }}</h6>
+                                            <h6></h6>
                                         </div>
                                         <div class="finance-chart-wrapper">
-                                            <div id="gender"></div>
+                                            <div id="piechart" style="max-width: 480px; height: 360px; margin: 0px auto"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-md-12 order-xxl-0 order-sm-1 box-ord-1">
                                 <div class="card">
                                     <div class="card-header card-no-border">
@@ -811,436 +884,80 @@
 var financeChart1 = new ApexCharts(document.querySelector("#finance-chart"), financeChart1);
 financeChart1.render();
     </script>
+
     <script>
-    const salesData11 = JSON.parse('{{ lead_gender_male|safe|escapejs }}');
-    const salesData12 = JSON.parse('{{ lead_gender_female|safe|escapejs }}');
-
-    var financeChart1 = {
-        series: [
-            {
-                name: "Male",
-                data: salesData11,
-            },
-            {
-                name: "Female",
-                data: salesData12,
-            },
-        ],
-    chart: {
-        type: "bar",
-        height: 230,
-        stacked: true,
-        toolbar: {
-            show: false,
-        },
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: "50%",
-            borderRadius: 0,
-        },
-    },
-    grid: {
-        show: false,
-        yaxis: {
-            lines: {
-                show: true,
-            },
-        },
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    stroke: {
-        width: 2,
-        dashArray: 0,
-        lineCap: "butt",
-        colors: "#7366FF",
-    },
-    fill: {
-        opacity: 1,
-    },
-    legend: {
-        show: false,
-    },
-
-    colors: [CubaAdminConfig.primary, "#65c15c"],
-    yaxis: {
-        min: 1,
-        max: 50,
-        tickAmount: 4,
-        tickPlacement: "on",
-
-        axisBorder: {
-            show: false,
-        },
-        axisTicks: {
-            show: false,
-        },
-    },
-    xaxis: {
-        categories: ["Week1", "Week2", "Week3", " Week4"],
-        labels: {
-            style: {
-                fontFamily: "Rubik, sans-serif",
-            },
-        },
-        axisBorder: {
-            show: false,
-        },
-        axisTicks: {
-            show: false,
-        },
-    },
-    responsive: [{
-            breakpoint: 1200,
-            options: {
-                chart: {
-                    height: 235,
-                },
-            },
-        },
-        {
-            breakpoint: 875,
-            options: {
-                xaxis: {
-                    tickAmount: 6,
-                    tickPlacement: "between",
-                },
-            },
-        },
-        {
-            breakpoint: 767,
-            options: {
-                plotOptions: {
-                    bar: {
-                        columnWidth: "15px",
-                    },
-                },
-            },
-        },
-        {
-            breakpoint: 576,
-            options: {
-                plotOptions: {
-                    bar: {
-                        columnWidth: "8px",
-                    },
-                },
-            },
-        },
-        {
-            breakpoint: 400,
-            options: {
-                plotOptions: {
-                    bar: {
-                        columnWidth: "6px",
-                    },
-                },
-            },
-        },
-    ],
-};
-
-var financeChart1 = new ApexCharts(document.querySelector("#gender"), financeChart1);
-financeChart1.render();
+        var chart = JSC.chart('funnelchart', { 
+  debug: true, 
+  type: 'funnel square', 
+  legend_visible: false, 
+  annotations: [ 
+    { 
+      position: 'inside top', 
+      margin_top: 15, 
+      label: { 
+        text: '', 
+        style_fontSize: 15 
+      } 
+    } 
+  ], 
+  defaultSeries: { 
+    shape_innerPadding: 6, 
+    defaultPoint: { 
+      tooltip: 
+        '<b>%name</b><br><b>Applicants:</b> %yValue', 
+      label: { 
+        text: 
+          '%name %yValue (%percentOfSeriesMax%)', 
+        placement: 'outside'
+      } 
+    } 
+  }, 
+  series: [ 
+    { 
+      name: 'All Applicants', 
+      palette: 'fiveColor11', 
+      points: [ 
+        { name: 'Candidates Applied', y: 183 }, 
+        { name: 'Aptitude Test', y: 140 }, 
+        { name: 'Technical Interview', y: 136 }, 
+        { name: 'HR Interview', y: 80 }, 
+        { name: 'Candidates Recruited', y: 51 } 
+      ] 
+    } 
+  ] 
+}); 
     </script>
-<script>
-        var salesChart1 = {
-        series: [
-            {
-            name: "Lead",
-            data: [5, 8, 12, 18, 10, 2, 5, 18, 20, 16, 22, 5],
-        }, 
-            {
-            name: "Male",
-            data: [35, 28, 12, 18, 30, 2, 15, 18, 20, 16, 2, 15],
-        }, 
-            {
-            name: "Female",
-            data: [15, 18, 12, 18, 10, 12, 5, 18, 20, 16, 12, 50],
-        }, 
-    ],
-        chart: {
-            height: 150,
-            type: "line",
-            zoom: {
-                enabled: false,
-            },
-            offsetY: -20,
-            offsetX: -20,
-            toolbar: {
-                show: false,
-            },
-            dropShadow: {
-                enabled: true,
-                top: 8,
-                left: 0,
-                blur: 3,
-                color: "#54BA4A",
-                opacity: 0.2,
-            },
-        },
-        chart1: {
-            height: 150,
-            type: "line",
-            zoom: {
-                enabled: false,
-            },
-            offsetY: -20,
-            offsetX: -20,
-            toolbar: {
-                show: false,
-            },
-            dropShadow: {
-                enabled: true,
-                top: 8,
-                left: 0,
-                blur: 3,
-                color: "#0000ff",
-                opacity: 0.2,
-            },
-        },
-        chart2: {
-            height: 150,
-            type: "line",
-            zoom: {
-                enabled: false,
-            },
-            offsetY: -20,
-            offsetX: -20,
-            toolbar: {
-                show: false,
-            },
-            dropShadow: {
-                enabled: true,
-                top: 8,
-                left: 0,
-                blur: 3,
-                color: "#e52b50",
-                opacity: 0.2,
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        stroke: {
-            curve: "smooth",
-            width: 2,
-        },
-        grid: {
-            show: false,
-        },
-        tooltip: {
-            x: {
-                show: false,
-            },
-            z: {
-                show: false,
-            },
-        },
-        colors: ["#0000ff","#e52b50","#228b22"],
-        fill: {
-            opacity: 1,
-            type: "solid",
-            gradient: {
-                shade: "light",
-                type: "vertical",
-                shadeIntensity: 1,
-                opacityFrom: 0.95,
-                opacityTo: 1,
-                colorStops: [{
-                        offset: 0,
-                        color: "#0000ff",
-                        opacity: 0.1,
-                    },
-                    {
-                        offset: 30,
-                        color: "#7366FF",
-                        opacity: 0.8,
-                    },
-                    {
-                        offset: 80,
-                        color: "#54BA4A",
-                        opacity: 1,
-                    },
-                    {
-                        offset: 100,
-                        color: "#54BA4A",
-                        opacity: 0.1,
-                    },
-                ],
-            },
-        },
-        markers: {
-            discrete: [{
-                seriesIndex: 0,
-                dataPointIndex: 11,
-                fillColor: "#65c15c",
-                strokeColor: "var(--white)",
-                size: 5,
-                sizeOffset: 3,
-            }, ],
-            hover: {
-                size: 5,
-                sizeOffset: 0,
-            },
-        },
-        xaxis: {
-            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-            labels: {
-                show: false,
-            },
-            axisBorder: {
-                show: false,
-            },
-            axisTicks: {
-                show: false,
-            },
-            tooltip: {
-                enabled: false,
-            },
-        },
-        yaxis: {
-            labels: {
-                show: false,
-            },
-            axisBorder: {
-                show: false,
-            },
-            axisTicks: {
-                show: false,
-            },
-        },
-        responsive: [{
-                breakpoint: 1684,
-                options: {
-                    chart: {
-                        width: 280,
-                    },
-                },
-            },
-            {
-                breakpoint: 1582,
-                options: {
-                    chart: {
-                        width: 240,
-                    },
-                },
-            },
-            {
-                breakpoint: 1421,
-                options: {
-                    chart: {
-                        width: 225,
-                    },
-                },
-            },
-            {
-                breakpoint: 1400,
-                options: {
-                    chart: {
-                        width: "100%",
-                    },
-                },
-            },
-            {
-                breakpoint: 716,
-                options: {
-                    chart: {
-                        height: 75,
-                    },
-                },
-            },
-        ],
-        responsive: [{
-                breakpoint: 1684,
-                options: {
-                    chart2: {
-                        width: 280,
-                    },
-                },
-            },
-            {
-                breakpoint: 1582,
-                options: {
-                    chart2: {
-                        width: 240,
-                    },
-                },
-            },
-            {
-                breakpoint: 1421,
-                options: {
-                    chart2: {
-                        width: 225,
-                    },
-                },
-            },
-            {
-                breakpoint: 1400,
-                options: {
-                    chart2: {
-                        width: "100%",
-                    },
-                },
-            },
-            {
-                breakpoint: 716,
-                options: {
-                    chart2: {
-                        height: 75,
-                    },
-                },
-            },
-        ],
-        responsive: [{
-                breakpoint: 1684,
-                options: {
-                    chart1: {
-                        width: 280,
-                    },
-                },
-            },
-            {
-                breakpoint: 1582,
-                options: {
-                    chart1: {
-                        width: 240,
-                    },
-                },
-            },
-            {
-                breakpoint: 1421,
-                options: {
-                    chart1: {
-                        width: 225,
-                    },
-                },
-            },
-            {
-                breakpoint: 1400,
-                options: {
-                    chart1: {
-                        width: "100%",
-                    },
-                },
-            },
-            {
-                breakpoint: 716,
-                options: {
-                    chart1: {
-                        height: 75,
-                    },
-                },
-            },
-        ],
-    };
 
-    var salesChart1 = new ApexCharts(document.querySelector("#sales-chart1"), salesChart1);
-    salesChart1.render();
-</script>
+    <script>
+        var chart = JSC.chart('piechart', { 
+  debug: true, 
+  type: 'pie', 
+  title: { 
+    label_text: 'Top World Populations', 
+    position: 'center'
+  }, 
+  legend_visible: false, 
+  defaultSeries: { 
+    angle: 45, 
+    pointSelection: true
+  }, 
+  defaultPoint_label_text: 
+    '%name <b>%percentOfTotal%</b>', 
+  series: [ 
+    { 
+      name: 'Top 5 Countries', 
+      points: [ 
+        { name: 'China', y: 1349585838 }, 
+        { name: 'India', y: 1220800359 }, 
+        { name: 'Europe', y: 509365627 }, 
+        { name: 'U.S.', y: 316438601 }, 
+        { name: 'Indonesia', y: 251160124 } 
+      ] 
+    } 
+  ] 
+}); 
+    </script>
+  
 </body>
 
 </html>
