@@ -8,7 +8,7 @@ from django.utils import timezone
 from base.models import Lead ,Status
 from django.db.models import Q
 from django.utils import timezone
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from django.db.models import Count
 from django.utils.dateparse import parse_date
 
@@ -71,6 +71,7 @@ def dashboard(request,lead_id=None):
     current_month = datetime.now().month
     current_year = datetime.now().year
     current_week = datetime.now().isocalendar()[1]
+    current_date = date.today()
 
 # Filter leads created in the current month and year
     monthly_lead = Lead.objects.filter(   #monthly lead for monhtly count
@@ -170,10 +171,36 @@ def dashboard(request,lead_id=None):
         lead_date = Lead.objects.all()
 
 
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
+    # Filter sources and statuses
+    lead_queryset = Lead.objects.filter(
+        source__in=['Social media', 'Whatsapp', 'Referral', 'Job portal'],
+        status__identity__in=["Pending", "Follow Up", "Negotation", "Closed", "Success"]
+    )
+
+    # Apply date filters if provided
+    if start_date:
+        start_date = parse_date(start_date)
+    if end_date:
+        end_date = parse_date(end_date)
+
+    if start_date and end_date:
+        lead_queryset = lead_queryset.filter(created_at__range=[start_date, end_date])
+    elif start_date:
+        lead_queryset = lead_queryset.filter(created_at__gte=start_date)
+    elif end_date:
+        lead_queryset = lead_queryset.filter(created_at__lte=end_date)
+
+    # Get the count after applying filters
+    lead_count = lead_queryset.count()
+
 
    
 
     content = {
+        'lead_count': lead_count,
         'source':source,
         'social':social,
         'total_lead': total_lead,
@@ -211,6 +238,17 @@ def dashboard(request,lead_id=None):
         'week_job':week_job,
         'week_social':week_social,
         'lead_date':lead_date,
+        # fiter chart
+        # 'source_social': source_social,
+        # 'source_referral': source_referral,
+        # 'source_whatsapp': source_whatsapp,
+        # 'source_job': source_job,
+        # 'total_lead': total_lead,
+        # 'status_count': success_lead,
+        # 'negotiation_lead': negotiation_lead,
+        # 'follow_up_lead': follow_up_lead,
+        # 'pending_lead': pending_lead,
+        # 'closed_lead': closed_lead,
 
 
     }

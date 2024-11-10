@@ -516,22 +516,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="card o-hidden crm-card">
-                                            <div class="card-body">
-                                                <h4 class="mb-3 mt-1 f-w-500 mb-0">
-                                                    Lead Connections
-                                                </h4>
-                                                <p>Improved customer Sales management.</p>
-                                                <button class="btn btn-white f-w-500">
-                                                    <a href="{% url 'add-lead' %}">Add New Lead</a>
-                                                </button>
-                                            </div>
-                                            <img class="crm-img"
-                                                src="{% static 'assets/images/dashboard-9/widget.svg' %}"
-                                                alt="search image" />
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-xxl-6 col-md-6 box-col-6">
@@ -563,13 +547,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-8 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
+                            <div class="col-xxl-12 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
                                 <div class="card">
-                                    <div class="card-header card-no-border" style="height: 100px;
-                                    display: flex;
-                                    justify-content: center;">
+                                    <div class="card-header card-no-border" >
                                         <div class="header-top">
-                                            <h5>Weekly Follow up</h5>
+                                            <h5>Daily Follow up</h5>
                                             <div class="card-header-right-icon">
                                                 
                                             </div>
@@ -601,7 +583,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-4 col-sm-6 order-xxl-0 order-sm-2 box-col-6 box-ord-2">
+                            <!-- <div class="col-xxl-4 col-sm-6 order-xxl-0 order-sm-2 box-col-6 box-ord-2">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
@@ -609,7 +591,7 @@
                                                 <h5 class="pb-1">Lead Source</h5>
                                                 
                                             </div>
-                                            <!-- <div class="dropdown icon-dropdown">
+                                             <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="leadSourceDropdown" type="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false"><i
                                                         class="icon-more-alt"></i></button>
@@ -617,7 +599,7 @@
                                                     aria-labelledby="leadSourceDropdown"><a class="dropdown-item"
                                                         href="#">Today</a><a class="dropdown-item" href="#">Yesterday</a><a
                                                         class="dropdown-item" href="#">This week</a></div>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
@@ -642,6 +624,43 @@
                                 </div>
                             </div>
                             
+                            <div class="col-md-8 col-sm-6" style="height: 400px;padding-left: 500px;
+                            display: flex;
+                            justify-content: center;">
+                                <div class="card o-hidden crm-card">
+                                    <div class="card-body">
+                                        <h4 class="mb-3 mt-1 f-w-500 mb-0">
+                                            Lead Connections
+                                        </h4>
+                                        <p>Improved customer Sales management.</p>
+                                        <button class="btn btn-white f-w-500">
+                                            <a href="{% url 'add-lead' %}">Add New Lead</a>
+                                        </button>
+                                    </div>
+                                    <img class="crm-img"
+                                        src="{% static 'assets/images/dashboard-9/widget.svg' %}"
+                                        alt="search image" />
+                                </div>
+                            </div> -->
+                            <div class="filter">
+                                <!-- Date filter form -->
+                                <form method="get" action="">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label for="start-date">start date</label>
+                                            <input type="date" id="startDate" name="start_date" class="form-control" >
+                                        </div>
+                                        <div class="col-5">
+                                            <label for="start-date">End date</label>
+                                            <input type="date" id="endDate" name="end_date" class="form-control" >
+                                        </div>
+                                        <div class="col-md-2 mt-4">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
                             <div class="col-sm-6 ">
                                 <div class="card widget-hover" style=" height: 501px;
                                 display: flex;
@@ -649,21 +668,9 @@
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
                                             <div class="sales-header">
-                                                <h5 class="m-0">Filter Lead</h5>
+                                                <h5 class="m-0">Funnel Lead</h5>
                                             </div>
-                                            <div class="filter">
-                                                <!-- Date filter form -->
-                                                <form method="get" action="">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="date" id="startDate" name="start_date" class="form-control" required>
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="date" id="endDate" name="end_date" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                            
                                             <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
@@ -694,19 +701,7 @@
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
                                             <h5>Pie-Chart Leads</h5>
-                                            <div class="filter">
-                                                <!-- Date filter form -->
-                                                <form method="get" action="">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="date" id="startDate" name="start_date" class="form-control" required>
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="date" id="endDate" name="end_date" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                           
                                             <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
@@ -1026,6 +1021,71 @@ financeChart1.render();
         ]
     });
 </script>
+<!-- 
+<script type="text/javascript">
+    var chart2 = JSC.chart('chartDiv2', {
+        debug: true,
+        type: 'pie',
+        title: {
+            label_text: 'Source Lead',
+            position: 'center'
+        },
+        legend_visible: false,
+        defaultSeries: { angle: 45, pointSelection: true },
+        defaultPoint_label_text: '%name <b>%percentOfTotal%</b>',
+        series: [
+            {
+                name: 'Top 5 Sources',
+                points: [
+                    { name: 'Social media', y: {{ source_social }} },
+                    { name: 'Referral', y: {{ source_referral }} },
+                    { name: 'Whatsapp', y: {{ source_whatsapp }} },
+                    { name: 'Job portal', y: {{ source_job }} }
+                ]
+            }
+        ]
+    });
+</script>
+
+<script type="text/javascript">
+    var chart = JSC.chart('funnelchart', {
+        debug: true,
+        type: 'funnel square',
+        legend_visible: false,
+        annotations: [
+            {
+                position: 'inside top',
+                margin_top: 20,
+                label: { text: 'Status Lead', style_fontSize: 15 }
+            }
+        ],
+        defaultSeries: {
+            shape_innerPadding: 6,
+            defaultPoint: {
+                tooltip: '<b>%name</b><br><b>Applicants:</b> %yValue',
+                label: {
+                    text: '%name %yValue (%percentOfSeriesMax%)',
+                    placement: 'outside'
+                }
+            }
+        },
+        series: [
+            {
+                name: 'All Applicants',
+                palette: 'fiveColor11',
+                points: [
+                    { name: 'Lead', y: {{ total_lead }} },
+                    { name: 'Success', y: {{ status_count }} },
+                    { name: 'Negotiation', y: {{ negotiation_lead }} },
+                    { name: 'Follow up', y: {{ follow_up_lead }} },
+                    { name: 'Pending', y: {{ pending_lead }} },
+                    { name: 'Closed', y: {{ closed_lead }} }
+                ]
+            }
+        ]
+    });
+</script> -->
+
 
     
   
