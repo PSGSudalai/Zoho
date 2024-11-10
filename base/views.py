@@ -95,6 +95,10 @@ def dashboard(request,lead_id=None):
     if lead_id:
         lead = get_object_or_404(Lead, id=lead_id)  
 
+
+    source =Lead.objects.filter(source="Referral").count()
+    social =Lead.objects.filter(source="Social media").count()
+
     
     
 
@@ -170,6 +174,8 @@ def dashboard(request,lead_id=None):
    
 
     content = {
+        'source':source,
+        'social':social,
         'total_lead': total_lead,
         'status_count': status_count,
         'monthly_lead': monthly_lead,
