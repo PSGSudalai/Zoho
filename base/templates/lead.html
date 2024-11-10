@@ -304,7 +304,7 @@
                     </div>
 
                 <!-- Container-fluid starts-->
-                <div class="container-fluid autofill-data-tables">
+                <div class="container autofill-data-tables">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -317,15 +317,16 @@
                                         <table class="display table-striped" id="export-button">
                                             <div class="row">
                                                 <form method="GET" action="{% url 'lead' %}">
-                                                <div class="col-sm-2">
-                                                    <label class="form-label" for="status" style="font-weight: bold; font-weight:100px ;">Filter</label>
-                                                    <input type="date" id="startDate" name="start_date" class="form-control" >
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <label class="form-label" for="status"></label>
-                                                    <input type="date" id="endDate" name="end_date" class="form-control" >
-                                                </div>
-                                                <div class="col-md-2">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label" for="startDate" style="font-weight: bold;">Filter</label>
+                                                        <input type="date" id="startDate" name="start_date" class="form-control" placeholder="YYYY-MM-DD">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label" for="endDate" style="font-weight: bold;">End Date</label>
+                                                        <input type="date" id="endDate" name="end_date" class="form-control" placeholder="YYYY-MM-DD">
+                                                    </div>
+                                                    
+                                                <div class="col-md-4">
                                                     <label class="form-label" for="status"></label>
                                                     <select class="form-select" id="city" name="city" >
                                                         <option value="" disabled {% if not lead.city %}selected{% endif %}>Select a District</option>
@@ -367,39 +368,39 @@
                                                         <option value="Virudhunagar" {% if lead.city == 'Virudhunagar' %}selected{% endif %}>Virudhunagar</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-xxl-2 col-md-6">
+                                                <div class="col-md-4">
                                                     <label class="form-label" for="status"></label>
                                                     <select class="form-select" id="tech_field" name="tech_field" >
-                                                        <option selected disabled value="">Choose...</option>
+                                                        <option selected disabled value="">Select Field</option>
                                                         <option value="IT" {% if lead.tech_field == 'IT' %}selected{% endif %}>IT</option>
                                                         <option value="Non-IT" {% if lead.tech_field == 'Non-IT' %}selected{% endif %}>Non-IT</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-lg-2 col-md-6">
+                                                <div class="col-md-4">
                                                     <label class="form-label" for="status"></label>
                                                     <select class="form-select" id="source" name="source" >
-                                                        <option selected disabled value="">Choose...</option>
+                                                        <option selected disabled value="">Select Source</option>
                                                         <option value="Social media" {% if lead.source == 'Social media' %}selected{% endif %}>Social media</option>
                                                         <option value="Referral" {% if lead.source == 'Referral' %}selected{% endif %}>Referral</option>
                                                         <option value="Job portal" {% if lead.source == 'Job portal' %}selected{% endif %}>Job portal</option>
                                                         <option value="Whatsapp" {% if lead.source == 'Whatsapp' %}selected{% endif %}>Whatsapp</option>
                                                     </select>
                                                 </div>
-                                                <!-- <div class="col-lg-2 col-md-8">
+                                                <div class="col-md-4">
                                                     <label class="form-label" for="status"></label>
-                                                    <select class="form-select" id="status" name="status" required>
-                                                        <option selected disabled value="">Choose...</option>
-                                                        {% for status in statuses %}
-                                                            <option value="{{ status.id }}" {% if lead.status and lead.status.id == status.id %}selected{% endif %}>
-                                                                {{ status.identity }}
-                                                            </option>
-                                                        {% endfor %}
+                                                    <select class="form-select" id="gender" name="gender" >
+                                                        <option selected disabled value="">Select Gender</option>
+                                                        <option value="Male" {% if lead.gender == 'Male' %}selected{% endif %}>Male</option>
+                                                        <option value="Female" {% if lead.gender == 'Female' %}selected{% endif %}>Female</option>
                                                     </select>
-                                                    </div> -->
-                                                    <div class="col-md-2 mt-3">
+                                                </div>
+                                                    <div class="col-md-2 mt-4">
                                                         <button type="submit" class="btn btn-primary">Filter</button>
                                                     </div>
-                                                </form>
+                                                    <div class="col-md-2 mt-4">
+                                                        <button type="submit" class="btn btn-primary"> Clear Filter</button>
+                                                    </div>
+                                                </form >
                                                 </div>
                                             
                                             <thead>
@@ -470,11 +471,29 @@
             </footer>
         </div>
     </div>
+    
     <script>
         function setDeleteUrl(leadId) {
             const deleteUrl = "{% url 'delete-lead' 0 %}".replace('/0/', '/' + leadId + '/');
             document.getElementById('confirmDeleteBtn').href = deleteUrl;
         }
+    // Function to preserve filter values
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Set each filter input based on URL parameters
+        document.getElementById('location').value = urlParams.get('location') || '';
+        document.getElementById('jobType').value = urlParams.get('jobType') || '';
+    };
+
+    // Clear filter function
+    function clearFilter() {
+        // Clear the form fields
+        document.getElementById('location').value = '';
+        document.getElementById('jobType').value = '';
+        // Redirect to the base URL without parameters
+        window.location.href = '/your-job-search-url';
+    }
     </script>
  <!-- latest jquery-->
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>

@@ -224,6 +224,7 @@ def all_lead(request, lead_id=None):
     city = request.GET.get('city')
     source = request.GET.get('source')
     tech = request.GET.get('tech_field')
+    gender = request.GET.get('gender')
 
 
     if start_date:
@@ -249,6 +250,9 @@ def all_lead(request, lead_id=None):
     # Apply tech field filter if provided
     elif tech:
         leads = Lead.objects.filter(tech_field=tech)
+    # Apply tech field filter if provided
+    elif gender:
+        leads = Lead.objects.filter(gender=gender)
 
     # Get a specific lead if an ID is provided
     lead = None
@@ -373,8 +377,7 @@ def edit_lead(request, lead_id):
 
         # Allow empty follow-up date
         lead.follow_up = request.POST.get('follow_up') or None
-
-        # Get the status as a ForeignKey object
+        
         status_id = request.POST.get('status')
         if status_id:
             lead.status = Status.objects.get(id=status_id)
@@ -383,8 +386,8 @@ def edit_lead(request, lead_id):
 
         lead.save()
         messages.success(request, 'Lead updated successfully.')
-        return redirect('lead')  # Redirect to the appropriate leads list page
-
+        return redirect('lead')  
+    
     context = {
         'lead': lead,
         'statuses': statuses,
