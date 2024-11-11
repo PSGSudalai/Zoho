@@ -310,24 +310,24 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="assignModal" tabindex="-1" aria-labelledby="assignModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="statusModalLabel">Add New Status</h5>
+                                                                <h5 class="modal-title" id="assignModalLabel">Add New User</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <form action="{% url 'add_assign' %}" method="POST">
                                                                 {% csrf_token %}
                                                                 <div class="modal-body">
                                                                     <div class="mb-3">
-                                                                        <label for="newStatus" class="form-label">Assign</label>
-                                                                        <input type="text" class="form-control" id="newStatus" name="identity" required>
+                                                                        <label for="new_assign" class="form-label">Assign To:</label>
+                                                                        <input type="text" class="form-control" id="new_assign" name="assign_to" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Save Status</button>
+                                                                    <button type="submit" class="btn btn-primary">Save</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -476,9 +476,9 @@
                                                     <label class="form-label" for="assign_to">Assign To:</label>
                                                     <select class="form-select" id="assign_to" name="assign_to" >
                                                         <option selected disabled value="">Choose...</option>
-                                                        {% for assign in assign %}
+                                                        {% for assign in assigns %}
                                                             <option value="{{ assign.id }}" {% if lead.assign and lead.assign.id == assign.id %}selected{% endif %}>
-                                                                {{ assign.assign_to }}
+                                                                {{ assign.assigned_to }}
                                                             </option>
                                                         {% endfor %}
                                                     </select>

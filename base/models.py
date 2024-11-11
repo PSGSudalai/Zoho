@@ -32,7 +32,7 @@ class Lead(models.Model):
     is_lead = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)  
     follow_up = models.DateField(null=True, blank=True)
-    
+    assign_to = models.ForeignKey(Assign, on_delete=models.SET_NULL, null=True, blank=True)
     def __str__(self):
         return self.name
 

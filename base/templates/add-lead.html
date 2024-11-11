@@ -475,9 +475,9 @@
                                                     <label class="form-label" for="assign_to">Assign To:</label>
                                                     <select class="form-select" id="assign_to" name="assign_to" >
                                                         <option selected disabled value="">Choose...</option>
-                                                        {% for assign in assign %}
+                                                        {% for assign in assigns %}
                                                             <option value="{{ assign.id }}" {% if lead.assign and lead.assign.id == assign.id %}selected{% endif %}>
-                                                                {{ assign.assign_to }}
+                                                                {{ assign.assigned_to }}
                                                             </option>
                                                         {% endfor %}
                                                     </select>

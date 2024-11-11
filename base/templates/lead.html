@@ -495,6 +495,15 @@
         window.location.href = '/your-job-search-url';
     }
     </script>
+    <script>
+        document.getElementById('startDate').addEventListener('change', function() {
+            const startDate = this.value;
+            const endDateInput = document.getElementById('endDate');
+            
+            // Set the min attribute of the end date input to the selected start date
+            endDateInput.min = startDate;
+        });
+    </script>
  <!-- latest jquery-->
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <!-- Bootstrap js-->

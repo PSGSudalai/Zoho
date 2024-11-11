@@ -72,26 +72,62 @@ def dashboard(request,lead_id=None):
     current_year = datetime.now().year
     current_week = datetime.now().isocalendar()[1]
     current_date = date.today()
+
+    lead_overall_count = Lead.objects.count()
+    user = Assign.objects.all().count()
+
+    # Retrieve and parse date filters from GET request
+   # Initial overall counts without any filters
+
+
+    total_lead = Lead.objects.all().count()
+    lead_success_count = Lead.objects.filter(status__identity="Success").count()
+    lead_pending_count = Lead.objects.filter(status__identity="Pending").count()
+    lead_negotiation_count = Lead.objects.filter(status__identity="Negotiation").count()
+    lead_follow_up_count = Lead.objects.filter(status__identity="Follow Up").count()
+    lead_closed_count = Lead.objects.filter(status__identity="Closed").count()
+    lead_whatsapp_count = Lead.objects.filter(source='Whatsapp').count()
+    lead_referral_count = Lead.objects.filter(source='Referral').count()
+    lead_job_count = Lead.objects.filter(source='Job portal').count()
+    lead_social_count = Lead.objects.filter(source='Social media').count()
+    
+
+    # Retrieve and parse date filters from GET request
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
 
-        # Apply date filters if provided
     if start_date:
         start_date = parse_date(start_date)
     if end_date:
         end_date = parse_date(end_date)
 
+    # Create a QuerySet to filter by date range
+    lead_filtered_queryset = Lead.objects.all()
+
     if start_date and end_date:
-        lead_queryset = lead_queryset.filter(created_at__range=[start_date, end_date])
+        lead_filtered_queryset = lead_filtered_queryset.filter(created_at__range=[start_date, end_date])
     elif start_date:
-        lead_queryset = lead_queryset.filter(created_at__gte=start_date)
+        lead_filtered_queryset = lead_filtered_queryset.filter(created_at__gte=start_date)
     elif end_date:
-        lead_queryset = lead_queryset.filter(created_at__lte=end_date)
+        lead_filtered_queryset = lead_filtered_queryset.filter(created_at__lte=end_date)
 
-    # Get the count after applying filters
-    # lead_count = lead_queryset.count()
+    # If date filters are applied, update the counts accordingly
+    if start_date or end_date:
+        total_lead=lead_filtered_queryset.all().count()
+        lead_success_count = lead_filtered_queryset.filter(status__identity="Success").count()
+        lead_pending_count = lead_filtered_queryset.filter(status__identity="Pending").count()
+        lead_negotiation_count = lead_filtered_queryset.filter(status__identity="Negotiation").count()
+        lead_follow_up_count = lead_filtered_queryset.filter(status__identity="Follow Up").count()
+        lead_closed_count = lead_filtered_queryset.filter(status__identity="Closed").count()
+        lead_whatsapp_count = lead_filtered_queryset.filter(source='Whatsapp').count()
+        lead_referral_count = lead_filtered_queryset.filter(source='Referral').count()
+        lead_job_count = lead_filtered_queryset.filter(source='Job portal').count()
+        lead_social_count = lead_filtered_queryset.filter(source='Social media').count()
 
-    user = Assign.objects.all().count()
+# Return or pass these counts as needed
+
+
+    
 
 # Filter leads created in the current month and year
     monthly_lead = Lead.objects.filter(   #monthly lead for monhtly count
@@ -99,26 +135,18 @@ def dashboard(request,lead_id=None):
         created_at__year=current_year
     ).count()
     weekly_follow_up = Lead.objects.filter(follow_up__week=current_week)   # weekly follow up list
-    total_lead = Lead.objects.all().count()   # Total lead count
+       # Total lead count
     leading = Lead.objects.all()[:5]   #Lead Data List
     lead_count = Lead.objects.all().count()   #Lead Data count
     leadweek = Lead.objects.filter(follow_up__week=current_week)
 
-    #Overall Count
-    status_count = Lead.objects.filter(status__identity="Success").count()  #Status count
-    closed_lead =Lead.objects.filter(status__identity="Closed").count()
-    negotiation_lead =Lead.objects.filter(status__identity="Negotiation").count()
-    follow_up_lead =Lead.objects.filter(status__identity="Follow Up").count()
-    pending_lead =Lead.objects.filter(status__identity="Pending").count()
+   
 
-    follow_up = Lead.objects.filter(follow_up__year=current_year).count()
     lead = None
     if lead_id:
         lead = get_object_or_404(Lead, id=lead_id)  
 
 
-    source =Lead.objects.filter(source="Referral").count()
-    social =Lead.objects.filter(source="Social media").count()
 
     
     
@@ -140,8 +168,8 @@ def dashboard(request,lead_id=None):
 
     
     # Prepare data arrays for JavaScript
-    leadchart = [0,0,current_lead_count,0]
-    leadStatus = [0,0,success_count, 0]
+    leadchart = [0,current_lead_count,0,0]
+    leadStatus = [0,success_count,0, 0]
 
     #gender lead graph
     lead_male = Lead.objects.filter(gender='Male', created_at__week=current_week).count()
@@ -180,25 +208,7 @@ def dashboard(request,lead_id=None):
     year_pending =Lead.objects.filter(status__identity="Pending",created_at__year=current_year).count()
 
 
-    start_date = request.GET.get('start_date')
-    end_date = request.GET.get('end_date')
-
-    if start_date and end_date:
-        start_date = datetime.strptime(start_date, '%Y-%m-%d')
-        end_date = datetime.strptime(end_date, '%Y-%m-%d')
-        lead_date = Lead.objects.filter(created_at__range=(start_date, end_date))
-    else:
-        lead_date = Lead.objects.all()
-
-
-    
-
-    # Filter sources and statuses
-    lead_queryset = Lead.objects.filter(
-        source__in=['Social media', 'Whatsapp', 'Referral', 'Job portal'],
-        status__identity__in=["Pending", "Follow Up", "Negotation", "Closed", "Success"]
-    )
-
+   
 
 
 
@@ -207,10 +217,17 @@ def dashboard(request,lead_id=None):
     content = {
         'user':user,
         'lead_count': lead_count,
-        'source':source,
-        'social':social,
+        'lead_overall_count': lead_overall_count,
+        'lead_success_count': lead_success_count,
+        'lead_pending_count': lead_pending_count,
+        'lead_negotiation_count': lead_negotiation_count,
+        'lead_follow_up_count': lead_follow_up_count,
+        'lead_closed_count': lead_closed_count,
+        'lead_whatsapp_count': lead_whatsapp_count,
+        'lead_referral_count': lead_referral_count,
+        'lead_job_count': lead_job_count,
+        'lead_social_count': lead_social_count,
         'total_lead': total_lead,
-        'status_count': status_count,
         'monthly_lead': monthly_lead,
         'lead': lead,
         'leading': leading,
@@ -224,10 +241,6 @@ def dashboard(request,lead_id=None):
         'source_referral':source_referral,
         'source_job':source_job,
         'source_social':source_social,
-        'closed_lead':closed_lead,
-        'pending_lead':pending_lead,
-        'follow_up_lead':follow_up_lead,
-        'negotiation_lead':negotiation_lead,
         'source_whatsapp':source_whatsapp,
         'week_success':week_success,
         'week_closed':week_closed,
@@ -243,18 +256,6 @@ def dashboard(request,lead_id=None):
         'week_referral':week_referral,
         'week_job':week_job,
         'week_social':week_social,
-        'lead_date':lead_date,
-        # fiter chart
-        # 'source_social': source_social,
-        # 'source_referral': source_referral,
-        # 'source_whatsapp': source_whatsapp,
-        # 'source_job': source_job,
-        # 'total_lead': total_lead,
-        # 'status_count': success_lead,
-        # 'negotiation_lead': negotiation_lead,
-        # 'follow_up_lead': follow_up_lead,
-        # 'pending_lead': pending_lead,
-        # 'closed_lead': closed_lead,
 
 
     }
@@ -347,11 +348,11 @@ def add_assign(request):
     
     if request.method == 'POST':
         # Get the value from the POST data and trim whitespace
-        assign_to = request.POST.get('assigned_to', '').strip()
+        assign_to = request.POST.get('assign_to', '').strip()
         
         if assign_to:
-            if not Assign.objects.filter(assign_to=assign_to).exists():
-                new_assign = Assign(assign_to=assign_to)
+            if not Assign.objects.filter(assigned_to=assign_to).exists():
+                new_assign = Assign(assigned_to=assign_to)
                 new_assign.save()
                 messages.success(request, "Assignment added successfully.")
             else:
@@ -365,9 +366,14 @@ def add_assign(request):
 
 
 
+
 #add Lead
+
+
 def add_lead(request):
     statuses = Status.objects.all()
+    assigns = Assign.objects.all()
+    
     if request.method == 'POST':
         # Collect data from the form
         name = request.POST.get('name')
@@ -379,26 +385,30 @@ def add_lead(request):
         passout = request.POST.get('passout')
         college = request.POST.get('college_name')
         tech = request.POST.get('tech_field')
-        source = request.POST.get('source')  # Get the selected source
+        source = request.POST.get('source')
         status_id = request.POST.get('status')
         assign_id = request.POST.get('assign_to')
         is_lead = False
+
+        # Basic validation
+        if not name or not email:
+            messages.error(request, "Name and Email are required.")
+            return redirect('add-lead')  # Replace with your add-lead URL or view name
 
         try:
             status = Status.objects.get(id=status_id)
         except (Status.DoesNotExist, ValueError):
             status = None
-        
-        # If the status is 'Active', mark as lead
-        if status and status.identity == 'Active': 
+
+        # Check if the status is 'Active' and set `is_lead`
+        if status and status.identity == 'Active':
             is_lead = True
 
         try:
             assign = Assign.objects.get(id=assign_id)
-        except(Assign.DoesNotExist,ValueError):
+        except (Assign.DoesNotExist, ValueError):
             assign = None
 
-        # Check if the follow-up date is provided; if not, set it to None
         follow_up = request.POST.get('follow_up') or None
 
         # Create the new Lead object
@@ -413,16 +423,18 @@ def add_lead(request):
             tech_field=tech,
             source=source,
             college_name=college,
-            status=status,  
-            is_lead=is_lead,  
+            status=status,
+            is_lead=is_lead,
             follow_up=follow_up,
-            assign_to=assign  # This will be None if not provided
+            assign_to=assign
         )
 
         messages.success(request, 'New lead added successfully.')
         return redirect('lead')  # Replace with your appropriate redirect URL or view name
 
-    return render(request, 'add-lead.html', {'statuses': statuses})
+    return render(request, 'add-lead.html', {'statuses': statuses, 'assigns': assigns})
+
+
 
 
 
@@ -439,6 +451,7 @@ def delete_lead(request,pk):
 def edit_lead(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
     statuses = Status.objects.all()
+    assigns = Assign.objects.all()
 
     if request.method == 'POST':
         # Update lead instance with form data
@@ -459,6 +472,9 @@ def edit_lead(request, lead_id):
         status_id = request.POST.get('status')
         if status_id:
             lead.status = Status.objects.get(id=status_id)
+        assign_id = request.POST.get('assigns')
+        if assign_id:
+            lead.assigns = Assign.objects.get(id=assign_id)
 
         lead.is_lead = 'is_lead' in request.POST
 
@@ -469,6 +485,7 @@ def edit_lead(request, lead_id):
     context = {
         'lead': lead,
         'statuses': statuses,
+        'assigns': assigns,
     }
 
     return render(request, 'edit.html', context)
