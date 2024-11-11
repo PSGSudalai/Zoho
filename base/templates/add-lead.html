@@ -309,6 +309,29 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="modal fade" id="assignModal" tabindex="-1" aria-labelledby="assignModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="statusModalLabel">Add New User</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="{% url 'add_assign' %}" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label for="new_assign" class="form-label">Assign To:</label>
+                                                                    <input type="text" class="form-control" id="new_assign" name="assign_to" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <form class="row g-3 needs-validation" method="post" action="{% url 'add-lead' %}" novalidate="">
                                                 {% csrf_token %}
                                                 <div class="col-md-6">
@@ -448,6 +471,31 @@
                                                     <label class="form-label" for="follow_up">Follow Up Date</label>
                                                     <input class="form-control" type="date" id="follow_up" name="follow_up">
                                                 </div>
+                                                <div class="col-lg-4 col-md-8">
+                                                    <label class="form-label" for="assign_to">Assign To:</label>
+                                                    <select class="form-select" id="assign_to" name="assign_to" >
+                                                        <option selected disabled value="">Choose...</option>
+                                                        {% for assign in assign %}
+                                                            <option value="{{ assign.id }}" {% if lead.assign and lead.assign.id == assign.id %}selected{% endif %}>
+                                                                {{ assign.assign_to }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                              
+                                                <div class="col-lg-2 col-md-4" style="
+                                                display: flex;
+                                                justify-content: center;
+                                                flex-direction: column;
+                                                align-items: center;
+                                            ">
+                                                    <label class="form-label" for="assign_to"></label>
+                                                    <!-- Button to trigger the Add Status modal -->
+                                                    <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal">
+                                                        Add User
+                                                    </button>
+                                                </div>
+                                                
                                                 
                                                 <div class="col-12">
                                                     <div class="common-flex justify-content-end">
