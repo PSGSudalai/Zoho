@@ -313,7 +313,7 @@
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="statusModalLabel">Add New User</h5>
+                                                            <h5 class="modal-title" id="assignModalLabel">Add New User</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <form action="{% url 'add_assign' %}" method="POST">
@@ -491,11 +491,10 @@
                                             ">
                                                     <label class="form-label" for="assign_to"></label>
                                                     <!-- Button to trigger the Add Status modal -->
-                                                    <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal">
+                                                    <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assignModal">
                                                         Add User
                                                     </button>
                                                 </div>
-                                                
                                                 
                                                 <div class="col-12">
                                                     <div class="common-flex justify-content-end">

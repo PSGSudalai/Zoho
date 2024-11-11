@@ -72,6 +72,26 @@ def dashboard(request,lead_id=None):
     current_year = datetime.now().year
     current_week = datetime.now().isocalendar()[1]
     current_date = date.today()
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
+        # Apply date filters if provided
+    if start_date:
+        start_date = parse_date(start_date)
+    if end_date:
+        end_date = parse_date(end_date)
+
+    if start_date and end_date:
+        lead_queryset = lead_queryset.filter(created_at__range=[start_date, end_date])
+    elif start_date:
+        lead_queryset = lead_queryset.filter(created_at__gte=start_date)
+    elif end_date:
+        lead_queryset = lead_queryset.filter(created_at__lte=end_date)
+
+    # Get the count after applying filters
+    # lead_count = lead_queryset.count()
+
+    user = Assign.objects.all().count()
 
 # Filter leads created in the current month and year
     monthly_lead = Lead.objects.filter(   #monthly lead for monhtly count
@@ -171,8 +191,7 @@ def dashboard(request,lead_id=None):
         lead_date = Lead.objects.all()
 
 
-    start_date = request.GET.get('start_date')
-    end_date = request.GET.get('end_date')
+    
 
     # Filter sources and statuses
     lead_queryset = Lead.objects.filter(
@@ -180,26 +199,13 @@ def dashboard(request,lead_id=None):
         status__identity__in=["Pending", "Follow Up", "Negotation", "Closed", "Success"]
     )
 
-    # Apply date filters if provided
-    if start_date:
-        start_date = parse_date(start_date)
-    if end_date:
-        end_date = parse_date(end_date)
 
-    if start_date and end_date:
-        lead_queryset = lead_queryset.filter(created_at__range=[start_date, end_date])
-    elif start_date:
-        lead_queryset = lead_queryset.filter(created_at__gte=start_date)
-    elif end_date:
-        lead_queryset = lead_queryset.filter(created_at__lte=end_date)
-
-    # Get the count after applying filters
-    lead_count = lead_queryset.count()
 
 
    
 
     content = {
+        'user':user,
         'lead_count': lead_count,
         'source':source,
         'social':social,
@@ -336,21 +342,25 @@ def add_status(request):
         return redirect(request.META.get('HTTP_REFERER', 'default-page-url'))
     return render(request, 'add-lead.html', {'statuses': statuses})
 
-
 def add_assign(request):
     assign = Assign.objects.all()
+    
     if request.method == 'POST':
+        # Get the value from the POST data and trim whitespace
         assign_to = request.POST.get('assigned_to', '').strip()
+        
         if assign_to:
             if not Assign.objects.filter(assign_to=assign_to).exists():
                 new_assign = Assign(assign_to=assign_to)
                 new_assign.save()
-                messages.success(request, "assign added successfully.")
+                messages.success(request, "Assignment added successfully.")
             else:
-                messages.warning(request, "assign with this assign_user already exists.")
+                messages.warning(request, "An assignment with this user already exists.")
         else:
-            messages.error(request, "assign name cannot be empty.")
+            messages.error(request, "Assignment name cannot be empty.")
+        
         return redirect(request.META.get('HTTP_REFERER', 'default-page-url'))
+    
     return render(request, 'add-lead.html', {'assign': assign})
 
 
