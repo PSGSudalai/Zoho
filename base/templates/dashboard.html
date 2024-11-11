@@ -633,23 +633,14 @@
                             
                             <div class="filter ">
                                 <!-- Date filter form -->
-                                <form method="get" action="{% url 'home' %}">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <label for="start-date">Start Date</label>
-                                            <input type="date" id="startDate" name="start_date" class="form-control" value="{{ start_date}}">
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="end-date">End Date</label>
-                                            <input type="date" id="endDate" name="end_date" class="form-control" value="{{ end_date}}">
-                                        </div>
-                                        <div class="col-md-2 mt-5">
-                                            <button type="submit" class="btn btn-primary">Filter</button>
-                                        </div>
-                                        <div class="col-md-2 mt-5">
-                                            <button type="submit" class="btn btn-primary">Clear Filter</button>
-                                        </div>
-                                    </div>
+                                <form method="GET" action="{% url 'home' %}">
+                                    <label for="start_date">Start Date:</label>
+                                    <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+                                
+                                    <label for="end_date">End Date:</label>
+                                    <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+                                
+                                    <button type="submit">Filter</button>
                                 </form>
                                 
                             </div>

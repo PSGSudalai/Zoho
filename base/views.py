@@ -138,6 +138,7 @@ def dashboard(request, lead_id=None):
         # Date filtering
         start_date = request.GET.get('start_date')
         end_date = request.GET.get('end_date')
+        breakpoint()
         lead_queryset = Lead.objects.filter(
             source__in=['Social media', 'Whatsapp', 'Referral', 'Job portal'],
             status__identity__in=["Pending", "Follow Up", "Negotiation", "Closed", "Success"]
