@@ -9,6 +9,11 @@ class Status(models.Model):
     def __str__(self):
         return self.identity
     
+class Assign(models.Model):
+    assigned_to = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.assigned_to
 
     
 class Lead(models.Model):

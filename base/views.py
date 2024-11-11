@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,  logout ,login as auth_login
 from django.utils import timezone
-from base.models import Lead ,Status
+from base.models import Lead ,Status ,Assign
 from django.db.models import Q
 from django.utils import timezone
 from datetime import date, datetime, timedelta
@@ -285,6 +285,23 @@ def add_status(request):
     return render(request, 'add-lead.html', {'statuses': statuses})
 
 
+def add_assign(request):
+    assign = Assign.objects.all()
+    if request.method == 'POST':
+        assign_to = request.POST.get('assigned_to', '').strip()
+        if assign_to:
+            if not Assign.objects.filter(assign_to=assign_to).exists():
+                new_assign = Assign(assign_to=assign_to)
+                new_assign.save()
+                messages.success(request, "assign added successfully.")
+            else:
+                messages.warning(request, "assign with this assign_user already exists.")
+        else:
+            messages.error(request, "assign name cannot be empty.")
+        return redirect(request.META.get('HTTP_REFERER', 'default-page-url'))
+    return render(request, 'add-lead.html', {'assign': assign})
+
+
 
 #add Lead
 def add_lead(request):
@@ -302,6 +319,7 @@ def add_lead(request):
         tech = request.POST.get('tech_field')
         source = request.POST.get('source')  # Get the selected source
         status_id = request.POST.get('status')
+        assign_id = request.POST.get('assign_to')
         is_lead = False
 
         try:
@@ -312,6 +330,11 @@ def add_lead(request):
         # If the status is 'Active', mark as lead
         if status and status.identity == 'Active': 
             is_lead = True
+
+        try:
+            assign = Assign.objects.get(id=assign_id)
+        except(Assign.DoesNotExist,ValueError):
+            assign = None
 
         # Check if the follow-up date is provided; if not, set it to None
         follow_up = request.POST.get('follow_up') or None
@@ -330,7 +353,8 @@ def add_lead(request):
             college_name=college,
             status=status,  
             is_lead=is_lead,  
-            follow_up=follow_up,  # This will be None if not provided
+            follow_up=follow_up,
+            assign_to=assign  # This will be None if not provided
         )
 
         messages.success(request, 'New lead added successfully.')
