@@ -318,7 +318,7 @@
                                             <div class="row">
                                                 <form method="GET" action="{% url 'lead' %}">
                                                     <div class="col-md-4">
-                                                        <label class="form-label" for="startDate" style="font-weight: bold;">Start Date</label>
+                                                        <label class="form-label" for="startDate" style="font-weight: bold;">Filter</label>
                                                         <input type="date" id="startDate" name="start_date" class="form-control" placeholder="YYYY-MM-DD">
                                                     </div>
                                                     <div class="col-md-4">
@@ -398,7 +398,7 @@
                                                         <button type="submit" class="btn btn-primary">Filter</button>
                                                     </div>
                                                     <div class="col-md-2 mt-4">
-                                                        <button type="submit" class="btn btn-primary"> Clear Filter</button>
+                                                        <button type="submit" class="btn btn-primary" onclick="clearFilter()"> Clear Filter</button>
                                                     </div>
                                                 </form >
                                                 </div>
@@ -481,16 +481,37 @@
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
 
-        // Set each filter input based on URL parameters
-        document.getElementById('location').value = urlParams.get('location') || '';
-        document.getElementById('jobType').value = urlParams.get('jobType') || '';
+
+        const startDate = urlParams.get('start_date');
+        const endDate = urlParams.get('end_date');
+
+        // Set the date input fields if values are present
+        if (startDate) {
+            document.getElementById('startDate').value = new Date(startDate).toISOString().split('T')[0];
+        }
+        if (endDate) {
+            document.getElementById('endDate').value = new Date(endDate).toISOString().split('T')[0];
+        }
+
+        
+        // document.getElementById('startDate').value = urlParams.get('startDate') || '';
+        // document.getElementById('endDate').value = urlParams.get('endDate') || '';
+        document.getElementById('city').value = urlParams.get('city') || '';
+        document.getElementById('source').value = urlParams.get('source') || '';
+        document.getElementById('tech_field').value = urlParams.get('tech_field') || '';
+        document.getElementById('gender').value = urlParams.get('gender') || '';
+        
     };
 
     // Clear filter function
     function clearFilter() {
         // Clear the form fields
-        document.getElementById('location').value = '';
-        document.getElementById('jobType').value = '';
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('source').value = '';
+            document.getElementById('tech_field').value = '';
+            document.getElementById('gender').value = '';
         // Redirect to the base URL without parameters
         window.location.href = '/your-job-search-url';
     }

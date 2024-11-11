@@ -78,7 +78,7 @@ def dashboard(request,lead_id=None):
         created_at__month=current_month,
         created_at__year=current_year
     ).count()
-    weekly_follow_up = Lead.objects.filter(follow_up__week=current_week)   # weekly follow up list
+    today_follow_up = Lead.objects.filter(follow_up=current_date)   # weekly follow up list
     total_lead = Lead.objects.all().count()   # Total lead count
     leading = Lead.objects.all()[:5]   #Lead Data List
     lead_count = Lead.objects.all().count()   #Lead Data count
@@ -211,7 +211,7 @@ def dashboard(request,lead_id=None):
         'leadweek':leadweek,
         'leadStatus':leadStatus,
         'leadchart':leadchart,
-        'weekly_follow_up':weekly_follow_up,
+        'today_follow_up':today_follow_up,
         'lead_count':lead_count,
         'lead_gender_female':lead_gender_female,
         'lead_gender_male':lead_gender_male,

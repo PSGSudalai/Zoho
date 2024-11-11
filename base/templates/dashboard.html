@@ -518,36 +518,41 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-6 col-md-6 box-col-6">
-                                <div class="card">
-                                    <div class="card-header card-no-border">
-                                        <div class="header-top">
-                                            <h5>Weekly Leads</h5>
-                                            <!-- <div class="dropdown icon-dropdown">
-                                                <button class="btn dropdown-toggle" id="financeDropdown" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="icon-more-alt"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="financeDropdown">
-                                                    <a class="dropdown-item" href="#">Today</a><a class="dropdown-item"
-                                                        href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                        week</a>
-                                                </div>
-                                            </div> -->
-                                        </div>
+                            
+                            <div class="col-md-12" style="display: flex;">
+                                <div class="card o-hidden crm-card col-xxl-6 col-md-6 box-col-6">
+                                    <div class="card-body">
+                                        <h4 class="mb-3 mt-1 f-w-500 mb-0">
+                                            Lead Connections
+                                        </h4>
+                                        <p>Improved customer Sales management.</p>
+                                        <button class="btn btn-white f-w-500">
+                                            <a href="{% url 'add-lead' %}">Add New Lead</a>
+                                        </button>
                                     </div>
-                                    <div class="card-body finance-wrapper pt-0">
-                                        <div class="common-flex">
-                                            <h6>Overall Leads : {{total_lead }}</h6>
+                                    <img class="crm-img"
+                                        src="{% static 'assets/images/dashboard-9/widget.svg' %}"
+                                        alt="search image" />
+                                </div>
+                                <div class="col-xxl-6 col-md-6 box-col-6">
+                                    <div class="card">
+                                        <div class="card-header card-no-border">
+                                            <div class="header-top">
+                                                <h5>Daily Leads</h5>
+                                            </div>
                                         </div>
-                                        <div class="finance-chart-wrapper">
-                                            <div id="finance-chart"></div>
+                                        <div class="card-body finance-wrapper pt-0">
+                                            <div class="common-flex">
+                                                <h6>Overall Leads : {{total_lead }}</h6>
+                                            </div>
+                                            <div class="finance-chart-wrapper">
+                                                <div id="finance-chart"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xxl-12 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
+                            </div> 
+                            <div class="col-xxl-12 col-md-12 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
                                 <div class="card">
                                     <div class="card-header card-no-border" >
                                         <div class="header-top">
@@ -582,6 +587,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
                             <!-- <div class="col-xxl-4 col-sm-6 order-xxl-0 order-sm-2 box-col-6 box-ord-2">
                                 <div class="card">
@@ -622,43 +628,27 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             
-                            <div class="col-md-8 col-sm-6" style="height: 400px;padding-left: 500px;
-                            display: flex;
-                            justify-content: center;">
-                                <div class="card o-hidden crm-card">
-                                    <div class="card-body">
-                                        <h4 class="mb-3 mt-1 f-w-500 mb-0">
-                                            Lead Connections
-                                        </h4>
-                                        <p>Improved customer Sales management.</p>
-                                        <button class="btn btn-white f-w-500">
-                                            <a href="{% url 'add-lead' %}">Add New Lead</a>
-                                        </button>
-                                    </div>
-                                    <img class="crm-img"
-                                        src="{% static 'assets/images/dashboard-9/widget.svg' %}"
-                                        alt="search image" />
-                                </div>
-                            </div> -->
+                            
                             <div class="filter">
                                 <!-- Date filter form -->
-                                <form method="get" action="">
+                                <form method="get" action="{% url 'home' %}">
                                     <div class="row">
                                         <div class="col-5">
-                                            <label for="start-date">start date</label>
-                                            <input type="date" id="startDate" name="start_date" class="form-control" >
+                                            <label for="start-date">Start Date</label>
+                                            <input type="date" id="startDate" name="start_date" class="form-control" value="{{ start_date|date:'Y-m-d' }}">
                                         </div>
                                         <div class="col-5">
-                                            <label for="start-date">End date</label>
-                                            <input type="date" id="endDate" name="end_date" class="form-control" >
+                                            <label for="end-date">End Date</label>
+                                            <input type="date" id="endDate" name="end_date" class="form-control" value="{{ end_date|date:'Y-m-d' }}">
                                         </div>
                                         <div class="col-md-2 mt-4">
                                             <button type="submit" class="btn btn-primary">Filter</button>
                                         </div>
                                     </div>
                                 </form>
+                                
                             </div>
                             
                             <div class="col-sm-6 ">
@@ -671,7 +661,7 @@
                                                 <h5 class="m-0">Funnel Lead</h5>
                                             </div>
                                             
-                                            <div class="dropdown icon-dropdown">
+                                            <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
                                                 </button>
@@ -680,7 +670,7 @@
                                                     <a class="dropdown-item" href="#">Month</a>
                                                     <a class="dropdown-item" href="#">Year</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="card-header-right-icon"></div>
                                         </div>
                                     </div>
@@ -688,9 +678,9 @@
                                         <div class="sales-chart-wrap">
                                             <div id="funnelchart"style="max-width: 480px;height: 360px;margin: 0px auto;"></div>
                                         </div>
-                                        <div class="sale-details">
+                                        <!-- <div class="sale-details">
                                             <h4 class="mb-0"></h4>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -702,7 +692,7 @@
                                         <div class="header-top">
                                             <h5>Pie-Chart Leads</h5>
                                            
-                                            <div class="dropdown icon-dropdown">
+                                            <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
                                                 </button>
@@ -711,15 +701,15 @@
                                                     <a class="dropdown-item" href="#">Month</a>
                                                     <a class="dropdown-item" href="#">Year</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="card-body finance-wrapper pt-0" style="height: 446px;
                                     display: flex;
                                     justify-content: center;">
-                                        <div class="common-flex">
+                                        <!-- <div class="common-flex">
                                             <h6></h6>
-                                        </div>
+                                        </div> -->
                                         <div class="finance-chart-wrapper">
                                             <div id="chartDiv2" style="max-width: 560px;height: 400px;margin: 0px auto;"></div>
                                         </div>
