@@ -10209,14 +10209,14 @@
              * * `\_PAGE\_` - Current page number
              * * `\_PAGES\_` - Total number of pages of data in the table
              */
-            "sInfo": "Showing _START_ to _END_ of _TOTAL_ _ENTRIES-TOTAL_",
+            "sInfo": "Showing _TOTAL_ _ENTRIES-TOTAL_",
 
 
             /**
              * Display information string for when the table is empty. Typically the
              * format of this string should match `info`.
              */
-            "sInfoEmpty": "Showing 0 to 0 of 0 _ENTRIES-TOTAL_",
+            "sInfoEmpty": "Showing 0 _ENTRIES-TOTAL_",
 
 
             /**
@@ -10224,7 +10224,7 @@
              * to the information (`info`) to give an idea of how strong the filtering
              * is. The variable _MAX_ is dynamically updated.
              */
-            "sInfoFiltered": "(filtered from _MAX_ total _ENTRIES-MAX_)",
+            "sInfoFiltered": "",
 
 
             /**

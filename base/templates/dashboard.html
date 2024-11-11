@@ -327,47 +327,6 @@
                                         <div class="card compare-order">
                                             <div class="card-header card-no-border">
                                                 <div class="header-top">
-                                                    <div class="compare-icon shadow-success">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-shield-check fill-success">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path
-                                                                d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" />
-                                                            <path d="M15 19l2 2l4 -4" />
-                                                        </svg>
-                                                    </div>
-                                                    <!-- <div class="dropdown icon-dropdown">
-                                                        <button class="btn dropdown-toggle" id="compareDropdown"
-                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                class="icon-more-alt"></i></button>
-                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="compareDropdown"><a class="dropdown-item"
-                                                                href="#">Today</a><a class="dropdown-item"
-                                                                href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                                week</a></div>
-                                                    </div> -->
-                                                </div>
-                                            </div>
-                                            <div class="card-body pt-0">
-                                                <span class="f-w-500 c-o-light"> Monthly lead</span>
-                                                <h4 class="mb-2">{{ monthly_lead }}</h4>
-                                                <!-- <div class="progress" role="progressbar" aria-label="Basic example"
-                                                    aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
-                                                    <div class="progress-bar bg-success" style="width: 58%"></div>
-                                                </div><span class="user-growth f-12 f-w-500"><i
-                                                        class="icon-arrow-up txt-success"></i><span
-                                                        class="txt-success">+7.9%</span></span><span class="user-text">last
-                                                    month</span> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6">
-                                        <div class="card compare-order">
-                                            <div class="card-header card-no-border">
-                                                <div class="header-top">
                                                     <div class="compare-icon shadow-warning">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="currentColor"
@@ -390,7 +349,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
-                                                <span class="f-w-500 c-o-light">Won Status</span>
+                                                <span class="f-w-500 c-o-light">Closed Won </span>
                                                 <h4 class="mb-2">{{ status_count }}</h4>
                                                 <!-- <div class="progress" role="progressbar" aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
@@ -466,8 +425,8 @@
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
-                                                <span class="f-w-500 c-o-light">Referral Source</span>
-                                                <h4 class="mb-2">{{ source }}</h4>
+                                                <span class="f-w-500 c-o-light">Closed Lead</span>
+                                                <h4 class="mb-2">{{ closed_lead }}</h4>
                                                 <!-- <div class="progress" role="progressbar" aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
                                                     <div class="progress-bar bg-warning" style="width: 58%"></div>
@@ -485,7 +444,7 @@
                                                     <div class="compare-icon shadow-warning">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="currentColor"
-                                                            class="icon icon-tabler icons-tabler-brand-instagram">
+                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-coin-rupee fill-warning">
                                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                             <path
                                                                 d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 3.66h-6c-1.287 0 -1.332 1.864 -.133 1.993l.133 .007h1a2 2 0 0 1 1.732 1h-2.732a1 1 0 0 0 0 2l2.732 .001a2 2 0 0 1 -1.732 .999h-1c-.89 0 -1.337 1.077 -.707 1.707l3 3a1 1 0 0 0 1.414 0l.083 -.094a1 1 0 0 0 -.083 -1.32l-1.484 -1.485l.113 -.037a4.009 4.009 0 0 0 2.538 -2.77l1.126 -.001a1 1 0 0 0 0 -2h-1.126a3.973 3.973 0 0 0 -.33 -.855l-.079 -.145h1.535a1 1 0 0 0 1 -1l-.007 -.117a1 1 0 0 0 -.993 -.883z" />
@@ -504,8 +463,8 @@
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
-                                                <span class="f-w-500 c-o-light">Social Media</span>
-                                                <h4 class="mb-2">{{ social }}</h4>
+                                                <span class="f-w-500 c-o-light">Follow up</span>
+                                                <h4 class="mb-2">{{ follow_up_lead }}</h4>
                                                 <!-- <div class="progress" role="progressbar" aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
                                                     <div class="progress-bar bg-warning" style="width: 58%"></div>
@@ -516,60 +475,87 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="card o-hidden crm-card">
-                                            <div class="card-body">
-                                                <h4 class="mb-3 mt-1 f-w-500 mb-0">
-                                                    Lead Connections
-                                                </h4>
-                                                <p>Improved customer Sales management.</p>
-                                                <button class="btn btn-white f-w-500">
-                                                    <a href="{% url 'add-lead' %}">Add New Lead</a>
-                                                </button>
-                                            </div>
-                                            <img class="crm-img"
-                                                src="{% static 'assets/images/dashboard-9/widget.svg' %}"
-                                                alt="search image" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xxl-6 col-md-6 box-col-6">
-                                <div class="card">
-                                    <div class="card-header card-no-border">
-                                        <div class="header-top">
-                                            <h5>Weekly Leads</h5>
-                                            <!-- <div class="dropdown icon-dropdown">
-                                                <button class="btn dropdown-toggle" id="financeDropdown" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="icon-more-alt"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="financeDropdown">
-                                                    <a class="dropdown-item" href="#">Today</a><a class="dropdown-item"
-                                                        href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                        week</a>
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="card compare-order">
+                                            <div class="card-header card-no-border">
+                                                <div class="header-top">
+                                                    <div class="compare-icon shadow-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="currentColor"
+                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-user fill-primary">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path
+                                                                d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+                                                            <path
+                                                                d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
+                                                        </svg>
+                                                    </div>
+                                                    <!-- <div class="dropdown icon-dropdown">
+                                                        <button class="btn dropdown-toggle" id="compareDropdown1"
+                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                class="icon-more-alt"></i></button>
+                                                        <div class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="compareDropdown1"><a class="dropdown-item"
+                                                                href="#">Today</a><a class="dropdown-item"
+                                                                href="#">Yesterday</a><a class="dropdown-item" href="#">This
+                                                                week</a></div>
+                                                    </div> -->
                                                 </div>
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                    <div class="card-body finance-wrapper pt-0">
-                                        <div class="common-flex">
-                                            <h6>Overall Leads : {{total_lead }}</h6>
-                                        </div>
-                                        <div class="finance-chart-wrapper">
-                                            <div id="finance-chart"></div>
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <span class="f-w-500 c-o-light">Assign User</span>
+                                                <h4 class="mb-2">{{ user }}</h4>
+                                                <!-- <div class="progress" role="progressbar" aria-label="Basic example"
+                                                    aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-bar bg-warning" style="width: 58%"></div>
+                                                </div><span class="user-growth f-12 f-w-500"><i
+                                                        class="icon-arrow-up txt-success"></i><span
+                                                        class="txt-success">+6.7%</span></span><span class="user-text">last
+                                                    month</span> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-8 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
+                            
+                            <div class="col-md-12" style="display: flex;">
+                                <div class="card o-hidden crm-card col-xxl-6 col-md-6 box-col-6">
+                                    <div class="card-body">
+                                        <h4 class="mb-3 mt-1 f-w-500 mb-0">
+                                            Lead Connections
+                                        </h4>
+                                        <p>Improved customer Sales management.</p>
+                                        <button class="btn btn-white f-w-500">
+                                            <a href="{% url 'add-lead' %}">Add New Lead</a>
+                                        </button>
+                                    </div>
+                                    <img class="crm-img"
+                                        src="{% static 'assets/images/dashboard-9/widget.svg' %}"
+                                        alt="search image" />
+                                </div>
+                                <div class="col-xxl-6 col-md-6 box-col-6">
+                                    <div class="card">
+                                        <div class="card-header card-no-border">
+                                            <div class="header-top">
+                                                <h5>Daily Leads</h5>
+                                            </div>
+                                        </div>
+                                        <div class="card-body finance-wrapper pt-0">
+                                            <div class="common-flex">
+                                                <h6>Overall Leads : {{total_lead }}</h6>
+                                            </div>
+                                            <div class="finance-chart-wrapper">
+                                                <div id="finance-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-xxl-12 col-md-12 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
                                 <div class="card">
-                                    <div class="card-header card-no-border" style="height: 100px;
-                                    display: flex;
-                                    justify-content: center;">
+                                    <div class="card-header card-no-border" >
                                         <div class="header-top">
-                                            <h5>Weekly Follow up</h5>
+                                            <h5>Daily Follow up</h5>
                                             <div class="card-header-right-icon">
                                                 
                                             </div>
@@ -600,8 +586,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
-                            <div class="col-xxl-4 col-sm-6 order-xxl-0 order-sm-2 box-col-6 box-ord-2">
+                            <!-- <div class="col-xxl-4 col-sm-6 order-xxl-0 order-sm-2 box-col-6 box-ord-2">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
@@ -609,7 +596,7 @@
                                                 <h5 class="pb-1">Lead Source</h5>
                                                 
                                             </div>
-                                            <!-- <div class="dropdown icon-dropdown">
+                                             <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="leadSourceDropdown" type="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false"><i
                                                         class="icon-more-alt"></i></button>
@@ -617,7 +604,7 @@
                                                     aria-labelledby="leadSourceDropdown"><a class="dropdown-item"
                                                         href="#">Today</a><a class="dropdown-item" href="#">Yesterday</a><a
                                                         class="dropdown-item" href="#">This week</a></div>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0">
@@ -640,31 +627,34 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>-->
+                            
+                            
+                            <div class="filter ">
+                                <!-- Date filter form -->
+                                <form method="GET" action="{% url 'home' %}">
+                                    <label for="start_date">Start Date:</label>
+                                    <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+                                
+                                    <label for="end_date">End Date:</label>
+                                    <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+                                
+                                    <button type="submit">Filter</button>
+                                </form>
+                                
                             </div>
                             
-                            <div class="col-sm-6 ">
+                            <div class="col-sm-6 mt-3">
                                 <div class="card widget-hover" style=" height: 501px;
                                 display: flex;
                                 justify-content: center;">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
                                             <div class="sales-header">
-                                                <h5 class="m-0">Filter Lead</h5>
+                                                <h5 class="m-0">Funnel Lead</h5>
                                             </div>
-                                            <div class="filter">
-                                                <!-- Date filter form -->
-                                                <form method="get" action="">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="date" id="startDate" name="start_date" class="form-control" required>
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="date" id="endDate" name="end_date" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="dropdown icon-dropdown">
+                                            
+                                            <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
                                                 </button>
@@ -673,7 +663,7 @@
                                                     <a class="dropdown-item" href="#">Month</a>
                                                     <a class="dropdown-item" href="#">Year</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="card-header-right-icon"></div>
                                         </div>
                                     </div>
@@ -681,33 +671,21 @@
                                         <div class="sales-chart-wrap">
                                             <div id="funnelchart"style="max-width: 480px;height: 360px;margin: 0px auto;"></div>
                                         </div>
-                                        <div class="sale-details">
+                                        <!-- <div class="sale-details">
                                             <h4 class="mb-0"></h4>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xxl-6 col-md-6 box-col-6" style=" height: 501px;
+                            <div class="col-xxl-6 col-md-6 box-col-6 mt-3" style=" height: 501px;
                             display: flex;
                             justify-content: center;">
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
                                             <h5>Pie-Chart Leads</h5>
-                                            <div class="filter">
-                                                <!-- Date filter form -->
-                                                <form method="get" action="">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="date" id="startDate" name="start_date" class="form-control" required>
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="date" id="endDate" name="end_date" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="dropdown icon-dropdown">
+                                           
+                                            <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
                                                 </button>
@@ -716,15 +694,15 @@
                                                     <a class="dropdown-item" href="#">Month</a>
                                                     <a class="dropdown-item" href="#">Year</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="card-body finance-wrapper pt-0" style="height: 446px;
                                     display: flex;
                                     justify-content: center;">
-                                        <div class="common-flex">
+                                        <!-- <div class="common-flex">
                                             <h6></h6>
-                                        </div>
+                                        </div> -->
                                         <div class="finance-chart-wrapper">
                                             <div id="chartDiv2" style="max-width: 560px;height: 400px;margin: 0px auto;"></div>
                                         </div>
@@ -1026,6 +1004,71 @@ financeChart1.render();
         ]
     });
 </script>
+<!-- 
+<script type="text/javascript">
+    var chart2 = JSC.chart('chartDiv2', {
+        debug: true,
+        type: 'pie',
+        title: {
+            label_text: 'Source Lead',
+            position: 'center'
+        },
+        legend_visible: false,
+        defaultSeries: { angle: 45, pointSelection: true },
+        defaultPoint_label_text: '%name <b>%percentOfTotal%</b>',
+        series: [
+            {
+                name: 'Top 5 Sources',
+                points: [
+                    { name: 'Social media', y: {{ source_social }} },
+                    { name: 'Referral', y: {{ source_referral }} },
+                    { name: 'Whatsapp', y: {{ source_whatsapp }} },
+                    { name: 'Job portal', y: {{ source_job }} }
+                ]
+            }
+        ]
+    });
+</script>
+
+<script type="text/javascript">
+    var chart = JSC.chart('funnelchart', {
+        debug: true,
+        type: 'funnel square',
+        legend_visible: false,
+        annotations: [
+            {
+                position: 'inside top',
+                margin_top: 20,
+                label: { text: 'Status Lead', style_fontSize: 15 }
+            }
+        ],
+        defaultSeries: {
+            shape_innerPadding: 6,
+            defaultPoint: {
+                tooltip: '<b>%name</b><br><b>Applicants:</b> %yValue',
+                label: {
+                    text: '%name %yValue (%percentOfSeriesMax%)',
+                    placement: 'outside'
+                }
+            }
+        },
+        series: [
+            {
+                name: 'All Applicants',
+                palette: 'fiveColor11',
+                points: [
+                    { name: 'Lead', y: {{ total_lead }} },
+                    { name: 'Success', y: {{ status_count }} },
+                    { name: 'Negotiation', y: {{ negotiation_lead }} },
+                    { name: 'Follow up', y: {{ follow_up_lead }} },
+                    { name: 'Pending', y: {{ pending_lead }} },
+                    { name: 'Closed', y: {{ closed_lead }} }
+                ]
+            }
+        ]
+    });
+</script> -->
+
 
     
   
