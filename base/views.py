@@ -104,52 +104,52 @@ def dashboard(request,lead_id=None):
     lead_count = Lead.objects.all().count()   #Lead Data count
     leadweek = Lead.objects.filter(follow_up__week=current_week)
 
-        # Count statuses for overall metrics
-        status_count = Lead.objects.filter(status__identity="Success").count()
-        closed_lead = Lead.objects.filter(status__identity="Closed").count()
-        negotiation_lead = Lead.objects.filter(status__identity="Negotiation").count()
-        follow_up_lead = Lead.objects.filter(status__identity="Follow Up").count()
-        pending_lead = Lead.objects.filter(status__identity="Pending").count()
+    # Count statuses for overall metrics
+    status_count = Lead.objects.filter(status__identity="Success").count()
+    closed_lead = Lead.objects.filter(status__identity="Closed").count()
+    negotiation_lead = Lead.objects.filter(status__identity="Negotiation").count()
+    follow_up_lead = Lead.objects.filter(status__identity="Follow Up").count()
+    pending_lead = Lead.objects.filter(status__identity="Pending").count()
 
-        # Count sources for overall metrics
-        source = Lead.objects.filter(source="Referral").count()
-        social = Lead.objects.filter(source="Social media").count()
+    # Count sources for overall metrics
+    source = Lead.objects.filter(source="Referral").count()
+    social = Lead.objects.filter(source="Social media").count()
 
-        # Weekly metrics for leads, success status, and gender distribution
-        current_lead_count = Lead.objects.filter(created_at__week=current_week).count()
-        success_count = Lead.objects.filter(created_at__week=current_week, status__identity='Success').count()
-        lead_male = Lead.objects.filter(gender='Male', created_at__week=current_week).count()
-        lead_female = Lead.objects.filter(gender='Female', created_at__week=current_week).count()
+    # Weekly metrics for leads, success status, and gender distribution
+    current_lead_count = Lead.objects.filter(created_at__week=current_week).count()
+    success_count = Lead.objects.filter(created_at__week=current_week, status__identity='Success').count()
+    lead_male = Lead.objects.filter(gender='Male', created_at__week=current_week).count()
+    lead_female = Lead.objects.filter(gender='Female', created_at__week=current_week).count()
 
-        # Prepare arrays for JavaScript usage
-        leadchart = [0, 0, current_lead_count, 0]
-        leadStatus = [0, 0, success_count, 0]
-        lead_gender_male = [0, 0, lead_male, 0]
-        lead_gender_female = [0, 0, lead_female, 0]
+    # Prepare arrays for JavaScript usage
+    leadchart = [0, 0, current_lead_count, 0]
+    leadStatus = [0, 0, success_count, 0]
+    lead_gender_male = [0, 0, lead_male, 0]
+    lead_gender_female = [0, 0, lead_female, 0]
 
-        # Yearly and weekly source counts
-        source_social = Lead.objects.filter(source='Social media', created_at__year=current_year).count()
-        source_job = Lead.objects.filter(source='Job portal', created_at__year=current_year).count()
-        source_referral = Lead.objects.filter(source='Referral', created_at__year=current_year).count()
-        source_whatsapp = Lead.objects.filter(source='Whatsapp', created_at__year=current_year).count()
+    # Yearly and weekly source counts
+    source_social = Lead.objects.filter(source='Social media', created_at__year=current_year).count()
+    source_job = Lead.objects.filter(source='Job portal', created_at__year=current_year).count()
+    source_referral = Lead.objects.filter(source='Referral', created_at__year=current_year).count()
+    source_whatsapp = Lead.objects.filter(source='Whatsapp', created_at__year=current_year).count()
 
-        week_social = Lead.objects.filter(source='Social media', created_at__week=current_week).count()
-        week_job = Lead.objects.filter(source='Job portal', created_at__week=current_week).count()
-        week_referral = Lead.objects.filter(source='Referral', created_at__week=current_week).count()
-        week_whatsapp = Lead.objects.filter(source='Whatsapp', created_at__week=current_week).count()
+    week_social = Lead.objects.filter(source='Social media', created_at__week=current_week).count()
+    week_job = Lead.objects.filter(source='Job portal', created_at__week=current_week).count()
+    week_referral = Lead.objects.filter(source='Referral', created_at__week=current_week).count()
+    week_whatsapp = Lead.objects.filter(source='Whatsapp', created_at__week=current_week).count()
 
-        # Yearly and weekly status counts
-        year_success = Lead.objects.filter(status__identity="Success", created_at__year=current_year).count()
-        year_closed = Lead.objects.filter(status__identity="Closed", created_at__year=current_year).count()
-        year_negotiation = Lead.objects.filter(status__identity="Negotiation", created_at__year=current_year).count()
-        year_follow_up = Lead.objects.filter(status__identity="Follow Up", created_at__year=current_year).count()
-        year_pending = Lead.objects.filter(status__identity="Pending", created_at__year=current_year).count()
+    # Yearly and weekly status counts
+    year_success = Lead.objects.filter(status__identity="Success", created_at__year=current_year).count()
+    year_closed = Lead.objects.filter(status__identity="Closed", created_at__year=current_year).count()
+    year_negotiation = Lead.objects.filter(status__identity="Negotiation", created_at__year=current_year).count()
+    year_follow_up = Lead.objects.filter(status__identity="Follow Up", created_at__year=current_year).count()
+    year_pending = Lead.objects.filter(status__identity="Pending", created_at__year=current_year).count()
 
-        week_success = Lead.objects.filter(status__identity="Success", created_at__week=current_week).count()
-        week_closed = Lead.objects.filter(status__identity="Closed", created_at__week=current_week).count()
-        week_negotiation = Lead.objects.filter(status__identity="Negotiation", created_at__week=current_week).count()
-        week_follow_up = Lead.objects.filter(status__identity="Follow Up", created_at__week=current_week).count()
-        week_pending = Lead.objects.filter(status__identity="Pending", created_at__week=current_week).count()
+    week_success = Lead.objects.filter(status__identity="Success", created_at__week=current_week).count()
+    week_closed = Lead.objects.filter(status__identity="Closed", created_at__week=current_week).count()
+    week_negotiation = Lead.objects.filter(status__identity="Negotiation", created_at__week=current_week).count()
+    week_follow_up = Lead.objects.filter(status__identity="Follow Up", created_at__week=current_week).count()
+    week_pending = Lead.objects.filter(status__identity="Pending", created_at__week=current_week).count()
 
 
     start_date = request.GET.get('start_date')
@@ -318,11 +318,12 @@ def add_assign(request):
     
     if request.method == 'POST':
         # Get the value from the POST data and trim whitespace
-        assign_to = request.POST.get('assigned_to', '').strip()
+        assign_to = request.POST.get('assign_to', '').strip()
+        breakpoint()
         
         if assign_to:
-            if not Assign.objects.filter(assign_to=assign_to).exists():
-                new_assign = Assign(assign_to=assign_to)
+            if not Assign.objects.filter(assigned_to=assign_to).exists():
+                new_assign = Assign(assigned_to=assign_to)
                 new_assign.save()
                 messages.success(request, "Assignment added successfully.")
             else:
@@ -339,6 +340,7 @@ def add_assign(request):
 #add Lead
 def add_lead(request):
     statuses = Status.objects.all()
+    assign = Assign.objects.all()
     if request.method == 'POST':
         # Collect data from the form
         name = request.POST.get('name')
@@ -393,7 +395,7 @@ def add_lead(request):
         messages.success(request, 'New lead added successfully.')
         return redirect('lead')  # Replace with your appropriate redirect URL or view name
 
-    return render(request, 'add-lead.html', {'statuses': statuses})
+    return render(request, 'add-lead.html', {'statuses': statuses, 'assigns':assign})
 
 
 
