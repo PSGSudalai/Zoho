@@ -253,7 +253,36 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h3>Lead Dashboard</h3>
+                                <h3>Lead Dashboard</h3><div class="filter">
+                                    <!-- Date filter form -->
+                                    <form method="get" action="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label" for="startDate" style="font-weight: bold;">Start Date</label>
+                                                <input type="date" id="startDate" name="start_date" class="form-control" placeholder="YYYY-MM-DD">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label" for="endDate" style="font-weight: bold;">End Date</label>
+                                                <input type="date" id="endDate" name="end_date" class="form-control" placeholder="YYYY-MM-DD">
+                                            </div>
+                                            <div class="col-md-2 mt-4">
+                                                <button type="submit" class="btn btn-primary">Filter</button>
+                                            </div>
+                                            <div class="col-md-2 mt-4">
+                                                <a href="{% url 'home' %}" class="btn btn-primary">Clear</a>
+                                            </div>
+                                            <div class="col-md-2 mt-4">
+                                                <button type="submit" name="filter_week" value="week" class="btn btn-primary">Week</button>
+                                            </div>
+                                            <div class="col-md-2 mt-4">
+                                                <button type="submit" name="filter_month" value="month" class="btn btn-primary">Month</button>
+                                            </div>
+                                            <div class="col-md-2 mt-4">
+                                                <button type="submit" name="filter_year" value="year" class="btn btn-primary">Year</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb">
@@ -282,27 +311,7 @@
                         <div class="row">
                             <div class="col-xxl-6 box-col-12">
                                 <div class="row">
-                                    <div class="filter">
-                                        <!-- Date filter form -->
-                                        <form method="get" action="">
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <label for="start-date">start date</label>
-                                                    <input type="date" id="startDate" name="start_date" class="form-control" >
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="start-date">End date</label>
-                                                    <input type="date" id="endDate" name="end_date" class="form-control" >
-                                                </div>
-                                                <div class="col-md-2 mt-4">
-                                                    <button type="submit" class="btn btn-primary">Filter</button>
-                                                </div>
-                                                <div class="col-md-2 mt-4">
-                                                    <a href="{% url 'home' %}" class="btn btn-primary">Clear</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    
                                     <div class="col-md-4 col-sm-6">
                                         <div class="card compare-order">
                                             <div class="card-header card-no-border">
@@ -348,13 +357,14 @@
                                         <div class="card compare-order">
                                             <div class="card-header card-no-border">
                                                 <div class="header-top">
-                                                    <div class="compare-icon shadow-warning">
+                                                    <div class="compare-icon shadow-danger">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="currentColor"
-                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-coin-rupee fill-warning">
+                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-award fill-success">
                                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 3.66h-6c-1.287 0 -1.332 1.864 -.133 1.993l.133 .007h1a2 2 0 0 1 1.732 1h-2.732a1 1 0 0 0 0 2l2.732 .001a2 2 0 0 1 -1.732 .999h-1c-.89 0 -1.337 1.077 -.707 1.707l3 3a1 1 0 0 0 1.414 0l.083 -.094a1 1 0 0 0 -.083 -1.32l-1.484 -1.485l.113 -.037a4.009 4.009 0 0 0 2.538 -2.77l1.126 -.001a1 1 0 0 0 0 -2h-1.126a3.973 3.973 0 0 0 -.33 -.855l-.079 -.145h1.535a1 1 0 0 0 1 -1l-.007 -.117a1 1 0 0 0 -.993 -.883z" />
+                                                            <circle cx="12" cy="9" r="6" />
+                                                            <path d="M9 14l-2 6l3 -2l3 2l-2 -6" />
+                                                            <path d="M15 14l2 6l-3 -2l-3 2l2 -6" />
                                                         </svg>
                                                     </div>
                                                     <!-- <div class="dropdown icon-dropdown">
@@ -386,26 +396,15 @@
                                         <div class="card compare-order">
                                             <div class="card-header card-no-border">
                                                 <div class="header-top">
-                                                    <div class="compare-icon shadow-warning">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="currentColor"
-                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-coin-rupee fill-warning">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 3.66h-6c-1.287 0 -1.332 1.864 -.133 1.993l.133 .007h1a2 2 0 0 1 1.732 1h-2.732a1 1 0 0 0 0 2l2.732 .001a2 2 0 0 1 -1.732 .999h-1c-.89 0 -1.337 1.077 -.707 1.707l3 3a1 1 0 0 0 1.414 0l.083 -.094a1 1 0 0 0 -.083 -1.32l-1.484 -1.485l.113 -.037a4.009 4.009 0 0 0 2.538 -2.77l1.126 -.001a1 1 0 0 0 0 -2h-1.126a3.973 3.973 0 0 0 -.33 -.855l-.079 -.145h1.535a1 1 0 0 0 1 -1l-.007 -.117a1 1 0 0 0 -.993 -.883z" />
+                                                    <div class="bookmark-off-icon shadow-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-bookmark-off">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M7.708 3.721a3.982 3.982 0 0 1 2.292 -.721h4a4 4 0 0 1 4 4v7m0 4v3l-6 -4l-6 4v-14c0 -.308 .035 -.609 .1 -.897" />
+                                                            <path d="M3 3l18 18" />
                                                         </svg>
                                                     </div>
-                                                    <!-- <div class="dropdown icon-dropdown">
-                                                        <button class="btn dropdown-toggle" id="compareDropdown1"
-                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                class="icon-more-alt"></i></button>
-                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="compareDropdown1"><a class="dropdown-item"
-                                                                href="#">Today</a><a class="dropdown-item"
-                                                                href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                                week</a></div>
-                                                    </div> -->
                                                 </div>
+                                                
                                             </div>
                                             <div class="card-body pt-0">
                                                 <span class="f-w-500 c-o-light">Closed Lost</span>
@@ -424,62 +423,58 @@
                                         <div class="card compare-order">
                                             <div class="card-header card-no-border">
                                                 <div class="header-top">
-                                                    <div class="compare-icon shadow-warning">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="currentColor"
-                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-coin-rupee fill-warning">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 3.66h-6c-1.287 0 -1.332 1.864 -.133 1.993l.133 .007h1a2 2 0 0 1 1.732 1h-2.732a1 1 0 0 0 0 2l2.732 .001a2 2 0 0 1 -1.732 .999h-1c-.89 0 -1.337 1.077 -.707 1.707l3 3a1 1 0 0 0 1.414 0l.083 -.094a1 1 0 0 0 -.083 -1.32l-1.484 -1.485l.113 -.037a4.009 4.009 0 0 0 2.538 -2.77l1.126 -.001a1 1 0 0 0 0 -2h-1.126a3.973 3.973 0 0 0 -.33 -.855l-.079 -.145h1.535a1 1 0 0 0 1 -1l-.007 -.117a1 1 0 0 0 -.993 -.883z" />
+                                                    <div class="google-analytics-icon shadow-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-google-analytics">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+                                                            <path d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+                                                            <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                                         </svg>
                                                     </div>
-                                                    <!-- <div class="dropdown icon-dropdown">
-                                                        <button class="btn dropdown-toggle" id="compareDropdown1"
-                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                class="icon-more-alt"></i></button>
-                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="compareDropdown1"><a class="dropdown-item"
-                                                                href="#">Today</a><a class="dropdown-item"
-                                                                href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                                week</a></div>
-                                                    </div> -->
                                                 </div>
+                                                
                                             </div>
                                             <div class="card-body pt-0">
-                                                <span class="f-w-500 c-o-light">Status</span>
-                                                <h4 class="mb-2">{{ total_lead }}</h4>
-                                                <div  aria-label="Basic example"
-                                                    aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
-                                                </div><span class="user-growth f-12 f-w-500"><i
-                                                        class="icon-arrow-up txt-success"></i><span
-                                                        class="txt-success"></span></span>
+                                                <span class="f-w-500 c-o-light">Status Lead</span>
+                                                <h4 class="mb-2">
+                                                    <!-- {{ total_lead }} -->
+                                                    <div aria-label="Basic example" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar bg-warning" style="width: 58%"></div>
+                                                    </div>
+                                                    {% if lead_trend == 'up' %}
+                                                        <span class="user-growth f-12 f-w-500">
+                                                            <i data-feather="trending-up" style="font-size: large; color: green;"></i>
+                                                            <span class="txt-success">Increase</span>
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="user-growth f-12 f-w-500">
+                                                            <i data-feather="trending-down" style="font-size: large; color: red;"></i>
+                                                            <span class="txt-danger">Decrease</span>
+                                                        </span>
+                                                    {% endif %}
+                                                </h4>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <div class="card compare-order">
                                             <div class="card-header card-no-border">
                                                 <div class="header-top">
-                                                    <div class="compare-icon shadow-warning">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="currentColor"
-                                                            class="icon icon-tabler icons-tabler-filled icon-tabler-coin-rupee fill-warning">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -15 8.66l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 3.66h-6c-1.287 0 -1.332 1.864 -.133 1.993l.133 .007h1a2 2 0 0 1 1.732 1h-2.732a1 1 0 0 0 0 2l2.732 .001a2 2 0 0 1 -1.732 .999h-1c-.89 0 -1.337 1.077 -.707 1.707l3 3a1 1 0 0 0 1.414 0l.083 -.094a1 1 0 0 0 -.083 -1.32l-1.484 -1.485l.113 -.037a4.009 4.009 0 0 0 2.538 -2.77l1.126 -.001a1 1 0 0 0 0 -2h-1.126a3.973 3.973 0 0 0 -.33 -.855l-.079 -.145h1.535a1 1 0 0 0 1 -1l-.007 -.117a1 1 0 0 0 -.993 -.883z" />
+                                                    <div class="citymapper-icon shadow-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-citymapper">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M3 11a1 1 0 1 1 -1 1.013a1 1 0 0 1 1 -1v-.013z" />
+                                                            <path d="M21 11a1 1 0 1 1 -1 1.013a1 1 0 0 1 1 -1v-.013z" />
+                                                            <path d="M8 12h8" />
+                                                            <path d="M13 9l3 3l-3 3" />
                                                         </svg>
                                                     </div>
-                                                    <!-- <div class="dropdown icon-dropdown">
-                                                        <button class="btn dropdown-toggle" id="compareDropdown1"
-                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                class="icon-more-alt"></i></button>
-                                                        <div class="dropdown-menu dropdown-menu-end"
-                                                            aria-labelledby="compareDropdown1"><a class="dropdown-item"
-                                                                href="#">Today</a><a class="dropdown-item"
-                                                                href="#">Yesterday</a><a class="dropdown-item" href="#">This
-                                                                week</a></div>
-                                                    </div> -->
                                                 </div>
+                                                
+                                                
+                                                
+                                                
                                             </div>
                                             <div class="card-body pt-0">
                                                 <span class="f-w-500 c-o-light">Follow up</span>
@@ -487,9 +482,7 @@
                                                 <div  aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
                                                     <div class="progress-bar bg-warning" style="width: 58%"></div>
-                                                </div><span class="user-growth f-12 f-w-500"><i
-                                                        class="ico-arrow-up txt-success"></i><span
-                                                        class="txt-success"></span></span>
+                                                </div><span class="user-growth f-12 f-w-500">
                                             </div>
                                         </div>
                                     </div>
@@ -523,13 +516,10 @@
                                             <div class="card-body pt-0">
                                                 <span class="f-w-500 c-o-light">Assign User</span>
                                                 <h4 class="mb-2">{{ user }}</h4>
-                                                <!-- <div class="progress" role="progressbar" aria-label="Basic example"
+                                                <div  aria-label="Basic example"
                                                     aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
                                                     <div class="progress-bar bg-warning" style="width: 58%"></div>
-                                                </div><span class="user-growth f-12 f-w-500"><i
-                                                        class="icon-arrow-up txt-success"></i><span
-                                                        class="txt-success">+6.7%</span></span><span class="user-text">last
-                                                    month</span> -->
+                                                </div><span class="user-growth f-12 f-w-500">
                                             </div>
                                         </div>
                                     </div>
@@ -539,7 +529,7 @@
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
-                                            <h5>Weekly Leads</h5>
+                                            <h5> Leads</h5>
                                             <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -560,42 +550,6 @@
                                         </div>
                                         <div class="finance-chart-wrapper">
                                             <div id="finance-chart"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xxl-12 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
-                                <div class="card">
-                                    <div class="card-header card-no-border" >
-                                        <div class="header-top">
-                                            <h5>Daily Follow up</h5>
-                                            <div class="card-header-right-icon">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body px-0 pt-0">
-                                        <div class="recent-table table-responsive custom-scrollbar deal-table">
-                                            <table class="table" id="finance-deal-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>S.No</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Follow Up Date</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {% for lead in weekly_follow_up %}
-                                                    <tr>
-                                                        <td>{{ lead.name }}</td>
-                                                        <td>{{ lead.name }}</td>
-                                                        <td>{{ lead.phone }}</td>
-                                                        <td>{{ lead.follow_up }}</td>
-                                                    </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -662,16 +616,14 @@
                            
                             
                             <div class="col-sm-6 ">
-                                <div class="card widget-hover" style=" height: 501px;
-                                display: flex;
-                                justify-content: center;">
+                                <div class="card widget-hover" >
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
                                             <div class="sales-header">
-                                                <h5 class="m-0">Funnel Lead</h5>
+                                                <h5 class="m-0">Sales Funnel </h5>
                                             </div>
                                             
-                                            <div class="dropdown icon-dropdown">
+                                            <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
                                                 </button>
@@ -680,13 +632,13 @@
                                                     <a class="dropdown-item" href="#">Month</a>
                                                     <a class="dropdown-item" href="#">Year</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="card-header-right-icon"></div>
                                         </div>
                                     </div>
                                     <div class="card-body pt-0 main-sale">
                                         <div class="sales-chart-wrap">
-                                            <div id="funnelchart"style="max-width: 480px;height: 360px;margin: 0px auto;"></div>
+                                            <div id="funnelchart"style="max-width: 480px;height: 400px;margin: 0px auto;"></div>
                                         </div>
                                         <div class="sale-details">
                                             <h4 class="mb-0"></h4>
@@ -700,9 +652,9 @@
                                 <div class="card">
                                     <div class="card-header card-no-border">
                                         <div class="header-top">
-                                            <h5>Pie-Chart Leads</h5>
+                                            <h5>Lead Generation</h5>
                                            
-                                            <div class="dropdown icon-dropdown">
+                                            <!-- <div class="dropdown icon-dropdown">
                                                 <button class="btn dropdown-toggle" id="financeDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="icon-more-alt"></i>
                                                 </button>
@@ -711,17 +663,51 @@
                                                     <a class="dropdown-item" href="#">Month</a>
                                                     <a class="dropdown-item" href="#">Year</a>
                                                 </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="card-body finance-wrapper pt-0"  style="height: 400px;
+                                    display: flex;
+                                    justify-content: center;">
+                                        <div id="chartDiv2" style="max-width: 560px;height: 400px;margin: 0px auto;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xxl-12 col-md-6 order-xxl-0 order-sm-4 box-col-6 box-ord-4">
+                                <div class="card">
+                                    <div class="card-header card-no-border" >
+                                        <div class="header-top">
+                                            <h5>Weekly Follow up</h5>
+                                            <div class="card-header-right-icon">
+                                                
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body finance-wrapper pt-0" style="height: 446px;
-                                    display: flex;
-                                    justify-content: center;">
-                                        <div class="common-flex">
-                                            <h6></h6>
-                                        </div>
-                                        <div class="finance-chart-wrapper">
-                                            <div id="chartDiv2" style="max-width: 560px;height: 400px;margin: 0px auto;"></div>
+                                    <div class="card-body px-0 pt-0">
+                                        <div class="recent-table table-responsive custom-scrollbar deal-table">
+                                            <table class="table" id="finance-deal-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No</th>
+                                                        <th>Name</th>
+                                                        <th>Phone</th>
+                                                        <th>Follow Up Date</th>
+                                                        <th>Assign User</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for lead in weekly_follow_up %}
+                                                    <tr {% if lead.follow_up < today_date %}class="table-danger"{% endif %}>
+                                                        <td>{{ forloop.counter }}</td>
+                                                        <td>{{ lead.name }}</td>
+                                                        <td>{{ lead.phone }}</td>
+                                                        <td>{{ lead.follow_up }}</td>
+                                                        <td>{{ lead.assign_to }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -822,8 +808,13 @@
     <script src="{% static 'assets/js/script1.js' %}"></script>
     <script src="https://code.jscharting.com/latest/jscharting.js"></script>
     <!-- <script src="../assets/js/theme-customizer/customizer.js"></script> -->
-
-    <script>
+ 
+    <style>
+    .table-danger {
+        background-color: #f8d7da; /* Light red color */
+    }
+    </style>
+  <script>
     const salesData1 = JSON.parse('{{ leadStatus|safe|escapejs }}');
     const salesData2 = JSON.parse('{{ leadchart|safe|escapejs }}');
 
@@ -880,7 +871,7 @@
     colors: [CubaAdminConfig.primary, "#AAAFCB"],
     yaxis: {
         min: 1,
-        max: 10,
+        max: 50,
         tickAmount: 4,
         tickPlacement: "on",
 
@@ -892,7 +883,7 @@
         },
     },
     xaxis: {
-        categories: ["Week1", "Week2", "Week3", " Week4"],
+        categories: ["week1", "week2", "week3", "week4"],
         labels: {
             style: {
                 fontFamily: "Rubik, sans-serif",
@@ -958,6 +949,8 @@
 var financeChart1 = new ApexCharts(document.querySelector("#finance-chart"), financeChart1);
 financeChart1.render();
     </script>
+
+    
     <script type="text/javascript">
         var chart2 = JSC.chart('chartDiv2', {
             debug: true,
@@ -1031,8 +1024,44 @@ financeChart1.render();
     });
 </script>
 
+<script>
+    feather.replace();
+</script>
+
+  <script>
+    function setDeleteUrl(leadId) {
+        const deleteUrl = "{% url 'delete-lead' 0 %}".replace('/0/', '/' + leadId + '/');
+        document.getElementById('confirmDeleteBtn').href = deleteUrl;
+    }
+// Function to preserve filter values
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+
+    const startDate = urlParams.get('start_date');
+    const endDate = urlParams.get('end_date');
+
+    // Set the date input fields if values are present
+    if (startDate) {
+        document.getElementById('startDate').value = new Date(startDate).toISOString().split('T')[0];
+    }
+    if (endDate) {
+        document.getElementById('endDate').value = new Date(endDate).toISOString().split('T')[0];
+    }
+
     
-  
+    
+};
+
+// Clear filter function
+function clearFilter() {
+    // Clear the form fields
+        document.getElementById('startDate').value = '';
+        document.getElementById('endDate').value = '';
+    // Redirect to the base URL without parameters
+    window.location.href = '/your-job-search-url';
+}
+</script>
 </body>
 
 </html>

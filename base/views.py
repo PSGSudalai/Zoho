@@ -11,6 +11,7 @@ from django.utils import timezone
 from datetime import date, datetime, timedelta
 from django.db.models import Count
 from django.utils.dateparse import parse_date
+from django.db.models.functions import ExtractWeek, ExtractDay
 
 # Register
 def register(request):
@@ -78,9 +79,13 @@ def dashboard(request,lead_id=None):
 
     # Retrieve and parse date filters from GET request
    # Initial overall counts without any filters
+   
 
 
     total_lead = Lead.objects.all().count()
+    status_lead=Lead.objects.all().count()
+    previous_status_lead=Lead.objects.all().count()
+    # user =Lead.objects.filter(assign_to__assigned_to).count()
     lead_success_count = Lead.objects.filter(status__identity="Success").count()
     lead_pending_count = Lead.objects.filter(status__identity="Pending").count()
     lead_negotiation_count = Lead.objects.filter(status__identity="Negotiation").count()
@@ -95,6 +100,9 @@ def dashboard(request,lead_id=None):
     # Retrieve and parse date filters from GET request
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
+    filter_week = request.GET.get('filter_week')
+    filter_month = request.GET.get('filter_month')
+    filter_year = request.GET.get('filter_year')
 
     if start_date:
         start_date = parse_date(start_date)
@@ -111,9 +119,15 @@ def dashboard(request,lead_id=None):
     elif end_date:
         lead_filtered_queryset = lead_filtered_queryset.filter(created_at__lte=end_date)
 
+        
+
     # If date filters are applied, update the counts accordingly
     if start_date or end_date:
         total_lead=lead_filtered_queryset.all().count()
+        previous_total_lead = lead_filtered_queryset.filter(created_at__lt=start_date).count()  # Adjust filter as needed
+
+# Determine if the lead count has increased or decreased
+        lead_trend = 'up' if total_lead > previous_total_lead else 'down'
         lead_success_count = lead_filtered_queryset.filter(status__identity="Success").count()
         lead_pending_count = lead_filtered_queryset.filter(status__identity="Pending").count()
         lead_negotiation_count = lead_filtered_queryset.filter(status__identity="Negotiation").count()
@@ -123,6 +137,55 @@ def dashboard(request,lead_id=None):
         lead_referral_count = lead_filtered_queryset.filter(source='Referral').count()
         lead_job_count = lead_filtered_queryset.filter(source='Job portal').count()
         lead_social_count = lead_filtered_queryset.filter(source='Social media').count()
+    elif filter_year:
+        #year source count
+        total_lead=Lead.objects.filter(created_at__year=current_year).count()
+        lead_social_count = Lead.objects.filter(source='Social media',created_at__year=current_year).count()
+        lead_job_count = Lead.objects.filter(source='Job portal',created_at__year=current_year).count()
+        lead_referral_count = Lead.objects.filter(source='Referral',created_at__year=current_year).count()
+        lead_whatsapp_count = Lead.objects.filter(source='Whatsapp',created_at__year=current_year).count()
+
+        
+        #Yearly Status count
+        lead_success_count = Lead.objects.filter(status__identity="Success",created_at__year=current_year).count()  #Status count
+        lead_closed_count =Lead.objects.filter(status__identity="Closed",created_at__year=current_year).count()
+        lead_negotiation_count =Lead.objects.filter(status__identity="Negotation",created_at__year=current_year).count()
+        lead_follow_up_count =Lead.objects.filter(status__identity="Follow Up",created_at__year=current_year).count()
+        lead_pending_count =Lead.objects.filter(status__identity="Pending",created_at__year=current_year).count()
+
+    elif filter_month:
+        #month source count
+        total_lead=Lead.objects.filter(created_at__month=current_month).count()
+        lead_social_count = Lead.objects.filter(source='Social media',created_at__month=current_month).count()
+        lead_job_count = Lead.objects.filter(source='Job portal',created_at__month=current_month).count()
+        lead_referral_count = Lead.objects.filter(source='Referral',created_at__month=current_month).count()
+        lead_whatsapp_count = Lead.objects.filter(source='Whatsapp',created_at__month=current_month).count()
+        
+        #month Status Count
+        lead_success_count = Lead.objects.filter(status__identity="Success",created_at__month=current_month).count()  #Status count
+        lead_closed_count =Lead.objects.filter(status__identity="Closed",created_at__month=current_month).count()
+        lead_negotiation_count =Lead.objects.filter(status__identity="Negotation",created_at__month=current_month).count()
+        lead_follow_up_count =Lead.objects.filter(status__identity="Follow Up",created_at__month=current_month).count()
+        lead_pending_count =Lead.objects.filter(status__identity="Pending",created_at__month=current_month).count()
+
+    elif filter_week:
+        #week source count
+        total_lead=Lead.objects.filter(created_at__week=current_week).count()
+        lead_social_count = Lead.objects.filter(source='Social media',created_at__week=current_week).count()
+        lead_job_count = Lead.objects.filter(source='Job portal',created_at__week=current_week).count()
+        lead_referral_count = Lead.objects.filter(source='Referral',created_at__week=current_week).count()
+        lead_whatsapp_count = Lead.objects.filter(source='Whatsapp',created_at__week=current_week).count()
+        #Weekly Status Count
+        lead_success_count = Lead.objects.filter(status__identity="Success",created_at__week=current_week).count()  #Status count
+        lead_closed_count =Lead.objects.filter(status__identity="Closed",created_at__week=current_week).count()
+        lead_negotiation_count =Lead.objects.filter(status__identity="Negotation",created_at__week=current_week).count()
+        lead_follow_up_count =Lead.objects.filter(status__identity="Follow Up",created_at__week=current_week).count()
+        lead_pending_count =Lead.objects.filter(status__identity="Pending",created_at__week=current_week).count()
+
+
+
+            
+        
 
 # Return or pass these counts as needed
 
@@ -134,9 +197,10 @@ def dashboard(request,lead_id=None):
         created_at__month=current_month,
         created_at__year=current_year
     ).count()
-    weekly_follow_up = Lead.objects.filter(follow_up__week=current_week)   # weekly follow up list
+    weekly_follow_up = Lead.objects.filter(follow_up__week=current_week)
+    today_date = date.today()  # weekly follow up list
        # Total lead count
-    leading = Lead.objects.all()[:5]   #Lead Data List
+    leading = Lead.objects.all().order_by("-created_at")[:5]  #Lead Data List
     lead_count = Lead.objects.all().count()   #Lead Data count
     leadweek = Lead.objects.filter(follow_up__week=current_week)
 
@@ -146,30 +210,50 @@ def dashboard(request,lead_id=None):
     if lead_id:
         lead = get_object_or_404(Lead, id=lead_id)  
 
+    leadchart = [0, 0, 0, 0]
+    leadStatus = [0, 0, 0, 0]
 
+    # Get the week number for the first day of the month
+    first_day_of_month = date(current_year, current_month, 1)
+    first_week_number = first_day_of_month.isocalendar()[1]  # Extract the week number directly
 
-    
-    
+    # Get the total number of leads per week
+    weekly_lead_counts = Lead.objects.filter(
+        created_at__month=current_month,
+        created_at__year=current_year
+    ).annotate(
+        week=ExtractWeek('created_at')
+    ).values(
+        'week'
+    ).annotate(
+        count=Count('id')
+    ).order_by('week')
 
-# Weekly graph 
-# Get the current month's lead count
-    current_lead_count = Lead.objects.filter(
-        created_at__week=current_week
-    ).count()
+    # Populate leadchart array for the corresponding week
+    for entry in weekly_lead_counts:
+        week_index = entry['week'] - first_week_number  # Calculate week index based on the first week of the month
+        if 0 <= week_index < 4:  # Ensure the week falls within the 4-week range of the month
+            leadchart[week_index] = entry['count']
 
-    # Get the success status count for the current month
-    success_count = Lead.objects.filter(
-    created_at__week=current_week,
-    status__identity='Success'  
-    ).count()
+    # Get the number of successful leads per week
+    weekly_success_counts = Lead.objects.filter(
+        status__identity="Success",
+        created_at__month=current_month,
+        created_at__year=current_year
+    ).annotate(
+        week=ExtractWeek('created_at')
+    ).values(
+        'week'
+    ).annotate(
+        count=Count('id')
+    ).order_by('week')
 
-    # Get previous month's data with correct referencing for ForeignKey
-      
+    # Populate leadStatus array for the corresponding week
+    for entry in weekly_success_counts:
+        week_index = entry['week'] - first_week_number  # Align with the first week of the month
+        if 0 <= week_index < 4:  # Ensure within the 4-week range
+            leadStatus[week_index] = entry['count']
 
-    
-    # Prepare data arrays for JavaScript
-    leadchart = [0,current_lead_count,0,0]
-    leadStatus = [0,success_count,0, 0]
 
     #gender lead graph
     lead_male = Lead.objects.filter(gender='Male', created_at__week=current_week).count()
@@ -177,44 +261,11 @@ def dashboard(request,lead_id=None):
 
     lead_gender_male = [0,0,lead_male,0]
     lead_gender_female = [0,0,lead_female,0]
-
-
-    #year source count
-    source_social = Lead.objects.filter(source='Social media',created_at__year=current_year).count()
-    source_job = Lead.objects.filter(source='Job portal',created_at__year=current_year).count()
-    source_referral = Lead.objects.filter(source='Referral',created_at__year=current_year).count()
-    source_whatsapp = Lead.objects.filter(source='Whatsapp',created_at__year=current_year).count()
-
-
-    #week source count
-    week_social = Lead.objects.filter(source='Social media',created_at__week=current_week).count()
-    week_job = Lead.objects.filter(source='Job portal',created_at__week=current_week).count()
-    week_referral = Lead.objects.filter(source='Referral',created_at__week=current_week).count()
-    week_whatsapp = Lead.objects.filter(source='Whatsapp',created_at__week=current_week).count()
-
-
-    #Weekly Status Count
-    week_success = Lead.objects.filter(status__identity="Success",created_at__week=current_week).count()  #Status count
-    week_closed =Lead.objects.filter(status__identity="Closed",created_at__week=current_week).count()
-    week_negotiation =Lead.objects.filter(status__identity="Negotation",created_at__week=current_week).count()
-    week_follow_up =Lead.objects.filter(status__identity="Follow Up",created_at__week=current_week).count()
-    week_pending =Lead.objects.filter(status__identity="Pending",created_at__week=current_week).count()
-
-    #Yearly Status count
-    year_success = Lead.objects.filter(status__identity="Success",created_at__year=current_year).count()  #Status count
-    year_closed =Lead.objects.filter(status__identity="Closed",created_at__year=current_year).count()
-    year_negotiation =Lead.objects.filter(status__identity="Negotation",created_at__year=current_year).count()
-    year_follow_up =Lead.objects.filter(status__identity="Follow Up",created_at__year=current_year).count()
-    year_pending =Lead.objects.filter(status__identity="Pending",created_at__year=current_year).count()
-
-
-   
-
-
-
-   
-
+    
     content = {
+        # 'lead_trend':lead_trend,
+        'today_date': today_date,
+        'status_lead':status_lead,
         'user':user,
         'lead_count': lead_count,
         'lead_overall_count': lead_overall_count,
@@ -238,24 +289,7 @@ def dashboard(request,lead_id=None):
         'lead_count':lead_count,
         'lead_gender_female':lead_gender_female,
         'lead_gender_male':lead_gender_male,
-        'source_referral':source_referral,
-        'source_job':source_job,
-        'source_social':source_social,
-        'source_whatsapp':source_whatsapp,
-        'week_success':week_success,
-        'week_closed':week_closed,
-        'week_negotiation':week_negotiation,
-        'week_follow_up':week_follow_up,
-        'week_pending':week_pending,
-        'year_success':year_success,
-        'year_closed':year_closed,
-        'year_negotiation':year_negotiation,
-        'year_follow_up':year_follow_up,
-        'year_pending':year_pending,
-        'week_whatsapp':week_whatsapp,
-        'week_referral':week_referral,
-        'week_job':week_job,
-        'week_social':week_social,
+        
 
 
     }
@@ -290,22 +324,19 @@ def all_lead(request, lead_id=None):
     elif end_date:
         leads = Lead.objects.filter(created_at__lte=end_date)
     
-    # Apply city filter if provided
     elif city:
         leads = Lead.objects.filter(city=city)
     
-    # Apply source filter if provided
     elif source:
         leads = Lead.objects.filter(source=source)
     
     # Apply tech field filter if provided
     elif tech:
         leads = Lead.objects.filter(tech_field=tech)
-    # Apply tech field filter if provided
+
     elif gender:
         leads = Lead.objects.filter(gender=gender)
 
-    # Get a specific lead if an ID is provided
     lead = None
     if lead_id:
         lead = get_object_or_404(Lead, id=lead_id)
@@ -323,9 +354,6 @@ def all_lead(request, lead_id=None):
 
 
 
-
-from django.shortcuts import redirect
-from django.contrib import messages
 
 def add_status(request):
     statuses = Status.objects.all()
@@ -472,9 +500,9 @@ def edit_lead(request, lead_id):
         status_id = request.POST.get('status')
         if status_id:
             lead.status = Status.objects.get(id=status_id)
-        assign_id = request.POST.get('assigns')
+        assign_id = request.POST.get('assign_to')
         if assign_id:
-            lead.assigns = Assign.objects.get(id=assign_id)
+            lead.assign_to = Assign.objects.get(id=assign_id)
 
         lead.is_lead = 'is_lead' in request.POST
 

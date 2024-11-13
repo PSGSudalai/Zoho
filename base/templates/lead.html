@@ -504,6 +504,50 @@
             endDateInput.min = startDate;
         });
     </script>
+     <script>
+        function setDeleteUrl(leadId) {
+            const deleteUrl = "{% url 'delete-lead' 0 %}".replace('/0/', '/' + leadId + '/');
+            document.getElementById('confirmDeleteBtn').href = deleteUrl;
+        }
+    // Function to preserve filter values
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+
+        const startDate = urlParams.get('start_date');
+        const endDate = urlParams.get('end_date');
+
+        // Set the date input fields if values are present
+        if (startDate) {
+            document.getElementById('startDate').value = new Date(startDate).toISOString().split('T')[0];
+        }
+        if (endDate) {
+            document.getElementById('endDate').value = new Date(endDate).toISOString().split('T')[0];
+        }
+
+        
+        // document.getElementById('startDate').value = urlParams.get('startDate') || '';
+        // document.getElementById('endDate').value = urlParams.get('endDate') || '';
+        document.getElementById('city').value = urlParams.get('city') || '';
+        document.getElementById('source').value = urlParams.get('source') || '';
+        document.getElementById('tech_field').value = urlParams.get('tech_field') || '';
+        document.getElementById('gender').value = urlParams.get('gender') || '';
+        
+    };
+
+    // Clear filter function
+    function clearFilter() {
+        // Clear the form fields
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('source').value = '';
+            document.getElementById('tech_field').value = '';
+            document.getElementById('gender').value = '';
+        // Redirect to the base URL without parameters
+        window.location.href = '/your-job-search-url';
+    }
+    </script>
  <!-- latest jquery-->
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <!-- Bootstrap js-->
