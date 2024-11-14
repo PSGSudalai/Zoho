@@ -307,68 +307,70 @@ def dashboard(request,lead_id=None):
 
 
 #lead Table
-def all_lead(request, lead_id=None):
 
+def all_lead(request, lead_id=None):
     current_month = datetime.now().month
     current_year = datetime.now().year
     current_week = datetime.now().isocalendar()[1]
-    # Get all leads and order them by creation date
-    if request.user.is_superuser:
-        leads = Lead.objects.all().order_by("-created_at")
-    else:
-        leads = Lead.objects.filter(user=request.user).order_by("-created_at")
     
-    
+    # Get all query parameters
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
-    filter_type=request.GET.get('filter_type')
+    filter_type = request.GET.get('filter_type')
     city = request.GET.get('city')
     source = request.GET.get('source')
     tech = request.GET.get('tech_field')
     gender = request.GET.get('gender')
 
+    # Initialize Q object for filtering
+    filters = Q()
 
+    # Parse and apply date filters
     if start_date:
         start_date = parse_date(start_date)
+        filters &= Q(created_at__gte=start_date)
+    
     if end_date:
         end_date = parse_date(end_date)
+        filters &= Q(created_at__lte=end_date)
 
-    if start_date and end_date:
-        leads = Lead.objects.filter(created_at__range=[start_date, end_date])
-    elif start_date:
-        leads = Lead.objects.filter(created_at__gte=start_date)
-    elif end_date:
-        leads = Lead.objects.filter(created_at__lte=end_date)
-    elif filter_type=="week":
-        leads = Lead.objects.filter(created_at__week=current_week)
-    elif filter_type=="month":
-        leads = Lead.objects.filter(created_at__month=current_month)
-    elif filter_type=="year":
-        leads = Lead.objects.filter(created_at__year=current_year)
-    
-    
-    elif city:
-        leads = Lead.objects.filter(city=city)
-    
-    elif source:
-        leads = Lead.objects.filter(source=source)
-    
-    # Apply tech field filter if provided
-    elif tech:
-        leads = Lead.objects.filter(tech_field=tech)
+    # Filter based on filter_type (week, month, year)
+    if filter_type == "week":
+        filters &= Q(created_at__week=current_week)
+    elif filter_type == "month":
+        filters &= Q(created_at__month=current_month)
+    elif filter_type == "year":
+        filters &= Q(created_at__year=current_year)
 
-    elif gender:
-        leads = Lead.objects.filter(gender=gender)
+    # Additional filters
+    if city:
+        filters &= Q(city=city)
+    if source:
+        filters &= Q(source=source)
+    if tech:
+        filters &= Q(tech_field=tech)
+    if gender:
+        filters &= Q(gender=gender)
 
-    lead = None
-    if lead_id:
-        lead = get_object_or_404(Lead, id=lead_id)
+    # If the user is a superuser, allow them to view all leads
+    if request.user.is_superuser:
+        leading = Lead.objects.filter(filters).order_by("-created_at")
+        lead = None
+        if lead_id:
+            lead = get_object_or_404(Lead, id=lead_id)
+    else:
+        # If the user is not a superuser, filter leads based on the current user's associated leads
+        leading = Lead.objects.filter(filters, user=request.user).order_by("-created_at")
+        lead = None
+        if lead_id:
+            lead = get_object_or_404(Lead, id=lead_id, user=request.user)  # Ensure regular user can only see their leads
 
+    # Context data for the template
     context = {
-        'lead': lead,
-        'leads': leads,  # Pass filtered or all leads to the template
+        'lead': lead,  # Specific lead if `lead_id` is provided
+        'leading': leading,  # Filtered list of leads
     }
-    
+
     return render(request, 'lead.html', context)
 
 
@@ -421,18 +423,21 @@ def add_assign(request):
 #add Lead
 
 
+import re
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+
 def add_lead(request):
     statuses = Status.objects.all()
     assigns = Assign.objects.all()
-    users =User.objects.all()
-    
+    users = User.objects.all()
 
     if request.method == 'POST':
         # Collect data from the form
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         address = request.POST.get('address')
-        city = request.POST.get('city')
+        city = request.POST.get('city')  # Check if this is being submitted properly
         gender = request.POST.get('gender')
         passout = request.POST.get('passout')
         college = request.POST.get('college_name')
@@ -441,13 +446,15 @@ def add_lead(request):
         status_id = request.POST.get('status')
         assign_id = request.POST.get('assign_to')
         user_id = request.POST.get('user')
+        follow_up = request.POST.get('follow_up') or None
+        email = request.POST.get('email') or None
         is_lead = False
 
+        # Try to retrieve related objects by ID
         try:
             status = Status.objects.get(id=status_id)
         except (Status.DoesNotExist, ValueError):
             status = None
-
         if status and status.identity == 'Active':
             is_lead = True
 
@@ -460,17 +467,45 @@ def add_lead(request):
         except (User.DoesNotExist, ValueError):
             user = None
 
-        follow_up = request.POST.get('follow_up') or None
-        email = request.POST.get('email') or None
+        # Initialize error messages
+        phone_error = None
+        name_error = None
+        email_error = None
+        city_error = None
+        validation_passed = True  # Flag to check if all validations pass
 
         # Check if a lead with the same phone number already exists
         if Lead.objects.filter(phone=phone).exists():
             phone_error = 'A lead with this phone number already exists.'
+            validation_passed = False
+
+        # Validate name (must contain only alphabetic characters)
+        if not name.isalpha():
+            name_error = 'Name must contain only alphabetic characters.'
+            validation_passed = False
+
+        # Validate email format
+        try:
+            validate_email(email)
+        except ValidationError:
+            email_error = 'Enter a valid email address.'
+            validation_passed = False
+
+        # Check if city is provided
+        if not city:
+            city_error = 'City is required.'
+            validation_passed = False
+
+        # If validation fails, re-render the form with errors
+        if not validation_passed:
             return render(request, 'add-lead.html', {
                 'statuses': statuses,
                 'assigns': assigns,
-                'users':users,
-                'phone_error': phone_error
+                'users': users,
+                'phone_error': phone_error,
+                'name_error': name_error,
+                'email_error': email_error,
+                'city_error': city_error,
             })
 
         # Create the new Lead object if validation passes
@@ -479,7 +514,7 @@ def add_lead(request):
             email=email,
             phone=phone,
             address=address,
-            city=city,
+            city=city,  # Ensure this is not None
             gender=gender,
             passout=passout,
             tech_field=tech,
@@ -495,7 +530,11 @@ def add_lead(request):
         messages.success(request, 'New lead added successfully.')
         return redirect('lead')
 
-    return render(request, 'add-lead.html', {'statuses': statuses, 'assigns': assigns,'users':users})
+    return render(request, 'add-lead.html', {
+        'statuses': statuses,
+        'assigns': assigns,
+        'users': users,
+    })
 
 
 
@@ -515,6 +554,7 @@ def edit_lead(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
     statuses = Status.objects.all()
     assigns = Assign.objects.all()
+    users = User.objects.all()
 
     if request.method == 'POST':
         # Update lead instance with form data
@@ -528,6 +568,7 @@ def edit_lead(request, lead_id):
         lead.college_name = request.POST.get('college_name')
         lead.source = request.POST.get('source')
         lead.tech_field = request.POST.get('tech_field')
+        
 
         # Allow empty follow-up date
         lead.follow_up = request.POST.get('follow_up') or None
@@ -539,6 +580,9 @@ def edit_lead(request, lead_id):
         assign_id = request.POST.get('assign_to')
         if assign_id:
             lead.assign_to = Assign.objects.get(id=assign_id)
+        user =request.POST.get('user')
+        if user:
+            lead.user = User.objects.get(id=user)
 
         lead.is_lead = 'is_lead' in request.POST
 
@@ -550,6 +594,7 @@ def edit_lead(request, lead_id):
         'lead': lead,
         'statuses': statuses,
         'assigns': assigns,
+        'users': users,
     }
 
     return render(request, 'edit.html', context)

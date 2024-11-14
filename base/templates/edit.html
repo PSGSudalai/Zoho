@@ -82,7 +82,7 @@
                 <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
                     <ul class="nav-menus">
 
-                        <li class="fullscreen-body">
+                        <!-- <li class="fullscreen-body">
                             <span id="maximize-screen">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -96,7 +96,7 @@
                                 </svg>
 
                             </span>
-                        </li>
+                        </li> -->
 
 
                         <li>
@@ -314,14 +314,14 @@
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="assignModalLabel">Add New User</h5>
+                                                                <h5 class="modal-title" id="assignModalLabel">Add New Insite</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <form action="{% url 'add_assign' %}" method="POST">
                                                                 {% csrf_token %}
                                                                 <div class="modal-body">
                                                                     <div class="mb-3">
-                                                                        <label for="new_assign" class="form-label">Assign To:</label>
+                                                                        <label for="new_assign" class="form-label">Insite:</label>
                                                                         <input type="text" class="form-control" id="new_assign" name="assign_to" required>
                                                                     </div>
                                                                 </div>
@@ -354,52 +354,58 @@
                                                     <label class="form-label" for="address">Address:</label>
                                                     <input class="form-control" id="address" name="address" type="text" placeholder="Address" value="{{ lead.address }}" required>
                                                 </div>
-                                                <!-- <div class="col-md-6">
-                                                    <label class="form-label" for="city">City:</label>
-                                                    <select class="form-select" id="city" name="city" required>
-                                                        <option value="" disabled {% if not lead.city %}selected{% endif %}>Select a District</option>
-                                                        <option value="Ariyalur" {% if lead.city == 'Ariyalur' %}selected{% endif %}>Ariyalur</option>
-                                                        <option value="Chengalpattu" {% if lead.city == 'Chengalpattu' %}selected{% endif %}>Chengalpattu</option>
-                                                        <option value="Chennai" {% if lead.city == 'Chennai' %}selected{% endif %}>Chennai</option>
-                                                        <option value="Coimbatore" {% if lead.city == 'Coimbatore' %}selected{% endif %}>Coimbatore</option>
-                                                        <option value="Cuddalore" {% if lead.city == 'Cuddalore' %}selected{% endif %}>Cuddalore</option>
-                                                        <option value="Dharmapuri" {% if lead.city == 'Dharmapuri' %}selected{% endif %}>Dharmapuri</option>
-                                                        <option value="Dindigul" {% if lead.city == 'Dindigul' %}selected{% endif %}>Dindigul</option>
-                                                        <option value="Erode" {% if lead.city == 'Erode' %}selected{% endif %}>Erode</option>
-                                                        <option value="Kallakurichi" {% if lead.city == 'Kallakurichi' %}selected{% endif %}>Kallakurichi</option>
-                                                        <option value="Kancheepuram" {% if lead.city == 'Kancheepuram' %}selected{% endif %}>Kancheepuram</option>
-                                                        <option value="Karur" {% if lead.city == 'Karur' %}selected{% endif %}>Karur</option>
-                                                        <option value="Krishnagiri" {% if lead.city == 'Krishnagiri' %}selected{% endif %}>Krishnagiri</option>
-                                                        <option value="Madurai" {% if lead.city == 'Madurai' %}selected{% endif %}>Madurai</option>
-                                                        <option value="Nagapattinam" {% if lead.city == 'Nagapattinam' %}selected{% endif %}>Nagapattinam</option>
-                                                        <option value="Namakkal" {% if lead.city == 'Namakkal' %}selected{% endif %}>Namakkal</option>
-                                                        <option value="Nilgiris" {% if lead.city == 'Nilgiris' %}selected{% endif %}>Nilgiris</option>
-                                                        <option value="Perambalur" {% if lead.city == 'Perambalur' %}selected{% endif %}>Perambalur</option>
-                                                        <option value="Pudukkottai" {% if lead.city == 'Pudukkottai' %}selected{% endif %}>Pudukkottai</option>
-                                                        <option value="Ramanathapuram" {% if lead.city == 'Ramanathapuram' %}selected{% endif %}>Ramanathapuram</option>
-                                                        <option value="Ranipet" {% if lead.city == 'Ranipet' %}selected{% endif %}>Ranipet</option>
-                                                        <option value="Salem" {% if lead.city == 'Salem' %}selected{% endif %}>Salem</option>
-                                                        <option value="Sivaganga" {% if lead.city == 'Sivaganga' %}selected{% endif %}>Sivaganga</option>
-                                                        <option value="Tenkasi" {% if lead.city == 'Tenkasi' %}selected{% endif %}>Tenkasi</option>
-                                                        <option value="Thanjavur" {% if lead.city == 'Thanjavur' %}selected{% endif %}>Thanjavur</option>
-                                                        <option value="Theni" {% if lead.city == 'Theni' %}selected{% endif %}>Theni</option>
-                                                        <option value="Thoothukudi" {% if lead.city == 'Thoothukudi' %}selected{% endif %}>Thoothukudi</option>
-                                                        <option value="Tiruchirappalli" {% if lead.city == 'Tiruchirappalli' %}selected{% endif %}>Tiruchirappalli</option>
-                                                        <option value="Tirunelveli" {% if lead.city == 'Tirunelveli' %}selected{% endif %}>Tirunelveli</option>
-                                                        <option value="Tirupathur" {% if lead.city == 'Tirupathur' %}selected{% endif %}>Tirupathur</option>
-                                                        <option value="Tiruppur" {% if lead.city == 'Tiruppur' %}selected{% endif %}>Tiruppur</option>
-                                                        <option value="Tiruvallur" {% if lead.city == 'Tiruvallur' %}selected{% endif %}>Tiruvallur</option>
-                                                        <option value="Tiruvannamalai" {% if lead.city == 'Tiruvannamalai' %}selected{% endif %}>Tiruvannamalai</option>
-                                                        <option value="Tiruvarur" {% if lead.city == 'Tiruvarur' %}selected{% endif %}>Tiruvarur</option>
-                                                        <option value="Vellore" {% if lead.city == 'Vellore' %}selected{% endif %}>Vellore</option>
-                                                        <option value="Viluppuram" {% if lead.city == 'Viluppuram' %}selected{% endif %}>Viluppuram</option>
-                                                        <option value="Virudhunagar" {% if lead.city == 'Virudhunagar' %}selected{% endif %}>Virudhunagar</option>
-                                                    </select>
-                                                </div> -->
                                                 <div class="col-md-6">
                                                     <label class="form-label" for="city">City:</label>
-                                                    <input class="form-control" id="city" name="city" type="text" placeholder="city" value="{{ lead.city }}" required>
+                                                    <select class="form-select" id="city" name="city" required>
+                                                        <option value="" disabled {% if not lead.city %}selected{% endif %}>Select a State/UT</option>
+                                                        
+                                                        <!-- States and Union Territories of India (Alphabetically) -->
+                                                        <option value="Andhra Pradesh" {% if lead.city == 'Andhra Pradesh' %}selected{% endif %}>Andhra Pradesh</option>
+                                                        <option value="Arunachal Pradesh" {% if lead.city == 'Arunachal Pradesh' %}selected{% endif %}>Arunachal Pradesh</option>
+                                                        <option value="Assam" {% if lead.city == 'Assam' %}selected{% endif %}>Assam</option>
+                                                        <option value="Bihar" {% if lead.city == 'Bihar' %}selected{% endif %}>Bihar</option>
+                                                        <option value="Chhattisgarh" {% if lead.city == 'Chhattisgarh' %}selected{% endif %}>Chhattisgarh</option>
+                                                        <option value="Goa" {% if lead.city == 'Goa' %}selected{% endif %}>Goa</option>
+                                                        <option value="Gujarat" {% if lead.city == 'Gujarat' %}selected{% endif %}>Gujarat</option>
+                                                        <option value="Haryana" {% if lead.city == 'Haryana' %}selected{% endif %}>Haryana</option>
+                                                        <option value="Himachal Pradesh" {% if lead.city == 'Himachal Pradesh' %}selected{% endif %}>Himachal Pradesh</option>
+                                                        <option value="Jharkhand" {% if lead.city == 'Jharkhand' %}selected{% endif %}>Jharkhand</option>
+                                                        <option value="Karnataka" {% if lead.city == 'Karnataka' %}selected{% endif %}>Karnataka</option>
+                                                        <option value="Kerala" {% if lead.city == 'Kerala' %}selected{% endif %}>Kerala</option>
+                                                        <option value="Madhya Pradesh" {% if lead.city == 'Madhya Pradesh' %}selected{% endif %}>Madhya Pradesh</option>
+                                                        <option value="Maharashtra" {% if lead.city == 'Maharashtra' %}selected{% endif %}>Maharashtra</option>
+                                                        <option value="Manipur" {% if lead.city == 'Manipur' %}selected{% endif %}>Manipur</option>
+                                                        <option value="Meghalaya" {% if lead.city == 'Meghalaya' %}selected{% endif %}>Meghalaya</option>
+                                                        <option value="Mizoram" {% if lead.city == 'Mizoram' %}selected{% endif %}>Mizoram</option>
+                                                        <option value="Nagaland" {% if lead.city == 'Nagaland' %}selected{% endif %}>Nagaland</option>
+                                                        <option value="Odisha" {% if lead.city == 'Odisha' %}selected{% endif %}>Odisha</option>
+                                                        <option value="Punjab" {% if lead.city == 'Punjab' %}selected{% endif %}>Punjab</option>
+                                                        <option value="Rajasthan" {% if lead.city == 'Rajasthan' %}selected{% endif %}>Rajasthan</option>
+                                                        <option value="Sikkim" {% if lead.city == 'Sikkim' %}selected{% endif %}>Sikkim</option>
+                                                        <option value="Tamil Nadu" {% if lead.city == 'Tamil Nadu' %}selected{% endif %}>Tamil Nadu</option>
+                                                        <option value="Telangana" {% if lead.city == 'Telangana' %}selected{% endif %}>Telangana</option>
+                                                        <option value="Tripura" {% if lead.city == 'Tripura' %}selected{% endif %}>Tripura</option>
+                                                        <option value="Uttar Pradesh" {% if lead.city == 'Uttar Pradesh' %}selected{% endif %}>Uttar Pradesh</option>
+                                                        <option value="Uttarakhand" {% if lead.city == 'Uttarakhand' %}selected{% endif %}>Uttarakhand</option>
+                                                        <option value="West Bengal" {% if lead.city == 'West Bengal' %}selected{% endif %}>West Bengal</option>
+                                                
+                                                        <!-- Union Territories -->
+                                                        <option value="Andaman and Nicobar Islands" {% if lead.city == 'Andaman and Nicobar Islands' %}selected{% endif %}>Andaman and Nicobar Islands</option>
+                                                        <option value="Chandigarh" {% if lead.city == 'Chandigarh' %}selected{% endif %}>Chandigarh</option>
+                                                        <option value="Dadra and Nagar Haveli and Daman and Diu" {% if lead.city == 'Dadra and Nagar Haveli and Daman and Diu' %}selected{% endif %}>Dadra and Nagar Haveli and Daman and Diu</option>
+                                                        <option value="Lakshadweep" {% if lead.city == 'Lakshadweep' %}selected{% endif %}>Lakshadweep</option>
+                                                        <option value="Delhi" {% if lead.city == 'Delhi' %}selected{% endif %}>Delhi</option>
+                                                        <option value="Puducherry" {% if lead.city == 'Puducherry' %}selected{% endif %}>Puducherry</option>
+                                                        <option value="Ladakh" {% if lead.city == 'Ladakh' %}selected{% endif %}>Ladakh</option>
+                                                        <option value="Lakshadweep" {% if lead.city == 'Lakshadweep' %}selected{% endif %}>Lakshadweep</option>
+                                                        <option value="Jammu and Kashmir" {% if lead.city == 'Jammu and Kashmir' %}selected{% endif %}>Jammu and Kashmir</option>
+                                                        <option value="Ladakh" {% if lead.city == 'Ladakh' %}selected{% endif %}>Ladakh</option>
+                                                    </select>
                                                 </div>
+                                                <!-- <div class="col-md-6">
+                                                    <label class="form-label" for="city">City:</label>
+                                                    <input class="form-control" id="city" name="city" type="text" placeholder="city" value="{{ lead.city }}" required>
+                                                </div> -->
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="phone">Phone Number:</label>
                                                     <input class="form-control" id="phone" name="phone" type="text" maxlength="10" placeholder="Phone" value="{{ lead.phone }}" required>
@@ -477,7 +483,7 @@
                                                     <input class="form-control" id="follow_up" name="follow_up" type="date" value="{{ lead.follow_up|date:'Y-m-d' }}">
                                                 </div>
                                                 <div class="col-lg-4 col-md-8">
-                                                    <label class="form-label" for="assign_to">Assign To:</label>
+                                                    <label class="form-label" for="assign_to">Insite:</label>
                                                     <select class="form-select" id="assign_to" name="assign_to" >
                                                         <option selected disabled value="">Choose...</option>
                                                         {% for assign in assigns %}
@@ -497,9 +503,29 @@
                                                     <label class="form-label" for="assign_to"></label>
                                                     <!-- Button to trigger the Add Status modal -->
                                                     <button type="button" style="display: flex; justify-items: center;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assignModal">
-                                                        Add User
+                                                        Add Insite
                                                     </button>
                                                 </div>
+                                                <div class="col-lg-4 col-md-8">
+                                                    <label class="form-label" for="user">Assign User:</label>
+                                                    
+                                                    {% if request.user.is_superuser %}
+                                                        <!-- Show dropdown for superuser to assign any user -->
+                                                        <select class="form-select" id="user" name="user">
+                                                            <option selected disabled value="">Choose...</option>
+                                                            {% for user in users %}
+                                                                <option value="{{ user.id }}" {% if lead.user and lead.user.id == user.id %}selected{% endif %}>
+                                                                    {{ user.username }} <!-- Display 'username', replace with 'name' if needed -->
+                                                                </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    {% else %}
+                                                        <!-- Show input field for non-superuser (i.e., the current user) -->
+                                                        <input type="text" class="form-control" value="{{ request.user.username }}" readonly>
+                                                        <input type="hidden" name="user" value="{{ request.user.id }}">
+                                                    {% endif %}
+                                                </div>
+                                                
                                                 
                                                 <div class="col-12">
                                                     <div class="common-flex justify-content-end">
