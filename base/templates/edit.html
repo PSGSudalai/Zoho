@@ -354,7 +354,7 @@
                                                     <label class="form-label" for="address">Address:</label>
                                                     <input class="form-control" id="address" name="address" type="text" placeholder="Address" value="{{ lead.address }}" required>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <!-- <div class="col-md-6">
                                                     <label class="form-label" for="city">City:</label>
                                                     <select class="form-select" id="city" name="city" required>
                                                         <option value="" disabled {% if not lead.city %}selected{% endif %}>Select a District</option>
@@ -395,6 +395,10 @@
                                                         <option value="Viluppuram" {% if lead.city == 'Viluppuram' %}selected{% endif %}>Viluppuram</option>
                                                         <option value="Virudhunagar" {% if lead.city == 'Virudhunagar' %}selected{% endif %}>Virudhunagar</option>
                                                     </select>
+                                                </div> -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label" for="city">City:</label>
+                                                    <input class="form-control" id="city" name="city" type="text" placeholder="city" value="{{ lead.city }}" required>
                                                 </div>
                                                 <div class="col-lg-4 col-md-6">
                                                     <label class="form-label" for="phone">Phone Number:</label>
